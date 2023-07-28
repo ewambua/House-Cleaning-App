@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import Login from './components/Login';
 import Signup from './components/Signup';
 import './App.css'; // Import your App-level CSS file here for any common styles you might have
+import LandingPage from './components/LandingPage';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -14,7 +15,8 @@ function App() {
 
   return (
     <div className="App">
-      {showLogin ? <Login /> : <Signup />}
+      <LandingPage />
+      {/* {showLogin ? <Login /> : <Signup />}
       <button className='btn2' onClick={handleToggleForm}>
         {showLogin ? (
           <>
@@ -27,7 +29,7 @@ function App() {
             <span className="highlightText">Log in</span>
           </>
         )}
-      </button>
+      </button> */}
     </div>
   );
 }
