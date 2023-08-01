@@ -587,8 +587,8 @@ display: block;
   bottom: 20px;
   right: 20px;
   width: 300px;
-  background-color: #f5f5f5;
-  border: 1px solid #ccc;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
   padding: 20px;
   z-index: 999;
   border-radius: 5px;
@@ -627,6 +627,82 @@ display: block;
 
 .floating-chatbox button.close-chatbox {
   background-color: #dc3545;
+}
+
+
+/* Styling for the modal overlay */
+.plan-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the modal container */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Styling for the modal title */
+.modal-content h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Styling for the modal price */
+.modal-content p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Styling for the modal tasks list */
+.modal-content ul {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+/* Styling for the modal task items */
+.modal-content li {
+  margin-bottom: 5px;
+}
+
+/* Styling for the modal description */
+.modal-content p:last-child {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Styling for the modal footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Styling for the modal button */
+.modal-content button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Styling for the modal button on hover */
+.modal-content button:hover {
+  background-color: #0056b3;
 }
 
 

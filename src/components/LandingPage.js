@@ -1,4 +1,5 @@
 import React,{useEffect, useState} from 'react';
+
 import './LandingPage.css';
 import AOS from 'aos';
 import 'aos/dist/aos.css';

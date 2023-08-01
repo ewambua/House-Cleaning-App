@@ -1,0 +1,320 @@
+/* PlanDetailsModal.css */
+
+/* Styling for the modal overlay */
+.plan-details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling for the modal container */
+  .modal-content {
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+  }
+  
+  /* Styling for the modal title */
+  .modal-content h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007bff; /* Blue color for the title */
+  }
+  
+  /* Styling for the modal price */
+  .modal-content p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555; /* Dark gray color for the price */
+  }
+  
+  /* Styling for the modal tasks list */
+  .modal-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Styling for the modal task items */
+  .modal-content li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  /* Styling for the checkbox label */
+  .modal-content label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #333; /* Dark gray color for the task labels */
+  }
+  
+  /* Styling for the custom checkbox */
+  .modal-content input[type="checkbox"] {
+    margin-right: 10px;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007bff; /* Blue border for the checkbox */
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  /* Styling for the custom checkbox checkmark */
+  .modal-content input[type="checkbox"]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #007bff; /* Blue color for the checkmark */
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  /* Styling for the custom checkbox when checked */
+  .modal-content input[type="checkbox"]:checked:before {
+    opacity: 1;
+  }
+  
+  /* Styling for the custom checkbox when disabled */
+  .modal-content input[type="checkbox"]:disabled {
+    border-color: #c0c0c0; /* Grey border for disabled checkboxes */
+    background-color: #f2f2f2; /* Light grey background for disabled checkboxes */
+    cursor: not-allowed;
+  }
+  
+  /* Styling for the custom checkbox checkmark when disabled */
+  .modal-content input[type="checkbox"]:disabled:before {
+    background-color: #c0c0c0; /* Grey color for the checkmark on disabled checkboxes */
+  }
+  
+  /* Styling for the disabled task label */
+  .modal-content input[type="checkbox"]:disabled + span {
+    color: #c0c0c0;
+    pointer-events: none;
+  }
+  
+  /* Styling for the modal description */
+  .modal-content p:last-child {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666; /* Gray color for the description */
+  }
+  
+  /* Styling for the modal footer */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Styling for the modal button */
+  .modal-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Styling for the modal button on hover */
+  .modal-content button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Center the modal content vertically and horizontally */
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Styling for the modal overlay */
+  .plan-details-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Styling for the modal container */
+  .modal-content {
+    background-color: #f9f9f9; /* Light background color */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 90%;
+  }
+  
+  /* Styling for the modal title */
+  .modal-content h3 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: #007bff; /* Blue color for the title */
+  }
+  
+  /* Styling for the modal price */
+  .modal-content p {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #555; /* Dark gray color for the price */
+  }
+  
+  /* Styling for the modal tasks list */
+  .modal-content ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Styling for the modal task items */
+  .modal-content li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  
+  /* Styling for the checkbox label */
+  .modal-content label {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #333; /* Dark gray color for the task labels */
+  }
+  
+  /* Styling for the custom checkbox */
+  .modal-content input[type="checkbox"] {
+    margin-right: 10px;
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #007bff; /* Blue border for the checkbox */
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
+  }
+  
+  /* Styling for the custom checkbox checkmark */
+  .modal-content input[type="checkbox"]:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 10px;
+    height: 10px;
+    background-color: #007bff; /* Blue color for the checkmark */
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  
+  /* Styling for the custom checkbox when checked */
+  .modal-content input[type="checkbox"]:checked:before {
+    opacity: 1;
+  }
+  
+  /* Styling for the custom checkbox when disabled */
+  .modal-content input[type="checkbox"]:disabled {
+    border-color: #c0c0c0; /* Grey border for disabled checkboxes */
+    background-color: #f2f2f2; /* Light grey background for disabled checkboxes */
+    cursor: not-allowed;
+  }
+  
+  /* Styling for the custom checkbox checkmark when disabled */
+  .modal-content input[type="checkbox"]:disabled:before {
+    background-color: #c0c0c0; /* Grey color for the checkmark on disabled checkboxes */
+  }
+  
+  /* Styling for the disabled task label */
+  .modal-content input[type="checkbox"]:disabled + span {
+    color: #c0c0c0;
+    pointer-events: none;
+  }
+  
+  /* Styling for the modal description */
+  .modal-content p:last-child {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #666; /* Gray color for the description */
+  }
+  
+  /* Styling for the modal footer */
+  .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  /* Styling for the modal button */
+  .modal-content button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Styling for the modal button on hover */
+  .modal-content button:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Center the modal content vertically and horizontally */
+  .modal-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  
+  /* Media query for smaller screens */
+  @media (max-width: 768px) {
+    .modal-content {
+      max-width: 90%;
+      max-height: 90%;
+    }
+  
+    .modal-content h3 {
+      font-size: 1.5rem;
+    }
+  
+    .modal-content p {
+      font-size: 1.1rem;
+    }
+  
+    .modal-content h4 {
+      font-size: 1.3rem;
+    }
+  }
+  
