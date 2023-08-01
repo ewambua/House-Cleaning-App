@@ -12,7 +12,7 @@ const Login = () => {
   };
 
   return (
-    <div>
+    <div className='signup'>
       <form action="" className="form_main"> {/* Use className instead of class */}
         <p className="heading">Login</p> {/* Use className instead of class */}
         <div className="inputContainer"> {/* Use className instead of class */}

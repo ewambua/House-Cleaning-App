@@ -46,6 +46,7 @@ const Signup = () => {
   };
 
   return (
+    <>
     <div className='signup'>
       <form onSubmit={handleSubmit} className="form_main">
         <p className="heading">Signup</p>
@@ -115,6 +116,7 @@ const Signup = () => {
         <a className="forgotLink" href="#">Forgot your password?</a>
       </form>
     </div>
+    </>
   );
 };
 

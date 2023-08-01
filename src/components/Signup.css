@@ -1,12 +1,14 @@
 /* Signup.css */
 
 /* Center the form both horizontally and vertically */
-body {
+
+
+.signup{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  margin: 0;
+  height: 70vh;
+ 
 }
 
 .form_main {

@@ -30,12 +30,13 @@ body {
   color: white;
 }
 
-.signup {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+.btn2 {
+  background-color: rgb(11, 106, 134);
+  margin-bottom: 200px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  color: aliceblue;
 }
 
 .App-link {
