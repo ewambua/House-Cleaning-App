@@ -1,68 +1,71 @@
-/* UserProfile.css */
 .user-profile {
-  background-color: #f0f0f0;
-  padding: 20px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  margin: 20px;
-}
-
-.user-profile h2 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.user-profile p {
-  margin: 5px 0;
-}
-
-.user-profile p:last-child {
-  font-weight: bold;
-  color: #007bff;
-}
-user-profile .profile-image-container {
-  width: 80px;
-  height: 80px; 
-  border-radius: 50%; 
-  background-color: #007bff; 
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.user-profile .profile-image {
-  width: 30mm;
-  height: 20mm;
-  border-radius: 10px;
-  background: url("/public/vn_passport.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-.user-profile .frame {
-  width: 100%;
-  height: auto;
-  max-width: 100px;
-  background-color: #007bff; 
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid #007bff;
-  border-radius: 5px;
-  padding: 1rem;
-}
-
-.user-profile .welcome-message {
-  text-align: center;
-  margin-top: 1rem;
-}
-
-.user-profile .name {
-  font-size: 1.2rem;
-}
-
-.user-profile .welcome {
-  font-size: 1rem;
-}
+    background-color: #f0f0f0;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    margin: 20px;
+  }
+  
+  .user-profile h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile p {
+    margin: 5px 0;
+  }
+  
+  .user-profile p:last-child {
+    font-weight: bold;
+    color: #007bff;
+  }
+  
+  .user-profile .profile-image-container {
+    width: 80px;
+    height: 80px; 
+    border-radius: 50%; 
+    background-color: #007bff; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .user-profile .profile-image {
+    width: 30mm;
+    height: 20mm;
+    border-radius: 10px;
+    background: url("/public/vn_passport.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .user-profile .frame {
+    width: 100%;
+    height: auto;
+    max-width: 100px;
+    background-color: #007bff; 
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    padding: 1rem;
+  }
+  
+  .user-profile .welcome-message {
+    text-align: center;
+    margin-top: 1rem;
+  }
+  
+  .user-profile .name {
+    font-size: 1.2rem;
+  }
+  
+  .user-profile .welcome {
+    font-size: 1rem;
+  }
+  
