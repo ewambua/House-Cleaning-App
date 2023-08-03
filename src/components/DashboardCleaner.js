@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import './DashboardCleaner.css';
 import profileImage from '../components/Professional-Cleaning-Services-1920x1080-1.webp';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 
 const CleanerDashboard = () => {
   const [cleanerProfile] = useState({
@@ -47,7 +50,7 @@ const CleanerDashboard = () => {
 
   return (
     <div className="cleaner-dashboard">
-      <div className="cleaner-profile">
+      <div className="dashboard-section cleaner-profile">
         <div className="profile-image-container">
           <img src={profileImage} alt="profile" className="profile-image" />
         </div>
@@ -56,7 +59,8 @@ const CleanerDashboard = () => {
           <p>{cleanerProfile.bio}</p>
         </div>
       </div>
-      <div className="notifications">
+    <div className='boxes'>
+      <div className="dashboard-section notifications">
         <h3>Notifications</h3>
         <table>
           <thead>
@@ -80,19 +84,23 @@ const CleanerDashboard = () => {
         </table>
       </div>
 
-      <div className="reviews">
+      <div className="dashboard-section reviews">
         <h3>Reviews</h3>
         {cleanerProfile.reviews.map((review) => (
           <div key={review.id} className="review">
             <p>{review.review}</p>
             <div className="stars">
-              {Array.from(Array(review.rating)).map((_, index) => (
-                <span key={index} className="star"></span>
+              {Array.from(Array(Math.floor(review.rating))).map((_, index) => (
+                <FontAwesomeIcon key={index} icon={faStar} className="star full-star" />
               ))}
+              {review.rating % 1 !== 0 && (
+                <FontAwesomeIcon icon={faStar} className="star half-star" />
+              )}
             </div>
           </div>
         ))}
       </div>
+    </div>
     </div>
   );
 };

@@ -1,18 +1,14 @@
+/* Dashboard Cleaner Container */
 .cleaner-dashboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-.dashboard-sections {
-  display: flex;
-  margin-bottom: 20px;
+  display: block;
 }
 
-.dashboard-section:not(:last-child) {
-  margin-right: 20px;
+.boxes {
+  padding: 50px;
+  display: flex;
 }
 
+/* Cleaner Profile Section */
 .cleaner-profile {
   display: flex;
   align-items: center;
@@ -28,6 +24,13 @@
   justify-content: center;
   align-items: center;
   margin-right: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-section {
+  flex: 1;
+  margin: 10px;
+  min-width: 300px;
 }
 
 .profile-image {
@@ -45,33 +48,22 @@
 .user-info p {
   margin: 5px 0;
 }
-.notifications {
-  flex: 1; 
-}
 
+/* Notifications Section */
 .notifications {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
   margin-bottom: 30px;
 }
-.notifications table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.notifications th,
-.notifications td {
-  padding: 8px; 
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.notifications th {
-  background-color: #f2f2f2;
-}
-
 
 .notifications h3 {
   color: #333;
+  font-size: 20px;
   margin-bottom: 10px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
 }
 
 .notification {
@@ -99,40 +91,71 @@
   background-color: #dc3545;
 }
 
+.notification-details {
+  flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification-sender {
+  flex: 1;
+  color: #333;
+  font-size: 16px;
+}
+
+.notification-job {
+  color: #555;
+  font-size: 14px;
+}
+
+
+/* Reviews Section */
 .reviews {
   text-align: center;
-  margin-top: 20px;
+  width: 100%;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
-.reviews {
-  flex: 1; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+
+.reviews h3 {
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .review {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
   margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
 }
 
 .review p {
   flex: 1;
   margin-right: 10px;
-   color: #333;
+  color: #333;
 }
 
 .stars {
   display: flex;
   align-items: center;
+  color: gold;
 }
+
 
 .star {
   width: 20px;
   height: 20px;
-  background-color: #ffc107;
+  color: gold;
+  background-color: #ffc107; /* Make the stars gold */
   clip-path: polygon(
     50% 0%,
     61.8% 38.2%,
@@ -145,4 +168,42 @@
     0% 35.4%,
     38.2% 38.2%
   );
+  margin: 2px;
+}
+
+.full-star {
+  clip-path: polygon(
+    50% 0%,
+    61.8% 38.2%,
+    100% 35.4%,
+    69.1% 57.3%,
+    82.6% 91.6%,
+    50% 70.9%,
+    17.4% 91.6%,
+    30.9% 57.3%,
+    0% 35.4%,
+    38.2% 38.2%
+  );
+  background-color: #ffc107; /* Make the full stars gold */
+}
+
+.half-star {
+  clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 70.9%, 0% 100%, 0% 0%);
+  background-color: #ffc107; /* Make the half stars gold */
+}
+
+/* Animation for the dashboard-section */
+.dashboard-section {
+  animation: fadeInUp 1s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
