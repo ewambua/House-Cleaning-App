@@ -297,6 +297,47 @@
     align-items: center;
     text-align: center;
   }
+
+  .cleaners-section {
+    margin-top: 20px;
+    width: 100%;
+    height: 200px; /* Set the desired height */
+    overflow-y: auto; /* Add a vertical scroll bar if content exceeds the height */
+  }
+  
+  .cleaners-section h4 {
+    margin-bottom: 10px;
+  }
+  
+  .cleaners-section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+  }
+  
+  .cleaners-section li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  
+  .cleaners-section i {
+    font-size: 16px;
+    color: #ffc107; /* Gold color for the stars */
+  }
+  
+  .filled-star {
+    color: #ffc107; /* Gold color for filled stars */
+  }
+  
+  .half-star {
+    color: #ffc107; /* Gold color for half-filled star */
+  }
+  
+  .empty-star {
+    color: #ccc; /* Grey color for empty stars */
+  }
   
   /* Media query for smaller screens */
   @media (max-width: 768px) {

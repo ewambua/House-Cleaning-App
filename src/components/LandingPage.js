@@ -192,7 +192,7 @@ const handleScrollToSection = (sectionId) => {
   <h2>What Our Customers Say</h2>
   <div class="testimonial" data-aos="fade-up">
     <img
-      src="https://www.example.com/user-avatar-1.png"
+      src="https://previews.123rf.com/images/apoev/apoev2107/apoev210700033/171405527-default-avatar-photo-placeholder-gray-profile-picture-icon-business-man-illustration.jpg"
       alt="User 1"
     />
     <div class="quote">
@@ -204,7 +204,7 @@ const handleScrollToSection = (sectionId) => {
   </div>
   <div class="testimonial" data-aos="fade-up">
     <img
-      src="https://www.example.com/user-avatar-2.png"
+      src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
       alt="User 2"
     />
     <div class="quote">

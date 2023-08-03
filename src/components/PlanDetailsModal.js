@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './PlanDetailsModal.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'; 
 
 const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   // Define the plan details based on the selected plan
@@ -42,6 +44,24 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
     { name: 'Cleaner 9', rating: 4.4 },
   ];
 
+  const renderStars = (rating) => {
+    const totalStars = 5;
+    const filledStars = Math.round(rating * 2) / 2;
+    const starIcons = [];
+  
+    for (let i = 1; i <= totalStars; i++) {
+      if (i <= filledStars) {
+        starIcons.push(<i key={i} className="fa fa-star filled-star" />);
+      } else if (i - 0.5 === filledStars) {
+        starIcons.push(<i key={i} className="fa fa-star-half-o half-star" />);
+      } else {
+        starIcons.push(<i key={i} className="fa fa-star-o empty-star" />);
+      }
+    }
+  
+    return starIcons;
+  };
+
   // State to track the selected tasks
   const [selectedTasks, setSelectedTasks] = useState([]);
 
@@ -82,17 +102,18 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
         </form>
         <p>{description}</p>
 
-        {/* Section to display available cleaners and their ratings */}
-        <div className="cleaners-section">
-          <h4>Available Cleaners:</h4>
-          <ul>
-            {availableCleaners.map((cleaner, index) => (
-              <li key={index}>
-                {cleaner.name} - Rating: {cleaner.rating}
-              </li>
-            ))}
-          </ul>
-        </div>
+       {/* Section to display available cleaners and their ratings */}
+       <div className="cleaners-section">
+  <h4>Available Cleaners:</h4>
+  <ul>
+    {availableCleaners.map((cleaner, index) => (
+      <li key={index}>
+        {cleaner.name} - Rating: {renderStars(cleaner.rating)}
+      </li>
+    ))}
+  </ul>
+</div>
+
 
         <button onClick={onClose}>Close</button>
       </div>
