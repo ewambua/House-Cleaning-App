@@ -1,5 +1,24 @@
+/* App.css */
+
+/* Reset default margin and padding */
+body, html {
+  margin: 0;
+  padding: 0;
+}
+
+/* Global styles for the entire application */
 .App {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+/* Header section styles */
+.App-header {
+  background-color: #4caf50;
+  padding: 20px;
   text-align: center;
+  color: white;
 }
 
 /* For example, in your App.css or any other CSS file */
@@ -8,45 +27,38 @@ body {
 }
 
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App-title {
+  font-size: 24px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* Main content styles */
+.App-content {
+  padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* Footer styles */
+.App-footer {
+  background-color: #333;
   color: white;
+  text-align: center;
+  padding: 10px;
 }
 
-.signup {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: auto;
+.btn2 {
+  background-color: rgb(11, 106, 134);
+  margin-bottom: 200px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  color: aliceblue;
 }
 
+/* Styles for links */
 .App-link {
-  color: #61dafb;
+  color: #4caf50;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.App-link:hover {
+  text-decoration: underline;
 }

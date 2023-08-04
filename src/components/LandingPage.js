@@ -1,15 +1,107 @@
-import React from 'react';
-import './LandingPage.css';
+import React,{useEffect, useState} from 'react';
 
-const LandingPage = () => {
+import './LandingPage.css';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import ChatBanner from './ChatBanner';
+import image1 from './images/image1.png';
+import PlanDetailsModal from './PlanDetailsModal';
+
+const CustomLandingPage = () => {
+  const [selectedPlan, setSelectedPlan] = useState(null);
+
+  const handlePlanClick = (plan) => {
+    setSelectedPlan(plan);
+  };
+
+
+     // State to track whether the chatbox is open or closed
+  const [isChatboxOpen, setIsChatboxOpen] = useState(false);
+
+  // Function to handle the chatbox icon click
+  const handleChatboxClick = () => {
+    setIsChatboxOpen((prevIsChatboxOpen) => !prevIsChatboxOpen);
+  };
+  
+  useEffect(() => {
+    AOS.init(); // Initialize the AOS library
+
+    // Add an event listener to handle scrolling
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      // Remove the event listener on component unmount
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // State to track whether the user has scrolled or not
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  // Function to handle scrolling
+  const handleScroll = () => {
+    if (window.scrollY > 50) {
+      setIsScrolling(true); // Add the scrolling class to the header
+    } else {
+      setIsScrolling(false); // Remove the scrolling class from the header
+    }
+  };
+
+ 
+   
+// Function to handle scrolling to a section
+const handleScrollToSection = (sectionId) => {
+  const targetElement = document.getElementById(sectionId);
+  if (targetElement) {
+    const headerOffset = 80; // Adjust this value according to your header's height
+    const elementPosition = targetElement.getBoundingClientRect().top;
+    const offsetPosition = elementPosition - headerOffset;
+
+    const scrollDuration = 500; // Set the duration of the scroll animation in milliseconds
+    const startingTime = performance.now();
+    const getScrollTop = window.scrollY || document.documentElement.scrollTop;
+    const easeInOutQuad = (t) => t<.5 ? 2*t*t : -1+(4-2*t)*t;
+
+    const scrollStep = (timestamp) => {
+      const currentTime = timestamp || performance.now();
+      const elapsed = currentTime - startingTime;
+      const scrollProgress = easeInOutQuad(Math.min(elapsed / scrollDuration, 1));
+
+      window.scrollTo(0, getScrollTop + offsetPosition * scrollProgress);
+
+      if (elapsed < scrollDuration) {
+        requestAnimationFrame(scrollStep);
+      }
+    };
+
+    requestAnimationFrame(scrollStep);
+  }
+};
+
+
+
   return (
     <div className="landing-page">
-      <header className="header">
+
+   {/* Chatbox Icon */}
+   <div className="chatbox-icon" onClick={handleChatboxClick}>
+        <span className="fa-stack fa-3x rotate-animation">
+          <i className="far fa-circle fa-stack-2x" style={{ color: '#007bff' }}></i>
+          <i className="fas fa-comment fa-stack-1x"></i>
+        </span>
+      </div>
+
+       {/* Tiny Banner */}
+       <ChatBanner />
+
+      <header className={`header${isScrolling ? ' scrolling' : ''}`}>
         {/* Logo and Navigation */}
-        <img src="https://www.shutterstock.com/image-vector/home-cleaning-service-logo-design-600w-2145553895.jpg" />
+        <img
+          src="https://www.example.com/logo.png" // Replace with your logo image URL
+          alt="CustomLogo"
+        />
         <nav>
           {/* Navigation links */}
-          <a href="#login/signup">SignUp/Login</a>
           <a href="#features">Features</a>
           <a href="#testimonials">Testimonials</a>
           <a href="#pricing">Pricing</a>
@@ -17,110 +109,149 @@ const LandingPage = () => {
         </nav>
       </header>
 
-      <section className="hero">
-        {/* Hero Section Content */}
-        <h1>Welcome to HouseClean!</h1>
-        <p>Get your house cleaned with just a few clicks.</p>
-        <button>Get Started</button>
-      </section>
+      <main>
+      <div className="hero">
+  {/* Hero Section Content */}
+  <h1>Welcome to Our <span className='spanna'>Website</span>!</h1>
+  <p>Discover Amazing Services with Us.</p>
+  <img className='img10' src={image1} alt="Description of the image" />
+  <button className='btn5'>Get Started</button>
+</div>
 
-      <section id="features" className="features">
-        {/* Features Section Content */}
-        <h2>Key Features</h2>
-        <div className="feature">
-          <img src="" alt="" />
-          <h3>Easy Booking</h3>
-          <p>Book a cleaning service in no time.</p>
-        </div>
-        <div className="feature">
-          <img src="feature-icon-2.png" alt="Feature 2" />
-          <h3>Trusted Cleaners</h3>
-          <p>Experienced and background-checked cleaners.</p>
-        </div>
-      </section>
 
-      {/* Pricing Options Section */}
-      <section id="pricing-options" className="pricing-options">
-        <h2>Choose Your Plan</h2>
-        <div className="options">
-          <div className="option">
-            <h3>Bronze</h3>
-            <p>$29</p>
-          </div>
-          <div className="option">
-            <h3>Gold</h3>
-            <p>$59</p>
-          </div>
-          <div className="option">
-            <h3>Silver</h3>
-            <p>$39</p>
-          </div>
-        </div>
-      </section>
 
-      <section id="testimonials" className="testimonials">
-        {/* Testimonials Section Content */}
-        <h2>What Our Customers Say</h2>
-        <div className="testimonial">
-          <img src="user-avatar-1.png" alt="User 1" />
-          <blockquote>
-            "HouseClean is a lifesaver! Their cleaners are professional and always do a fantastic job."
-          </blockquote>
-          <p>- Kibiwot</p>
-        </div>
-        <div className="testimonial">
-          <img src="user-avatar-2.png" alt="User 2" />
-          <blockquote>
-            "I'm impressed with the quality of service and the ease of booking. Highly recommended!"
-          </blockquote>
-          <p>- Elon Musk</p>
-        </div>
-      </section>
+        <section id="features" className="features">
+            <div className="feature">
+              <i className="fa fa-check-circle"></i>
+              <h3>Easy Booking</h3>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+            <div className="feature">
+              <i className="fa fa-star"></i>
+              <h3>Trusted Cleaners</h3>
+              <p>Integer nec odio. Praesent libero.</p>
+            </div>
+            <div className="feature">
+              <i className="fa fa-heart"></i>
+              <h3>Feature 3</h3>
+              <p>Etiam ultricies nisi vel augue.</p>
+            </div>
+          </section>
 
-      <section id="pricing" className="pricing">
-        {/* Pricing Section Content */}
-        <h2>Pricing Plans</h2>
-        <div className="plan">
-          <h3>Basic</h3>
-          <p>$49 per cleaning</p>
-          <ul>
-            <li>Standard cleaning</li>
-            <li>1 bedroom & 1 bathroom</li>
-          </ul>
-        </div>
-        <div className="plan">
-          <h3>Standard</h3>
-          <p>$79 per cleaning</p>
-          <ul>
-            <li>Full house cleaning</li>
-            <li>3 bedrooms & 2 bathrooms</li>
-          </ul>
-        </div>
-        {/* Add more pricing plans here */}
-      </section>
+        {/* Pricing Options Section */}
+                  <section id="pricing" className="pricing-options">
+            <h2>Choose Your Plan</h2>
+            <div className="options">
+            <div className={`option-card bronze`} onClick={() => handlePlanClick('Bronze')}>
+                <div className="option-content">
+                  <h3>Bronze</h3>
+                  <p>ksh.950</p>
+                  <ul>
+                    <li>Gardening</li>
+                    <li>Laundry</li>
+                    <li>House Cleaning</li>
+                  </ul>
+                  <p>Choose one task for the cleaners to do.</p>
+                </div>
+              </div>
+              <div className="option-card silver" onClick={() => handlePlanClick('Silver')}>
+                <div className="option-content">
+                  <h3>Silver</h3>
+                  <p>ksh.1800</p>
+                  <ul>
+                    <li>Gardening</li>
+                    <li>Laundry</li>
+                    <li>House Cleaning</li>
+                  </ul>
+                  <p>Choose two tasks for the cleaners to do.</p>
+                </div>
+              </div>
+              <div className="option-card gold" onClick={() => handlePlanClick('Gold')}>
+                <div className="option-content">
+                  <h3>Gold</h3>
+                  <p>ksh.2500</p>
+                  <ul>
+                    <li>Gardening</li>
+                    <li>Laundry</li>
+                    <li>House Cleaning</li>
+                  </ul>
+                  <p>Choose three tasks for the cleaners to do.</p>
+                </div>
+              </div>
+            </div>
+          </section>
 
-      <section id="contact" className="contact">
-        {/* Contact Section Content */}
-        <h2>Contact Us</h2>
-        <p>Have a question or need support? Contact our team.</p>
-        <form>
-          <input type="text" placeholder="Your Name" />
-          <input type="email" placeholder="Your Email" />
-          <textarea placeholder="Your Message"></textarea>
-          <button type="submit">Send Message</button>
-        </form>
-      </section>
+
+      {/* Conditionally render the plan details modal */}
+      {selectedPlan && (
+        <PlanDetailsModal selectedPlan={selectedPlan} onClose={() => setSelectedPlan(null)} />
+      )}
+
+
+          <section id="testimonials" class="testimonials">
+  <h2>What Our Customers Say</h2>
+  <div class="testimonial" data-aos="fade-up">
+    <img
+      src="https://www.example.com/user-avatar-1.png"
+      alt="User 1"
+    />
+    <div class="quote">
+      <blockquote>
+        "Testimonial from User 1 goes here. Lorem ipsum dolor sit amet..."
+      </blockquote>
+      <p>- User 1</p>
+    </div>
+  </div>
+  <div class="testimonial" data-aos="fade-up">
+    <img
+      src="https://www.example.com/user-avatar-2.png"
+      alt="User 2"
+    />
+    <div class="quote">
+      <blockquote>
+        "Testimonial from User 2 goes here. Lorem ipsum dolor sit amet..."
+      </blockquote>
+      <p>- User 2</p>
+    </div>
+  </div>
+</section>
+
+{/* Floating Chatbox */}
+{isChatboxOpen && (
+        <div className="floating-chatbox" id="chatbox-contact">
+          {/* Contact Section Content */}
+          <h2>Contact Us</h2>
+          <p>Have a question or need support? Contact our team.</p>
+          <form>
+            <input type="text" placeholder="Your Name" />
+            <input type="email" placeholder="Your Email" />
+            <textarea placeholder="Your Message"></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+          <button className="close-chatbox" onClick={() => setIsChatboxOpen(false)}>
+            Close
+          </button>
+        </div>
+      )}
+
+       
+      </main>
 
       <footer className="footer">
-
-        <p>&copy; {new Date().getFullYear()} HouseClean App. All rights reserved.</p>
+        <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
         <div className="social-icons">
           {/* Social media icons here */}
           <a href="#">
-            <img src="facebook-icon.png" alt="Facebook" />
+            <img
+              src="https://www.example.com/facebook-icon.png" // Replace with your Facebook icon URL
+              alt="Facebook"
+            />
           </a>
           <a href="#">
-            <img src="twitter-icon.png" alt="Twitter" />
+            <img
+              src="https://www.example.com/twitter-icon.png" // Replace with your Twitter icon URL
+              alt="Twitter"
+            />
           </a>
         </div>
       </footer>
@@ -128,4 +259,4 @@ const LandingPage = () => {
   );
 };
 
-export default LandingPage;
+export default CustomLandingPage;
