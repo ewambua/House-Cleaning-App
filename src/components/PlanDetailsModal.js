@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './PlanDetailsModal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons'; 
+import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import CleanerDetails from './CleanerDetails';
 
 const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   // Define the plan details based on the selected plan
@@ -43,6 +44,12 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
     { name: 'Cleaner 8', rating: 4.3 },
     { name: 'Cleaner 9', rating: 4.4 },
   ];
+
+  const [selectedCleaner, setSelectedCleaner] = useState(null);
+// Function to handle the click event when a cleaner is selected
+const handleCleanerSelect = (cleaner) => {
+  setSelectedCleaner(cleaner);
+};
 
   const renderStars = (rating) => {
     const totalStars = 5;
@@ -107,12 +114,16 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   <h4>Available Cleaners:</h4>
   <ul>
     {availableCleaners.map((cleaner, index) => (
-      <li key={index}>
-        {cleaner.name} - Rating: {renderStars(cleaner.rating)}
-      </li>
+      <li key={index} onClick={() => handleCleanerSelect(cleaner)}>
+      {cleaner.name} - Rating: {renderStars(cleaner.rating)}
+    </li>
     ))}
   </ul>
 </div>
+
+ {/* Show the CleanerDetails component when a cleaner is selected */}
+ {selectedCleaner && <CleanerDetails cleaner={selectedCleaner} />}
+    
 
 
         <button onClick={onClose}>Close</button>
