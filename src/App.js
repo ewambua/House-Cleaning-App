@@ -4,7 +4,11 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import './App.css';
 import LandingPage from './components/LandingPage';
-import UserProfile from './components/UserProfile.jsx';
+
+import UserProfile from './components/UserProfile';
+import AdditionalInfo from './components/additionalInfo';
+import Dashboard from './components/DashboardCleaner.js';
+
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -33,12 +37,16 @@ function App() {
   };
 
   return (
+
     <Router>
       <div className="App">
         <Routes>
           <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup />} />
-          {/* Add the /landing route */}
+          <Route path="/info" element={<AdditionalInfo/>} />  
+          <Route path="/profile" element={<UserProfile />} />  
+          <Route path="/Dashboard" element={<Dashboard />} />  
+          
           <Route
             path="/landing"
             element={<LandingPage onLogout={handleLogout} />}
@@ -75,6 +83,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+
   );
 }
 

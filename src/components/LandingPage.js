@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import Login from './Login';
 import './LandingPage.css';
 import AOS from 'aos';
@@ -6,11 +8,19 @@ import 'aos/dist/aos.css';
 import ChatBanner from './ChatBanner';
 import image1 from './images/image1.png';
 import PlanDetailsModal from './PlanDetailsModal';
+import UserProfile from './UserProfile'; // Import the UserProfile component
 
 const CustomLandingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
+  const [selectedNavLink, setSelectedNavLink] = useState(null);
+  const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
 
   useEffect(() => {
     AOS.init();
@@ -21,8 +31,37 @@ const CustomLandingPage = () => {
     };
   }, []);
 
+
   const handlePlanClick = (plan) => {
     setSelectedPlan(plan);
+  };
+
+ 
+  const handleSendMessage = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('/send_message', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Email sent successfully:', data.message);
+        // You can add code here to show a success message to the user
+      } else {
+        const errorData = await response.json();
+        console.error('Error sending email:', errorData.error);
+        // You can add code here to show an error message to the user
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+      // You can add code here to show an error message to the user
+    }
   };
 
   const jwtToken = localStorage.getItem('jwtToken');
@@ -94,19 +133,77 @@ const CustomLandingPage = () => {
           alt="CustomLogo"
         />
         <nav>
-          {/* Navigation links */}
-          <a href="#features">Features</a>
-          <a href="#testimonials">Testimonials</a>
-          <a href="#pricing">Pricing</a>
-          <a href="#contact">Contact</a>
-        </nav>
+        {/* Navigation links */}
+        <a
+          href="#hero"
+          className={selectedNavLink === 'contact' ? 'selected' : ''}
+          onClick={() => {
+            setSelectedNavLink('contact');
+            handleScrollToSection('contact');
+          }}
+        >
+          Home
+        </a>
+        <a
+          href="#features"
+          className={selectedNavLink === 'features' ? 'selected' : ''}
+          onClick={() => {
+            setSelectedNavLink('features');
+            handleScrollToSection('features');
+          }}
+        >
+          Features
+        </a>
+        <a
+          href="#pricing"
+          className={selectedNavLink === 'pricing' ? 'selected' : ''}
+          onClick={() => {
+            setSelectedNavLink('pricing');
+            handleScrollToSection('pricing');
+          }}
+        >
+          Pricing
+        </a>
+        <a
+          href="#testimonials"
+          className={selectedNavLink === 'testimonials' ? 'selected' : ''}
+          onClick={() => {
+            setSelectedNavLink('testimonials');
+            handleScrollToSection('testimonials');
+          }}
+        >
+          Testimonials
+        </a>
+        
+        
+        <Link
+          to="#"
+          onClick={() => setIsProfilePopupOpen(true)}
+          className={selectedNavLink === 'profile' ? 'selected' : ''}
+        >
+          Profile
+        </Link>
+        <Link
+          to="/Dashboard"
+          className={selectedNavLink === 'Dashboard' ? 'selected' : ''}
+        >
+          Dashboard
+        </Link>
+        <Link
+          to="/info"
+          className={selectedNavLink === 'info' ? 'selected' : ''}
+        >
+          Info
+        </Link>
+      </nav>
+
         <button className="logout-button" onClick={handleLogout}>
           Logout
         </button>
       </header>
 
       <main>
-        <div className="hero">
+        <div id='hero' className="hero">
           {/* Hero Section Content */}
           <h1>Welcome to Our <span className="spanna">Website</span>!</h1>
           <p>Discover Amazing Services with Us.</p>
@@ -127,8 +224,8 @@ const CustomLandingPage = () => {
           </div>
           <div className="feature">
             <i className="fa fa-heart"></i>
-            <h3>Feature 3</h3>
-            <p>Etiam ultricies nisi vel augue.</p>
+            <h3>Environment friendly</h3>
+            <p>The products that our cleaners use are organic and do not affect the environment.</p>
           </div>
         </section>
 
@@ -208,22 +305,53 @@ const CustomLandingPage = () => {
           </div>
         </section>
 
-        {/* Floating Chatbox */}
-        {isChatboxOpen && (
-          <div className="floating-chatbox" id="chatbox-contact">
-            {/* Contact Section Content */}
-            <h2>Contact Us</h2>
-            <p>Have a question or need support? Contact our team.</p>
-            <form>
-              <input type="text" placeholder="Your Name" />
-              <input type="email" placeholder="Your Email" />
-              <textarea placeholder="Your Message"></textarea>
-              <button type="submit">Send Message</button>
-            </form>
-            <button className="close-chatbox" onClick={() => setIsChatboxOpen(false)}>
-              Close
-            </button>
+        {isProfilePopupOpen && (
+          <div className="popup-overlay">
+            <div className="profile-popup">
+              <div className="popup-content">
+                <UserProfile />
+                <button className="close-popup" onClick={() => setIsProfilePopupOpen(false)}>
+                  Close
+                </button>
+              </div>
+            </div>
           </div>
+        )}
+
+         {/* Floating Chatbox */}
+      {isChatboxOpen && (
+        <div className="floating-chatbox" id="chatbox-contact">
+          {/* Contact Section Content */}
+          <h2>Contact Us</h2>
+          <p>Have a question or need support? Contact our team.</p>
+          <form onSubmit={handleSendMessage}>
+            <input
+              type="text"
+              placeholder="Your Name"
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            />
+            <input
+              type="email"
+              placeholder="Your Email"
+              value={formData.email}
+              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+            />
+            <textarea
+              placeholder="Your Message"
+              value={formData.message}
+              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+            ></textarea>
+            <button type="submit">Send Message</button>
+          </form>
+          <button className="close-chatbox" onClick={() => setIsChatboxOpen(false)}>
+            Close
+          </button>
+        </div>
+
+
+
+    
         )}
       </main>
 
