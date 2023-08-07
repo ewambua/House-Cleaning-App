@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Signup.css';
+import swal from 'sweetalert';
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -42,11 +43,12 @@ const Signup = () => {
       if (response.ok) {
         const data = await response.json();
         // Save the JWT token to local storage or state if needed
+        swal("Good job!", "You successfully signed up!", "success");
         console.log('Signup successful. JWT token:', data.jwt_token);
       } else {
         const errorData = await response.json();
         // Handle signup error
-        console.log('Signup failed. Error:', errorData.errors);
+        swal("Oops!", "Something went wrong, try signing up again!", "error");          console.log('Signup failed. Error:', errorData.errors);
       }
     } catch (error) {
       console.error('Error occurred during signup:', error);

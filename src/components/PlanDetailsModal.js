@@ -80,7 +80,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
     return starIcons;
   };
 
-  
+
 
   const handleTaskSelect = (task) => {
     if (selectedTasks.includes(task)) {
@@ -95,7 +95,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
       <div className="modal-contento">
       <FontAwesomeIcon icon={faTimes} className="close-button" onClick={onClose} />
         <h2>{planName}</h2>
-        
+
         <div className="details-modal">
         <div className="tasks-sectiono">
           <h3 className='task-head'>Select {maxTasksSelectable} Task{maxTasksSelectable > 1 && 's'}:</h3>
@@ -119,12 +119,12 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
 </ul>
 
 
-          
+
         </div>
         <p className="description"> <br /> For this plan you are only allowed to choose {maxTasksSelectable} Task{maxTasksSelectable > 1 && 's'} for the cleaners to do. The tasks are not limited to one choice but you can select any variations .  </p>
         <h3>Available Cleaners:</h3>
         <div className="cleaners-section">
-          
+
           <ul>
             {availableCleaners.map((cleaner, index) => (
               <li
@@ -146,10 +146,10 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
 
          {/* Submit Button */}
          <button className="submit-button" onClick={handleSubmit}>
-          Submit
+          Choose Cleaner
         </button>
 
-        
+
       </div>
     </div>
   );
