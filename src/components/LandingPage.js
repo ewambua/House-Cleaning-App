@@ -184,6 +184,12 @@ const CustomLandingPage = () => {
           Profile
         </Link>
         <Link
+          to="/Dashboard"
+          className={selectedNavLink === 'Dashboard' ? 'selected' : ''}
+        >
+          Dashboard
+        </Link>
+        <Link
           to="/info"
           className={selectedNavLink === 'info' ? 'selected' : ''}
         >

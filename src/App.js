@@ -6,6 +6,7 @@ import './App.css';
 import LandingPage from './components/LandingPage';
 import UserProfile from './components/UserProfile';
 import AdditionalInfo from './components/additionalInfo';
+import Dashboard from './components/DashboardCleaner.js';
 
 
 function App() {
@@ -41,8 +42,9 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup />} />
-
+          <Route path="/info" element={<AdditionalInfo/>} />  
           <Route path="/profile" element={<UserProfile />} />  
+          <Route path="/Dashboard" element={<Dashboard />} />  
           
           <Route
             path="/landing"
