@@ -4,6 +4,9 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import './App.css';
 import LandingPage from './components/LandingPage';
+import UserProfile from './components/UserProfile';
+import AdditionalInfo from './components/additionalInfo';
+
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -32,12 +35,15 @@ function App() {
   };
 
   return (
+
     <Router>
       <div className="App">
         <Routes>
           <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup />} />
-          {/* Add the /landing route */}
+
+          <Route path="/profile" element={<UserProfile />} />  
+          
           <Route
             path="/landing"
             element={<LandingPage onLogout={handleLogout} />}
@@ -74,6 +80,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+
   );
 }
 

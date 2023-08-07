@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import './PlanDetailsModal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faStarHalfAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import CleanerDetails from './CleanerDetails';
+import { faCheckSquare, faSquare, faTshirt, faHome, faTree } from '@fortawesome/free-solid-svg-icons';
 
 const PlanDetailsModal = ({ selectedPlan, onClose }) => {
-  // Define the plan details based on the selected plan
+  const [selectedCleaner, setSelectedCleaner] = useState(null);
+  const [selectedTasks, setSelectedTasks] = useState([]);
+
   const planDetails = {
     Bronze: {
       planName: 'Bronze Plan',
@@ -32,7 +35,6 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
 
   const { planName, price, tasks, description, maxTasksSelectable } = planDetails[selectedPlan];
 
-  // Available cleaners with ratings
   const availableCleaners = [
     { name: 'Cleaner 1', rating: 4.5 },
     { name: 'Cleaner 2', rating: 4.0 },
@@ -45,88 +47,109 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
     { name: 'Cleaner 9', rating: 4.4 },
   ];
 
-  const [selectedCleaner, setSelectedCleaner] = useState(null);
-// Function to handle the click event when a cleaner is selected
-const handleCleanerSelect = (cleaner) => {
-  setSelectedCleaner(cleaner);
-};
+
+
+  const handleCleanerSelect = (cleaner) => {
+    setSelectedCleaner(cleaner === selectedCleaner ? null : cleaner);
+  };
+
+  const handleSubmit = () => {
+    // Do something with the user's selections (selectedPlan, selectedCleaner, selectedTasks)
+    // For example, you can send this data to an API or perform any other necessary actions.
+    console.log('Selected Plan:', selectedPlan);
+    console.log('Selected Cleaner:', selectedCleaner);
+    console.log('Selected Tasks:', selectedTasks);
+
+    // Close the modal
+    onClose();
+  };
+
 
   const renderStars = (rating) => {
     const totalStars = 5;
     const filledStars = Math.round(rating * 2) / 2;
-    const starIcons = [];
-  
-    for (let i = 1; i <= totalStars; i++) {
-      if (i <= filledStars) {
-        starIcons.push(<i key={i} className="fa fa-star filled-star" />);
-      } else if (i - 0.5 === filledStars) {
-        starIcons.push(<i key={i} className="fa fa-star-half-o half-star" />);
+    const starIcons = Array.from({ length: totalStars }, (_, index) => {
+      if (index + 0.5 <= filledStars) {
+        return <FontAwesomeIcon key={index} icon={faStar} className="star filled-star" />;
+      } else if (index < filledStars) {
+        return <FontAwesomeIcon key={index} icon={faStarHalfAlt} className="star half-star" />;
       } else {
-        starIcons.push(<i key={i} className="fa fa-star-o empty-star" />);
+        return <FontAwesomeIcon key={index} icon={faStar} className="star empty-star" />;
       }
-    }
-  
+    });
     return starIcons;
   };
 
-  // State to track the selected tasks
-  const [selectedTasks, setSelectedTasks] = useState([]);
+  
 
-  // Function to handle task selection
   const handleTaskSelect = (task) => {
     if (selectedTasks.includes(task)) {
-      // If the task is already selected, remove it from the selectedTasks
       setSelectedTasks((prevSelectedTasks) => prevSelectedTasks.filter((t) => t !== task));
     } else if (selectedTasks.length < maxTasksSelectable) {
-      // If the maximum tasks selectable has not been reached, add the task to selectedTasks
       setSelectedTasks((prevSelectedTasks) => [...prevSelectedTasks, task]);
     }
   };
 
   return (
     <div className="plan-details-modal">
-      <div className="modal-content">
-        <h3>{planName}</h3>
-        <p>{price}</p>
-        <form>
+      <div className="modal-contento">
+      <FontAwesomeIcon icon={faTimes} className="close-button" onClick={onClose} />
+        <h2>{planName}</h2>
+        
+        <div className="details-modal">
+        <div className="tasks-sectiono">
+          <h3 className='task-head'>Select {maxTasksSelectable} Task{maxTasksSelectable > 1 && 's'}:</h3>
+          <ul className='tasks'>
+  {tasks.map((task, index) => (
+    <li key={index}>
+      <label>
+        <input
+          type="checkbox"
+          checked={selectedTasks.includes(task)}
+          onChange={() => handleTaskSelect(task)}
+          disabled={selectedTasks.length >= maxTasksSelectable && !selectedTasks.includes(task)}
+        />
+        {task === 'Laundry' && <FontAwesomeIcon icon={faTshirt} className="task-icon" />}
+        {task === 'House Cleaning' && <FontAwesomeIcon icon={faHome} className="task-icon" />}
+        {task === 'Gardening' && <FontAwesomeIcon icon={faTree} className="task-icon" />}
+        {task}
+      </label>
+    </li>
+  ))}
+</ul>
+
+
+          
+        </div>
+        <p className="description"> <br /> For this plan you are only allowed to choose {maxTasksSelectable} Task{maxTasksSelectable > 1 && 's'} for the cleaners to do. The tasks are not limited to one choice but you can select any variations .  </p>
+        <h3>Available Cleaners:</h3>
+        <div className="cleaners-section">
+          
           <ul>
-            {tasks.map((task, index) => (
-              <li key={index}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={selectedTasks.includes(task)}
-                    onChange={() => handleTaskSelect(task)}
-                    disabled={
-                      selectedTasks.length >= maxTasksSelectable && !selectedTasks.includes(task)
-                    }
-                  />
-                  {task}
-                </label>
+            {availableCleaners.map((cleaner, index) => (
+              <li
+                key={index}
+                className={`cleaner-item ${selectedCleaner === cleaner ? 'selected' : ''}`}
+                onClick={() => handleCleanerSelect(cleaner)}
+              >
+                <div className="cleaner-name">{cleaner.name}</div>
+                <div className="cleaner-rating">
+                  {renderStars(cleaner.rating)}
+                </div>
               </li>
             ))}
           </ul>
-        </form>
-        <p>{description}</p>
+        </div>
+        </div>
 
-       {/* Section to display available cleaners and their ratings */}
-       <div className="cleaners-section">
-  <h4>Available Cleaners:</h4>
-  <ul>
-    {availableCleaners.map((cleaner, index) => (
-      <li key={index} onClick={() => handleCleanerSelect(cleaner)}>
-      {cleaner.name} - Rating: {renderStars(cleaner.rating)}
-    </li>
-    ))}
-  </ul>
-</div>
+        {selectedCleaner && <CleanerDetails cleaner={selectedCleaner} />}
 
- {/* Show the CleanerDetails component when a cleaner is selected */}
- {selectedCleaner && <CleanerDetails cleaner={selectedCleaner} />}
-    
+         {/* Submit Button */}
+         <button className="submit-button" onClick={handleSubmit}>
+          Submit
+        </button>
 
-
-        <button onClick={onClose}>Close</button>
+        
       </div>
     </div>
   );

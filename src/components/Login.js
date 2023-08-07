@@ -8,7 +8,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await fetch('/login', {
         method: 'POST',
@@ -17,12 +17,13 @@ const Login = () => {
         },
         body: JSON.stringify({ email, password }),
       });
-
+  
       if (response.ok) {
         const data = await response.json();
-        // Saving the JWT token to local storage
-        localStorage.setItem('jwtToken', data.token); // Store the token with the key 'jwtToken'
-        console.log('Login successful. JWT token:', data.token);
+        // Saving the JWT token and user ID to local storage
+        localStorage.setItem('jwtToken', data.token);
+        localStorage.setItem('userId', data.userId); // Store the user ID
+        console.log('Login successful. JWT token:', data.token, data);
         // Redirect to the landing page after successful login
         navigate('/landing'); // Replace '/landing' with the path of your landing page
       } else {
