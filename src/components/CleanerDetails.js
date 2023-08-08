@@ -1,23 +1,49 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 
 
 const CleanerDetails = ({ cleaner }) => {
+  const [cleanerDetails, setCleanerDetails] = useState(null);
+
   const renderStars = (rating) => {
     // (same as before)
   };
+
+  useEffect(() => {
+    // Fetch additional details for the selected cleaner
+    fetch(`/cleaners/${cleaner.id}`)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setCleanerDetails(data); 
+        console. log(data)// Assuming your API response contains additional cleaner details.
+      })
+      .catch(error => {
+        console.error('Error fetching cleaner details:', error);
+      });
+  }, [cleaner.id]);
 
   return (
     <div className="cleaner-details">
       <h2>{cleaner.name}</h2>
       <p>Rating: {renderStars(cleaner.rating)}</p>
-      <h3>Bio</h3>
-      <p>{cleaner.bio}</p>
+      
+      {/* Display cleaner bio */}
+      {cleanerDetails && (
+        <>
+          <h3>Bio</h3>
+          <p>{cleanerDetails.bio}</p>
+        </>
+      )}
 
-      <h3>Reviews</h3>
-      {cleaner.reviews && cleaner.reviews.length > 0 ? (
-        cleaner.reviews.map((review) => (
+      {/* Display cleaner reviews */}
+      {cleanerDetails && cleanerDetails.reviews && cleanerDetails.reviews.length > 0 ? (
+        cleanerDetails.reviews.map((review) => (
           <div key={review.id} className="review">
             <p>{review.review}</p>
             <div className="stars">

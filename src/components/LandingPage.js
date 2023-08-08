@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import emailjs from 'emailjs-com';
 
 import Login from './Login';
 import './LandingPage.css';
@@ -23,6 +24,8 @@ const CustomLandingPage = () => {
   });
 
   useEffect(() => {
+    emailjs.init(process.env.REACT_APP_EMAILJS_USER_ID);
+
     AOS.init();
     window.addEventListener('scroll', handleScroll);
 
@@ -31,31 +34,24 @@ const CustomLandingPage = () => {
     };
   }, []);
 
+  // Rest of your component code...
 
-  const handlePlanClick = (plan) => {
-    setSelectedPlan(plan);
-  };
-
- 
+  // Example of using the environment variable for EmailJS user ID
   const handleSendMessage = async (e) => {
     e.preventDefault();
-
+  
     try {
-      const response = await fetch('/send_message', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        console.log('Email sent successfully:', data.message);
+      const response = await emailjs.send(
+        process.env.REACT_APP_EMAILJS_SERVICE_ID,
+        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
+        formData
+      );
+  
+      if (response.status === 200) {
+        console.log('Email sent successfully');
         // You can add code here to show a success message to the user
       } else {
-        const errorData = await response.json();
-        console.error('Error sending email:', errorData.error);
+        console.error('Error sending email:', response.text);
         // You can add code here to show an error message to the user
       }
     } catch (error) {
@@ -63,6 +59,9 @@ const CustomLandingPage = () => {
       // You can add code here to show an error message to the user
     }
   };
+  
+
+  
 
   const jwtToken = localStorage.getItem('jwtToken');
 
@@ -108,6 +107,11 @@ const CustomLandingPage = () => {
       requestAnimationFrame(scrollStep);
     }
   };
+
+  const handlePlanClick = (plan) => {
+    setSelectedPlan(plan);
+  };
+
 
   if (!jwtToken) {
     return <Login />;
@@ -218,6 +222,11 @@ const CustomLandingPage = () => {
             <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
           </div>
           <div className="feature">
+            <i className="fa fa-check-circle"></i>
+            <h3>Trusted Partners</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          </div>
+          <div className="feature">
             <i className="fa fa-star"></i>
             <h3>Trusted Cleaners</h3>
             <p>Integer nec odio. Praesent libero.</p>
@@ -325,25 +334,26 @@ const CustomLandingPage = () => {
           <h2>Contact Us</h2>
           <p>Have a question or need support? Contact our team.</p>
           <form onSubmit={handleSendMessage}>
-            <input
-              type="text"
-              placeholder="Your Name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            />
-            <input
-              type="email"
-              placeholder="Your Email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            />
-            <textarea
-              placeholder="Your Message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-            ></textarea>
-            <button type="submit">Send Message</button>
-          </form>
+  <input
+    type="text"
+    placeholder="Your Name"
+    value={formData.name}
+    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+  />
+  <input
+    type="email"
+    placeholder="Your Email"
+    value={formData.email}
+    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+  />
+  <textarea
+    placeholder="Your Message"
+    value={formData.message}
+    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+  ></textarea>
+  <button type="submit">Send Message</button>
+</form>
+
           <button className="close-chatbox" onClick={() => setIsChatboxOpen(false)}>
             Close
           </button>

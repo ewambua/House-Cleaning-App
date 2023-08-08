@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './PlanDetailsModal.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
@@ -8,6 +8,8 @@ import { faCheckSquare, faSquare, faTshirt, faHome, faTree } from '@fortawesome/
 const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   const [selectedCleaner, setSelectedCleaner] = useState(null);
   const [selectedTasks, setSelectedTasks] = useState([]);
+  const [availableCleaners, setAvailableCleaners] = useState([]);
+
 
   const planDetails = {
     Bronze: {
@@ -32,21 +34,24 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
       maxTasksSelectable: 3,
     },
   };
-
   const { planName, price, tasks, description, maxTasksSelectable } = planDetails[selectedPlan];
 
-  const availableCleaners = [
-    { name: 'Cleaner 1', rating: 4.5 },
-    { name: 'Cleaner 2', rating: 4.0 },
-    { name: 'Cleaner 3', rating: 4.8 },
-    { name: 'Cleaner 4', rating: 4.2 },
-    { name: 'Cleaner 5', rating: 4.7 },
-    { name: 'Cleaner 6', rating: 4.9 },
-    { name: 'Cleaner 7', rating: 4.6 },
-    { name: 'Cleaner 8', rating: 4.3 },
-    { name: 'Cleaner 9', rating: 4.4 },
-  ];
-
+  useEffect(() => {
+    fetch('/cleaners') 
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(data => {
+        setAvailableCleaners(data); // Assuming your API response contains a list of cleaner objects.
+      })
+      .catch(error => {
+        console.error('Error fetching cleaners:', error);
+      });
+  }, []);
+  
 
 
   const handleCleanerSelect = (cleaner) => {
