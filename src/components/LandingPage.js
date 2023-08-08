@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
 
 import Login from './Login';
 import './LandingPage.css';
