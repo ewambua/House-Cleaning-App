@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef,useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
-
+import swal from 'sweetalert';
 import Login from './Login';
 import './LandingPage.css';
 import AOS from 'aos';
@@ -17,14 +17,14 @@ const CustomLandingPage = () => {
   const [isScrolling, setIsScrolling] = useState(false);
   const [selectedNavLink, setSelectedNavLink] = useState(null);
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    message: '',
-  });
+  // const [formData, setFormData] = useState({
+  //   name: '',
+  //   email: '',
+  //   message: '',
+  // });
 
   useEffect(() => {
-    emailjs.init(process.env.REACT_APP_EMAILJS_USER_ID);
+
 
     AOS.init();
     window.addEventListener('scroll', handleScroll);
@@ -37,27 +37,20 @@ const CustomLandingPage = () => {
   // Rest of your component code...
 
   // Example of using the environment variable for EmailJS user ID
-  const handleSendMessage = async (e) => {
+  const form = useRef();
+
+  const sendEmail = (e) => {
     e.preventDefault();
 
-    try {
-      const response = await emailjs.send(
-        process.env.REACT_APP_EMAILJS_SERVICE_ID,
-        process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-        formData
-      );
+    emailjs.sendForm('service_frjj88b', 'template_6yxi629', form.current, 'gGCrp2rNJ48xALizp')
+      .then((result) => {
 
-      if (response.status === 200) {
-        console.log('Email sent successfully');
-        // You can add code here to show a success message to the user
-      } else {
-        console.error('Error sending email:', response.text);
-        // You can add code here to show an error message to the user
-      }
-    } catch (error) {
-      console.error('An error occurred:', error);
-      // You can add code here to show an error message to the user
-    }
+          console.log(result.text);
+          swal("Good job!", "Your email has been sent!", "success");
+      }, (error) => {
+          console.log(error.text);
+          swal("Oops!", "Something went wrong, please try again!", "error");
+      });
   };
 
 
@@ -199,12 +192,6 @@ const CustomLandingPage = () => {
         >
           Info
         </Link>
-        <Link
-          to="/contactUs"
-          className={selectedNavLink === 'contactUs' ? 'selected' : ''}
-        >
-          contact us
-        </Link>
       </nav>
 
         <button className="logout-button" onClick={handleLogout}>
@@ -339,26 +326,15 @@ const CustomLandingPage = () => {
           {/* Contact Section Content */}
           <h2>Contact Us</h2>
           <p>Have a question or need support? Contact our team.</p>
-          <form onSubmit={handleSendMessage}>
-  <input
-    type="text"
-    placeholder="Your Name"
-    value={formData.name}
-    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-  />
-  <input
-    type="email"
-    placeholder="Your Email"
-    value={formData.email}
-    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-  />
-  <textarea
-    placeholder="Your Message"
-    value={formData.message}
-    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-  ></textarea>
-  <button type="submit">Send Message</button>
-</form>
+          <form ref={form} onSubmit={sendEmail}>
+            <label>Name</label>
+            <input type="text" name="user_name" />
+            <label>Email</label>
+            <input type="email" name="user_email" />
+            <label>Message</label>
+            <textarea name="message" />
+            <input type="submit" value="Send" />
+          </form>
 
           <button className="close-chatbox" onClick={() => setIsChatboxOpen(false)}>
             Close
