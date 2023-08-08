@@ -1,10 +1,10 @@
 import React from 'react';
-import DashboardCleaner from './components/DashboardCleaner';
+import AboutUs from './components/AboutUs';
 
 function App() {
   return (
     <div>
-      <DashboardCleaner />
+      <AboutUs />
     </div>
   );
 }
