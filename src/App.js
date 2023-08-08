@@ -4,7 +4,7 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import './App.css';
 import LandingPage from './components/LandingPage';
-import { ContactUs } from './components/ContactUs';
+
 
 import UserProfile from './components/UserProfile';
 import AdditionalInfo from './components/additionalInfo';
@@ -47,7 +47,6 @@ function App() {
           <Route path="/info" element={<AdditionalInfo/>} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/contactUs" element={<ContactUs/>} />
 
 
           <Route
