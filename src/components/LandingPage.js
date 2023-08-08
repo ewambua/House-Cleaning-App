@@ -39,14 +39,14 @@ const CustomLandingPage = () => {
   // Example of using the environment variable for EmailJS user ID
   const handleSendMessage = async (e) => {
     e.preventDefault();
-  
+
     try {
       const response = await emailjs.send(
         process.env.REACT_APP_EMAILJS_SERVICE_ID,
         process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
         formData
       );
-  
+
       if (response.status === 200) {
         console.log('Email sent successfully');
         // You can add code here to show a success message to the user
@@ -59,9 +59,9 @@ const CustomLandingPage = () => {
       // You can add code here to show an error message to the user
     }
   };
-  
 
-  
+
+
 
   const jwtToken = localStorage.getItem('jwtToken');
 
@@ -178,8 +178,8 @@ const CustomLandingPage = () => {
         >
           Testimonials
         </a>
-        
-        
+
+
         <Link
           to="#"
           onClick={() => setIsProfilePopupOpen(true)}
@@ -198,6 +198,12 @@ const CustomLandingPage = () => {
           className={selectedNavLink === 'info' ? 'selected' : ''}
         >
           Info
+        </Link>
+        <Link
+          to="/contactUs"
+          className={selectedNavLink === 'contactUs' ? 'selected' : ''}
+        >
+          contact us
         </Link>
       </nav>
 
@@ -361,7 +367,7 @@ const CustomLandingPage = () => {
 
 
 
-    
+
         )}
       </main>
 
