@@ -4,11 +4,11 @@ import Login from './components/Login';
 import Signup from './components/Signup';
 import './App.css';
 import LandingPage from './components/LandingPage';
-
-
+import AboutUs from './components/AboutUs';
 import UserProfile from './components/UserProfile';
 import AdditionalInfo from './components/additionalInfo';
 import Dashboard from './components/DashboardCleaner.js';
+
 
 
 function App() {
@@ -46,8 +46,8 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/info" element={<AdditionalInfo/>} />  
           <Route path="/profile" element={<UserProfile />} />  
-          <Route path="/Dashboard" element={<Dashboard />} />  
-          
+          <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/AboutUs" element={<AboutUs/>}/>  
           
 
           <Route
@@ -86,7 +86,6 @@ function App() {
         </Routes>
       </div>
     </Router>
-
   );
 }
 
