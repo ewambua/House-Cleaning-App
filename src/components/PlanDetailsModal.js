@@ -56,8 +56,9 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   };
 
   const handleCleanerSelect = (cleaner) => {
-    console.log('Selected:', cleaner);
+    setSelectedCleaner(cleaner);
   };
+  
 
   const handleSubmit = () => {
     console.log('Selected Cleaner:', selectedCleaner);
@@ -134,26 +135,27 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
             </p>
             <h3>Available Cleaners:</h3>
             <div className="cleaners-section">
-              <ul>
-                {availableCleaners.map((cleaner, index) => (
-                  <li
-                    key={index}
-                    className={`cleaner-item ${selectedCleaner === cleaner ? 'selected' : ''}`}
-                  >
-                    <div className={`cleaner-name ${selectedCleaner === cleaner ? 'selected' : ''}`}>
-                      <input
-                        type="checkbox"
-                        checked={selectedCleaner === cleaner}
-                        onChange={() => handleCleanerSelect(cleaner)}
-                      />
-                      {cleaner.name}
-                    </div>
-                    <div className="cleaner-rating">{renderStars(cleaner.rating)}</div>
-                    <button onClick={() => handleCleanerDetails(cleaner)}>View Details</button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+  <ul>
+    {availableCleaners.map((cleaner, index) => (
+      <li
+        key={index}
+        className={`cleaner-item ${selectedCleaner === cleaner ? 'selected' : ''}`}
+        onClick={() => handleCleanerSelect(cleaner)}
+      >
+        <div className={`cleaner-name ${selectedCleaner === cleaner ? 'selected' : ''}`}>
+          <input
+            type="checkbox"
+            checked={selectedCleaner === cleaner}
+            onChange={() => handleCleanerSelect(cleaner)}
+          />
+          {cleaner.name}
+        </div>
+        <div className="cleaner-rating">{renderStars(cleaner.rating)}</div>
+        <button onClick={() => handleCleanerDetails(cleaner)}>View Details</button>
+      </li>
+    ))}
+  </ul>
+</div>
           </div>
         )}
 
