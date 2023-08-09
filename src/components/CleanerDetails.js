@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
 
+
 const CleanerDetails = ({ cleaner }) => {
   const [cleanerDetails, setCleanerDetails] = useState({
     reviews: [], // Initialize reviews as an empty array
