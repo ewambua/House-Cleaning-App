@@ -28,6 +28,25 @@
     width: 500px;
    }
 
+   /* PlanDetailsModal.css */
+
+/* Add styles for the checked checkbox */
+.cleaner-name input[type="checkbox"]:checked + span {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Add hover effect for cleaner name */
+.cleaner-name label:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+
+.cleaner-item.selected {
+  border: 2px solid #007bff; /* Blue border for selected cleaner */
+  background-color: rgba(0, 123, 255, 0.1); /* Light blue background for selected cleaner */
+}
   
 
    .tasks li {

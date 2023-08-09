@@ -51,16 +51,26 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
       });
   }, []);
 
-  const handleCleanerSelect = (cleaner) => {
+  const handleCleanerDetails = (cleaner) => {
     setSelectedCleaner(cleaner === selectedCleaner ? null : cleaner);
+  };
+
+  const handleCleanerSelect = (cleaner) => {
+    console.log('Selected:', cleaner);
   };
 
   const handleSubmit = () => {
     console.log('Selected Cleaner:', selectedCleaner);
     console.log('Selected Tasks:', selectedTasks);
-
+  
+    if (selectedCleaner) {
+      const selectedCleanerId = selectedCleaner.id; // Replace 'id' with the actual property name
+      console.log('Selected Cleaner ID:', selectedCleanerId);
+    }
+  
     onClose();
   };
+  
 
   const renderStars = (rating) => {
     const totalStars = 5;
@@ -90,7 +100,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
       <div className="modal-content">
         <FontAwesomeIcon icon={faTimes} className="close-button" onClick={onClose} />
         <h2>{planName}</h2>
-        
+
         {selectedCleaner ? (
           <CleanerDetails cleaner={selectedCleaner} />
         ) : (
@@ -129,17 +139,24 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
                   <li
                     key={index}
                     className={`cleaner-item ${selectedCleaner === cleaner ? 'selected' : ''}`}
-                    onClick={() => handleCleanerSelect(cleaner)}
                   >
-                    <div className="cleaner-name">{cleaner.name}</div>
+                    <div className={`cleaner-name ${selectedCleaner === cleaner ? 'selected' : ''}`}>
+                      <input
+                        type="checkbox"
+                        checked={selectedCleaner === cleaner}
+                        onChange={() => handleCleanerSelect(cleaner)}
+                      />
+                      {cleaner.name}
+                    </div>
                     <div className="cleaner-rating">{renderStars(cleaner.rating)}</div>
+                    <button onClick={() => handleCleanerDetails(cleaner)}>View Details</button>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
         )}
-        
+
         <button className="submit-button" onClick={handleSubmit}>
           Submit
         </button>

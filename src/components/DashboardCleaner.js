@@ -16,7 +16,7 @@ const CleanerDashboard = () => {
 
   useEffect(() => {
     const cleanerId = localStorage.getItem('cleanerid');
-  
+
     if (cleanerId) {
       fetch(`/cleaners/${cleanerId}`)
         .then(response => response.json())
@@ -28,9 +28,9 @@ const CleanerDashboard = () => {
             notifications: data.notifications || [],
             reviews: data.reviews || [],
           });
-  
+
           const tempUserMap = {};
-  
+
           // Fetch user data for each user ID in the reviews
           const promises = data.reviews.map(review =>
             fetch(`/users/${review.user_id}`)
@@ -39,13 +39,13 @@ const CleanerDashboard = () => {
                 tempUserMap[review.user_id] = userData.name || ''; // Assuming user data has a 'name' field
               })
           );
-  
+
           // Wait for all user data requests to complete before updating the state
           Promise.all(promises).then(() => {
             setUserMap(tempUserMap);
             console.log('User Map:', tempUserMap);
           });
-  
+
           console.log('Fetched Cleaner Data:', data);
         })
         .catch(error => {
@@ -53,8 +53,6 @@ const CleanerDashboard = () => {
         });
     }
   }, []);
-  
-
   return (
     <div className="cleaner-dashboard">
       <div className="dashboard-section cleaner-profile">
