@@ -9,6 +9,7 @@ import 'aos/dist/aos.css';
 import ChatBanner from './ChatBanner';
 import image1 from './images/image1.png';
 import PlanDetailsModal from './PlanDetailsModal';
+import AboutUs from './AboutUs';
 import UserProfile from './UserProfile'; // Import the UserProfile component
 
 const CustomLandingPage = () => {
@@ -192,6 +193,13 @@ const CustomLandingPage = () => {
         >
           Info
         </Link>
+        <Link
+          to="/AboutUs"
+          className={selectedNavLink === 'AboutUs' ? 'selected' : ''}
+        >
+          AboutUs
+        </Link>
+
       </nav>
 
         <button className="logout-button" onClick={handleLogout}>

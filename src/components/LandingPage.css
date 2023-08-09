@@ -6,7 +6,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
- 
+
 }
 
 /* Body styles */
@@ -23,7 +23,7 @@ body {
   left: 0;
   width: 100%;
   z-index: 999;
-  
+
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -34,7 +34,7 @@ body {
 
 .header.scrolling {
   background-color: #f7f7f7; /* Set your desired background color for the scrolling header */
- 
+
 }
 
 .btn5 {
@@ -44,7 +44,7 @@ body {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.3s ease; 
+  transition: background-color 0.3s ease;
 }
 
 /* Add the hover effect */
@@ -138,9 +138,9 @@ h1, h2, h3 {
 
 .img10 {
   position: absolute;
-  bottom: 40px; 
-  right: 1px; 
-  
+  bottom: 40px;
+  right: 1px;
+
 }
 
 .hero h1 {
@@ -259,7 +259,7 @@ h1, h2, h3 {
   border-radius: 8px;
   padding: 20px;
   margin-top: 30px;
-  
+
 }
 
 
@@ -297,7 +297,7 @@ h1, h2, h3 {
 .option-card.bronze {
   /* Customize the style for Bronze plan */
   border-color: #cd7f32;
-   
+
 }
 
 .option-card.bronze:hover {
@@ -561,20 +561,20 @@ display: block;
 /* Position the chatbox icon on the bottom right corner */
 .chatbox-icon {
   position: fixed;
-  bottom: 20px; 
-  right: 20px; 
-  z-index: 999; 
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
   color: rgb(8, 80, 102);
 }
 
 /* Style the stacked chatbox icon */
 .chatbox-icon .fa-stack-2x {
-  color: #007bff; 
+  color: #007bff;
 }
 
 /* Adjust the size of the stacked chatbox icon */
 .chatbox-icon .fa-stack {
-  font-size: 2.4rem; 
+  font-size: 2.4rem;
 }
 
 /* Add animation to the chatbox icon */
@@ -595,8 +595,8 @@ display: block;
 /* Styling for the tiny banner */
 .chat-banner {
   position: fixed;
-  bottom: 40px; 
-  right: 110px; 
+  bottom: 40px;
+  right: 110px;
   background-color: #083b53;
   color: #ffffff;
   padding: 8px 16px;
@@ -795,7 +795,7 @@ display: block;
     flex-direction: column;
     gap: 30px;
     padding: 10px;
-    
+
   }
 
   .feature {

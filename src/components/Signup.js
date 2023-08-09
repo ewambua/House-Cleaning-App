@@ -23,6 +23,7 @@ const Signup = () => {
         },
         body: JSON.stringify({
           name,
+          username,
           email,
           description: isCleaner ? description : undefined,
           password,
@@ -37,9 +38,9 @@ const Signup = () => {
         console.log('Signup successful. JWT token:', data.jwt_token);
       } else {
         const errorData = await response.json();
-        swal("Oops!", "Something went wrong, try signing up again!", "error"); 
+        swal("Oops!", "Something went wrong, try signing up again!", "error");
         console.log('Signup failed. Error:', errorData.errors);
-      
+
       }
     } catch (error) {
       console.error('Error occurred during signup:', error);
@@ -100,11 +101,11 @@ const Signup = () => {
               id="username"
               placeholder="UserName"
               value={username}
-              onChange={(e) => setName(e.target.value)}
+              onChange={(e) => setUsername(e.target.value)}
             />
           </div>
 
-          
+
 
           <div className="inputContainer">
             <svg
