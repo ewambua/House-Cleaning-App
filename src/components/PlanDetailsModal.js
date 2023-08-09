@@ -57,20 +57,40 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
 
   const handleCleanerSelect = (cleaner) => {
     setSelectedCleaner(cleaner);
+    console.log("selected cleaner:", cleaner);
   };
+  
+  
   
 
   const handleSubmit = () => {
-    console.log('Selected Cleaner:', selectedCleaner);
-    console.log('Selected Tasks:', selectedTasks);
+    const request_data = {
+      task_one: selectedTasks[0],
+      task_two: selectedTasks[1],
+      task_three: selectedTasks[2],
+      user_id: localStorage.getItem('userId'), 
+      cleaner_id: selectedCleaner.id 
+    };
   
-    if (selectedCleaner) {
-      const selectedCleanerId = selectedCleaner.id; // Replace 'id' with the actual property name
-      console.log('Selected Cleaner ID:', selectedCleanerId);
-    }
+    console.log('Request Data:', request_data);
   
-    onClose();
+    fetch('/request', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(request_data)
+    })
+      .then(response => response.json())
+      .then(data => {
+        console.log('Server Response:', data);
+        onClose();
+      })
+      .catch(error => {
+        console.error('Error creating request:', error);
+      });
   };
+  
   
 
   const renderStars = (rating) => {

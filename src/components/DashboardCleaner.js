@@ -6,13 +6,14 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 const CleanerDashboard = () => {
   const [cleanerProfile, setCleanerProfile] = useState({
     name: '',
-    bio: '',
+    description: '',
     rating: 0,
-    notifications: [],
+    requests: [],
     reviews: [],
+    image_url: '',
   });
 
-  const [userMap, setUserMap] = useState({}); // Store user data here
+  const [userMap, setUserMap] = useState({});
 
   useEffect(() => {
     const cleanerId = localStorage.getItem('cleanerid');
@@ -23,24 +24,32 @@ const CleanerDashboard = () => {
         .then(data => {
           setCleanerProfile({
             name: data.name || '',
-            bio: data.bio || '',
+            description: data.description || '',
             rating: data.rating || 0,
-            notifications: data.notifications || [],
+            requests: data.requests || [],
             reviews: data.reviews || [],
+            image_url: data.image_url || '',
           });
 
           const tempUserMap = {};
 
-          // Fetch user data for each user ID in the reviews
-          const promises = data.reviews.map(review =>
-            fetch(`/users/${review.user_id}`)
-              .then(response => response.json())
-              .then(userData => {
-                tempUserMap[review.user_id] = userData.name || ''; // Assuming user data has a 'name' field
-              })
-          );
+          const promises = [
+            ...data.reviews.map(review =>
+              fetch(`/users/${review.user_id}`)
+                .then(response => response.json())
+                .then(userData => {
+                  tempUserMap[review.user_id] = userData.name || '';
+                })
+            ),
+            ...data.requests.map(request =>
+              fetch(`/users/${request.user_id}`)
+                .then(response => response.json())
+                .then(userData => {
+                  tempUserMap[request.user_id] = userData.name || '';
+                })
+            )
+          ];
 
-          // Wait for all user data requests to complete before updating the state
           Promise.all(promises).then(() => {
             setUserMap(tempUserMap);
             console.log('User Map:', tempUserMap);
@@ -53,58 +62,125 @@ const CleanerDashboard = () => {
         });
     }
   }, []);
+
+  // Calculate the average rating
+  const calculateAverageRating = () => {
+    if (cleanerProfile.reviews.length === 0) {
+      return 0;
+    }
+
+    const totalRating = cleanerProfile.reviews.reduce(
+      (sum, review) => sum + review.rating,
+      0
+    );
+
+    return totalRating / cleanerProfile.reviews.length;
+  };
+
+  const averageRating = calculateAverageRating();
+
+  const renderStars = (rating) => {
+    const stars = [];
+    const fullStars = Math.floor(rating);
+    const hasHalfStar = rating % 1 !== 0;
+
+    for (let i = 0; i < fullStars; i++) {
+      stars.push(<FontAwesomeIcon key={i} icon={faStar} className="star full-star" />);
+    }
+
+    if (hasHalfStar) {
+      stars.push(<FontAwesomeIcon key={fullStars} icon={faStar} className="star half-star" />);
+    }
+
+    return stars;
+  };
+  
   return (
+    <div className="cover">
     <div className="cleaner-dashboard">
       <div className="dashboard-section cleaner-profile">
         <div className="profile-image-container">
-          <img src='{cleanerProfile.image_url}' alt="profile" className="profile-image" />
+          <img src={cleanerProfile.image_url} alt="profile" className="profile-image" />
         </div>
         <div className="user-info">
-          <h2>{cleanerProfile.name}</h2>
-          <p>{cleanerProfile.bio}</p>
+          <h1>{cleanerProfile.name}</h1>
+          <p>{cleanerProfile.description}</p>
+          
+          <div className="average-rating-container">
+  <div className="circle">
+    <div className="outer-circle">
+      <div className="inner-circle">
+        {averageRating.toFixed(2)}
+      </div>
+    </div>
+    <p>Average Rating</p>
+  </div>
+  <div className="circle">
+    <div className="outer-circle">
+      <div className="inner-circle">
+        {cleanerProfile.requests.length}
+      </div>
+    </div>
+    <p>Number of Requests</p>
+  </div>
+  <div className="circle">
+    <div className="outer-circle">
+      <div className="inner-circle">
+        {cleanerProfile.reviews.length}
+      </div>
+    </div>
+    <p>Number of Reviews</p>
+  </div>
+</div>
+
         </div>
       </div>
-    <div className='boxes'>
-      <div className="dashboard-section notifications">
-        <h3>Notifications</h3>
-        <table>
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Job Description</th>
-              <th>Response</th>
-            </tr>
-          </thead>
-          <tbody>
-            {cleanerProfile.notifications.map((notification) => (
-              <tr key={notification.id}>
-                <td>{notification.sender}</td>
-                <td>{notification.jobTitle}</td>
-                <td className={notification.response}>
-                  {notification.response === 'accept' ? 'Accept' : 'Decline'}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <div className='boxes'>
+  <div className="dashboard-section notifications">
+    <h3 className='request-title'>Requests</h3>
+    <table className='table-request'>
+      <thead>
+        <tr>
+          <th className="name-column">Name</th>
+          <th className="centered-column">Tasks</th>
+          <th className='status-column'>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {cleanerProfile.requests.map(request => (
+          <tr className="notification" key={request.id}>
+            <td className="name-column">{userMap[request.user_id]}</td>
+            <td className="centered-column tasks-column">
+              {request.task_one}
+              {request.task_two}<br />
+              {request.task_three}
+            </td>
+            <td>{request.status}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
 
-      <div className="dashboard-section reviews">
-      <h3>Reviews</h3>
+
+        <div className="dashboard-section reviews">
+          <h3>Reviews</h3>
           {cleanerProfile.reviews.map((review) => (
             <div key={review.id} className="review">
-              <p>{review.review}</p>
-              <p>Posted by: {userMap[review.user_id]}</p>
+              <blockquote> <p>{review.review}</p></blockquote>
+              
               <div className="stars">
-              {Array.from(Array(Math.floor(review.rating))).map((_, index) => (
-                <FontAwesomeIcon key={index} icon={faStar} className="star full-star" />
-              ))}
-              {review.rating % 1 !== 0 && (
-                <FontAwesomeIcon icon={faStar} className="star half-star" />
-              )}
+                {Array.from(Array(Math.floor(review.rating))).map((_, index) => (
+                  <FontAwesomeIcon key={index} icon={faStar} className="star full-star" />
+                ))}
+                {review.rating % 1 !== 0 && (
+                  <FontAwesomeIcon icon={faStar} className="star half-star" />
+                )}
+              </div> 
+              <cite><p> by: ~{userMap[review.user_id]}</p></cite>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
     </div>
