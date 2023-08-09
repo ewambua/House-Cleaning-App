@@ -1,57 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './DashboardCleaner.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 
-
 const CleanerDashboard = () => {
-  const [cleanerProfile] = useState({
-    name: 'John Doe',
-    bio: 'I am an experienced cleaner with 5 years of experience.',
-    rating: 4.7,
-    notifications: [
-      {
-        id: 1,
-        sender: 'Alice',
-        jobTitle: 'Laundry',
-        response: 'accept',
-      },
-      {
-        id: 2,
-        sender: 'Bob',
-        jobTitle: 'Bathroom Cleaning',
-        response: 'decline',
-      },
-    ],
-    reviews: [
-      { id: 1, review: 'Great service, highly recommended!', rating: 5 },
-      { id: 2, review: 'Good job!', rating: 4 },
-      {
-        id: 3,
-        review:
-          'John is an amazing cleaner. He did a thorough job cleaning my house, and I am very satisfied with the results. He was punctual, professional, and paid attention to every detail. I will definitely hire him again for future cleaning services!',
-        rating: 5,
-      },
-      {
-        id: 4,
-        review:
-          'I had a wonderful experience with John. He arrived on time and worked diligently to clean my apartment. He is friendly, courteous, and takes pride in his work. My place looks spotless! I highly recommend John for anyone looking for top-notch cleaning services.',
-        rating: 5,
-      },
-      {
-        id: 5,
-        review:
-          'John exceeded my expectations with his cleaning service. He is thorough, reliable, and has a keen eye for detail. My home has never looked better! I highly recommend John to anyone in need of a professional cleaner.',
-        rating: 5,
-      },
-    ],
+  const [cleanerProfile, setCleanerProfile] = useState({
+    name: '',
+    bio: '',
+    rating: 0,
+    notifications: [],
+    reviews: [],
   });
+
+  const [userMap, setUserMap] = useState({}); // Store user data here
+
+  useEffect(() => {
+    const cleanerId = localStorage.getItem('cleanerid');
+  
+    if (cleanerId) {
+      fetch(`/cleaners/${cleanerId}`)
+        .then(response => response.json())
+        .then(data => {
+          setCleanerProfile({
+            name: data.name || '',
+            bio: data.bio || '',
+            rating: data.rating || 0,
+            notifications: data.notifications || [],
+            reviews: data.reviews || [],
+          });
+  
+          const tempUserMap = {};
+  
+          // Fetch user data for each user ID in the reviews
+          const promises = data.reviews.map(review =>
+            fetch(`/users/${review.user_id}`)
+              .then(response => response.json())
+              .then(userData => {
+                tempUserMap[review.user_id] = userData.name || ''; // Assuming user data has a 'name' field
+              })
+          );
+  
+          // Wait for all user data requests to complete before updating the state
+          Promise.all(promises).then(() => {
+            setUserMap(tempUserMap);
+            console.log('User Map:', tempUserMap);
+          });
+  
+          console.log('Fetched Cleaner Data:', data);
+        })
+        .catch(error => {
+          console.error('Error fetching cleaner data:', error);
+        });
+    }
+  }, []);
+  
 
   return (
     <div className="cleaner-dashboard">
       <div className="dashboard-section cleaner-profile">
         <div className="profile-image-container">
-          <img src='' alt="profile" className="profile-image" />
+          <img src='{cleanerProfile.image_url}' alt="profile" className="profile-image" />
         </div>
         <div className="user-info">
           <h2>{cleanerProfile.name}</h2>
@@ -84,11 +92,12 @@ const CleanerDashboard = () => {
       </div>
 
       <div className="dashboard-section reviews">
-        <h3>Reviews</h3>
-        {cleanerProfile.reviews.map((review) => (
-          <div key={review.id} className="review">
-            <p>{review.review}</p>
-            <div className="stars">
+      <h3>Reviews</h3>
+          {cleanerProfile.reviews.map((review) => (
+            <div key={review.id} className="review">
+              <p>{review.review}</p>
+              <p>Posted by: {userMap[review.user_id]}</p>
+              <div className="stars">
               {Array.from(Array(Math.floor(review.rating))).map((_, index) => (
                 <FontAwesomeIcon key={index} icon={faStar} className="star full-star" />
               ))}

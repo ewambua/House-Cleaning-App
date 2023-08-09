@@ -28,7 +28,8 @@ const Login = () => {
         const data = await response.json();
         // Saving the JWT token and user ID to local storage
         localStorage.setItem('jwtToken', data.token);
-        localStorage.setItem('userId', data.userId); // Store the user ID
+        localStorage.setItem('userId', data.userId); 
+        localStorage.setItem('cleanerId', data.cleanerid);
         console.log('Login successful. JWT token:', data.token, data);
 
         // Show success message

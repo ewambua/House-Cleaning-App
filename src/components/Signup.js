@@ -11,6 +11,8 @@ const Signup = () => {
   const [isCleaner, setIsCleaner] = useState(false);
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const [selectedImage, setSelectedImage] = useState(null); // Store the selected image file
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -46,6 +48,21 @@ const Signup = () => {
       console.error('Error occurred during signup:', error);
     }
   };
+
+    // Handle image selection
+    const handleImageChange = (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        setSelectedImage(file);
+        // Convert the selected image to a base64 encoded string
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          setImageUrl(event.target.result);
+        };
+        reader.readAsDataURL(file);
+      }
+    };
+  
 
   return (
     <>
@@ -131,7 +148,7 @@ const Signup = () => {
            {/* Render additional inputs for cleaner role */}
            {isCleaner && (
             <>
-              <div className="inputContainer">
+             <div className="inputContainer">
                 <input
                   type="text"
                   className="inputField"
@@ -144,12 +161,10 @@ const Signup = () => {
 
               <div className="inputContainer">
                 <input
-                  type="text"
-                  className="inputField"
-                  id="imageUrl"
-                  placeholder="Image URL"
-                  value={imageUrl}
-                  onChange={(e) => setImageUrl(e.target.value)}
+                  type="file"
+                  id="imageInput"
+                  accept="image/*"
+                  onChange={handleImageChange}
                 />
               </div>
             </>
