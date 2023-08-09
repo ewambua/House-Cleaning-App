@@ -4,28 +4,40 @@ import { useNavigate } from 'react-router-dom';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate(); 
+  const [isCleanerLogin, setIsCleanerLogin] = useState(false); // State to toggle between user and cleaner login
+  const navigate = useNavigate();
+  const [showSuccess, setShowSuccess] = useState(false); // State to control success message visibility
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      const response = await fetch('/login', {
+      // Modify the fetch URL based on the login type (user or cleaner)
+      const loginType = isCleanerLogin ? 'cleaner/login' : 'login';
+      const response = await fetch(`/${loginType}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         // Saving the JWT token and user ID to local storage
         localStorage.setItem('jwtToken', data.token);
         localStorage.setItem('userId', data.userId); // Store the user ID
         console.log('Login successful. JWT token:', data.token, data);
-        // Redirect to the landing page after successful login
-        navigate('/landing'); // Replace '/landing' with the path of your landing page
+
+        // Show success message
+        setShowSuccess(true);
+
+        // Redirect to the appropriate dashboard page after successful login
+        if (isCleanerLogin) {
+          navigate('/Dashboard'); // Replace '/dashboardCleaner' with the path of your cleaner dashboard
+        } else {
+          navigate('/landing'); // Replace '/landing' with the path of your user landing page
+        }
       } else {
         const errorData = await response.json();
         // Handle login error
@@ -35,9 +47,22 @@ const Login = () => {
       console.error('Error occurred during login:', error);
     }
   };
+
   return (
     <div className='signup'>
       <form onSubmit={handleSubmit} className="form_main">
+        <div className="toggle-container">
+          <label htmlFor="toggle" className="toggle-label">
+            {isCleanerLogin ? 'Cleaner Login' : 'User Login'}
+          </label>
+          <input
+            type="checkbox"
+            id="toggle"
+            className="toggle-input"
+            checked={isCleanerLogin}
+            onChange={() => setIsCleanerLogin(prevState => !prevState)}
+          />
+        </div>
         <p className="heading">Login</p>
         <div className="inputContainer">
           <svg className="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2e2e2e" viewBox="0 0 16 16">
@@ -51,10 +76,11 @@ const Login = () => {
             <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"></path>
           </svg>
           <input type="password" className="inputField" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
-        </div>
+          </div>
 
         <button id="button" type="submit">Submit</button>
         <a className="forgotLink" href="#">Forgot your password?</a>
+      {showSuccess && <div className="success-message">Login successful!</div>}
       </form>
     </div>
   );

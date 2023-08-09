@@ -47,6 +47,7 @@ function App() {
           <Route path="/profile" element={<UserProfile />} />  
           <Route path="/Dashboard" element={<Dashboard />} />  
           
+          
           <Route
             path="/landing"
             element={<LandingPage onLogout={handleLogout} />}

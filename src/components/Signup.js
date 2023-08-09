@@ -3,49 +3,38 @@ import './Signup.css';
 
 const Signup = () => {
   const [name, setName] = useState('');
-  const [username, setUsername] = useState('');
+  const [username, setUsername] = useState(''); // New state for username
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
-  const [role, setRole] = useState('user'); // Default role is set to 'user'
-  const [showCheckbox, setShowCheckbox] = useState(false); // State to control checkbox visibility
-
-  const handleRoleToggle = () => {
-    const newRole = role === 'user' ? 'cleaner' : 'user';
-    setRole(newRole);
-    console.log('Selected Role:', newRole);
-  };
-
-  const handleShowCheckbox = () => {
-    setShowCheckbox(!showCheckbox);
-  };
+  const [isCleaner, setIsCleaner] = useState(false);
+  const [description, setDescription] = useState('');
+  const [imageUrl, setImageUrl] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/users', { // Change '/register' to '/users' to match the Rails UsersController's 'create' action
+      const response = await fetch('/' + (isCleaner ? 'cleaners' : 'users'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
           name,
-          username, // Include the username in the request body
           email,
+          description: isCleaner ? description : undefined,
           password,
           password_confirmation: passwordConfirmation,
-          is_admin: role === 'cleaner',
+          image_url: isCleaner ? imageUrl : undefined,
         }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Save the JWT token to local storage or state if needed
         console.log('Signup successful. JWT token:', data.jwt_token);
       } else {
         const errorData = await response.json();
-        // Handle signup error
         console.log('Signup failed. Error:', errorData.errors);
       }
     } catch (error) {
@@ -59,29 +48,15 @@ const Signup = () => {
         <form onSubmit={handleSubmit} className="form_main">
           <p className="heading">Signup</p>
 
-          {/* Role Toggle with arrow icon */}
-          <div className="role-toggle-wrapper" onClick={handleShowCheckbox}>
-            <span className="toggleOption">{role === 'user' ? 'User' : 'Join as Cleaner'}</span>
-            <svg
-              className={`arrow-icon ${showCheckbox ? 'rotate' : ''}`}
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              viewBox="0 0 16 16"
-            >
-              <path d="M8 14.222L1.456 7.368 2.877 6l5.123 5.128L13.125 6l1.42 1.368z" />
-            </svg>
+          {/* Toggle between cleaner and user signup */}
+          <div className="role-toggle-wrapper">
+            <span className={`toggleOption ${isCleaner ? '' : 'active'}`} onClick={() => setIsCleaner(false)}>
+              User
+            </span>
+            <span className={`toggleOption ${isCleaner ? 'active' : ''}`} onClick={() => setIsCleaner(true)}>
+              Cleaner
+            </span>
           </div>
-
-          {/* Checkbox for cleaner role */}
-          {showCheckbox && (
-            <div className="checkbox-wrapper-41">
-              <input type="checkbox" id="roleCheckbox" checked={role === 'cleaner'} onChange={handleRoleToggle} />
-              <label htmlFor="roleCheckbox">
-                <span className="toggleOption">Cleaner</span>
-              </label>
-            </div>
-          )}
 
           <div className="inputContainer">
             <svg
@@ -92,7 +67,7 @@ const Signup = () => {
               fill="#2e2e2e"
               viewBox="0 0 16 16"
             >
-              <path d="..." />
+              {/* Path for the input icon */}
             </svg>
             <input
               type="text"
@@ -113,17 +88,19 @@ const Signup = () => {
               fill="#2e2e2e"
               viewBox="0 0 16 16"
             >
-              <path d="..." />
+              {/* Path for the input icon */}
             </svg>
             <input
               type="text"
               className="inputField"
-              id="username" // Add the 'username' input field
-              placeholder="Username"
+              id="username"
+              placeholder="UserName"
               value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              onChange={(e) => setName(e.target.value)}
             />
           </div>
+
+          
 
           <div className="inputContainer">
             <svg
@@ -134,7 +111,7 @@ const Signup = () => {
               fill="#2e2e2e"
               viewBox="0 0 16 16"
             >
-              <path d="..." />
+              {/* Path for the input icon */}
             </svg>
             <input
               type="email"
@@ -146,6 +123,33 @@ const Signup = () => {
             />
           </div>
 
+           {/* Render additional inputs for cleaner role */}
+           {isCleaner && (
+            <>
+              <div className="inputContainer">
+                <input
+                  type="text"
+                  className="inputField"
+                  id="description"
+                  placeholder="Description"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                />
+              </div>
+
+              <div className="inputContainer">
+                <input
+                  type="text"
+                  className="inputField"
+                  id="imageUrl"
+                  placeholder="Image URL"
+                  value={imageUrl}
+                  onChange={(e) => setImageUrl(e.target.value)}
+                />
+              </div>
+            </>
+          )}
+
           <div className="inputContainer">
             <svg
               className="inputIcon"
@@ -155,7 +159,7 @@ const Signup = () => {
               fill="#2e2e2e"
               viewBox="0 0 16 16"
             >
-              <path d="..." />
+              {/* Path for the input icon */}
             </svg>
             <input
               type="password"
@@ -176,7 +180,7 @@ const Signup = () => {
               fill="#2e2e2e"
               viewBox="0 0 16 16"
             >
-              <path d="..." />
+              {/* Path for the input icon */}
             </svg>
             <input
               type="password"
