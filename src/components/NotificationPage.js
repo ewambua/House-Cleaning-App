@@ -1,4 +1,5 @@
 import React from 'react';
+import './NotificationPage.css';
 const NotificationPage = () => {
   return (
     <div className="notification-container">
