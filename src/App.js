@@ -44,10 +44,11 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/info" element={<AdditionalInfo/>} />
-          <Route path="/profile" element={<UserProfile />} />
-          <Route path="/Dashboard" element={<Dashboard />} />
-
+          <Route path="/info" element={<AdditionalInfo/>} />  
+          <Route path="/profile" element={<UserProfile />} />  
+          <Route path="/Dashboard" element={<Dashboard />} />  
+          
+          
 
           <Route
             path="/landing"
