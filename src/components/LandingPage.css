@@ -1,0 +1,835 @@
+
+@import '~@fortawesome/fontawesome-free/css/all.css';
+
+/* Reset some default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+ 
+}
+
+/* Body styles */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+  margin-top: 0; /* Remove the margin-top to keep the header at the top */
+}
+
+/* Header styles */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background-color: transparent; /* Set the header background to transparent by default */
+  transition: background-color 0.3s ease; /* Add a smooth transition for the background color change */
+}
+
+.header.scrolling {
+  background-color: #f7f7f7; /* Set your desired background color for the scrolling header */
+ 
+}
+
+.btn5 {
+  background-color: #007bff;
+  color: #1f0505;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; 
+}
+
+/* Add the hover effect */
+.btn5:hover {
+  background-color: rgb(0, 153, 255);
+}
+
+.header img {
+  height: 40px;
+}
+
+
+
+.header nav a {
+  text-decoration: none;
+  color: #333333;
+  margin-left: 20px;
+  font-family: poppins;
+  font-weight: 500;
+}
+
+/* Add these CSS rules to your existing stylesheet */
+
+/* Style for selected navigation link */
+nav a.selected {
+  position: relative;
+  color: green;
+}
+
+/* Blue line under selected link */
+nav a.selected::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: blue;
+}
+
+
+.header nav a:hover {
+  color: rgb(0, 140, 255);
+}
+
+.header nav a.active {
+color: blue;
+}
+
+h1, h2, h3 {
+  font-family: poppins;
+  font-weight: 900;
+}
+
+.hero h1 {
+  font-size: 50px;
+}
+
+
+
+/* Hero styles */@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  /* ... */
+
+  /* Adjust the image size and positioning on smaller devices */
+  .img10 {
+    position: static;
+    width: 80px; /* Adjust the width to your desired size */
+    height: auto; /* Automatically adjust the height while maintaining the aspect ratio */
+    margin-top: 20px; /* Add margin-top to separate the image from the content */
+  }
+}
+.hero {
+  text-align: center;
+  padding: 80px 0;
+  background-color: #00bcd4;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+  align-items: center;
+  font-size:170px;
+  justify-content: center;
+  height:90vh;
+  box-shadow: 20px 0 5px rgb(2, 7, 8);
+  margin-top: 70px;
+}
+
+.img10 {
+  position: absolute;
+  bottom: 40px; 
+  right: 1px; 
+  
+}
+
+.hero h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.hero button {
+  background-color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+/* Features styles */
+/* Features Section */
+/* LandingPage.css */
+
+/* Reset default margins and paddings for the section and its children */
+.features {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 110px 10px;
+  background-color: #f7f7f7; /* Set your desired background color */
+}
+
+.feature {
+  text-align: center;
+  max-width: 300px;
+  padding: 20px;
+  height: 40vh;
+  background-color: #fff; /* Set your desired feature card background color */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  border-radius: 8px;
+  transition: transform 0.2s ease-in-out; /* Add a smooth transition on hover */
+}
+
+/* Style the icon */
+.feature i {
+  font-size: 48px;
+  color: #007bff; /* Set your desired icon color */
+}
+
+/* Style the feature title */
+.feature h3 {
+  font-size: 24px;
+  margin: 10px 0;
+  color: #333; /* Set your desired title color */
+}
+
+/* Style the feature description */
+.feature p {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #666; /* Set your desired description color */
+}
+
+/* Hover effect on feature cards */
+.feature:hover {
+  transform: scale(1.05); /* Increase the size slightly on hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Add a stronger box shadow on hover */
+}
+
+
+/* Pricing options */
+/* Your existing CSS code */
+
+/* Pricing Options Section */
+.pricing-options {
+  padding: 150px 20px;
+  text-align: center;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.spanna {
+  color: rgb(0, 81, 255);
+  font-size: 72px;
+  animation: fadeIn 3.5s ease-in-out;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.option-card {
+  flex: 1;
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.option-card:hover {
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+}
+
+.option-content {
+  background-color: #f5f5f5;
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 30px;
+  
+}
+
+
+
+.option-content h3 {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.option-content p {
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.option-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0;
+}
+
+.option-content ul li {
+  margin-bottom: 5px;
+  color: #444;
+}
+
+.option-content p:last-child {
+  font-size: 1em;
+  color: #1087d6;
+  margin-top: 10px;
+}
+
+/* Bronze */
+.option-card.bronze {
+  /* Customize the style for Bronze plan */
+  border-color: #cd7f32;
+   
+}
+
+.option-card.bronze:hover {
+  box-shadow: 0px 0px 20px rgba(236, 112, 54, 0.4);
+}
+
+.option-card.silver:hover {
+  box-shadow: 0px 0px 20px rgba(179, 177, 177, 0.4);
+}
+
+.option-card.gold:hover {
+  box-shadow: 0px 0px 10px rgba(236, 112, 54, 0.3);
+}
+
+.option-card.bronze .option-content h3 {
+  /* Customize the style for Bronze heading */
+  color: #cd7f32;
+}
+
+/* Silver */
+.option-card.silver {
+  /* Customize the style for Silver plan */
+  border-color: #c0c0c0;
+}
+
+.option-card.silver .option-content h3 {
+  /* Customize the style for Silver heading */
+  color: #c0c0c0;
+}
+
+/* Gold */
+.option-card.gold {
+  /* Customize the style for Gold plan */
+  border-color: #ffd700;
+}
+
+.option-card.gold .option-content h3 {
+  /* Customize the style for Gold heading */
+  color: #ffd700;
+}
+
+#testimonials {
+display: block;
+}
+
+
+/* Testimonials styles */
+.testimonials {
+  padding: 60px 0;
+  text-align: center;
+  background-color: #ffffff;
+  display: flex;
+  /* flex-wrap: wrap; */
+  justify-content: center;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.testimonial {
+  margin-bottom: 90px;
+  flex-basis: calc(50% - 40px); /* Adjust the width of each testimonial (2 testimonials per row) */
+  background-color: #fff;
+  box-shadow: 0 0 15px rgba(109, 108, 108, 0.1);
+  border-radius: 8px;
+  padding: 30px;
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  margin : 0 25% 0 25%;
+}
+
+.testimonial img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.testimonial .quote {
+  opacity: 0.5;
+}
+
+.testimonial blockquote {
+  font-size: 1.2rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #1898ee;
+  margin: 0 0 20px;
+  padding: 0 20px;
+}
+
+.testimonial p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #555;
+  margin: 0;
+}
+
+/* Hover effect on testimonials */
+.testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  background-color: #f8f8f8;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+  .testimonial {
+    flex-basis: calc(100% - 40px); /* Adjust to single column layout on smaller screens */
+  }
+}
+
+
+/* Pricing styles */
+.pricing {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.pricing h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.plan {
+  margin-bottom: 40px;
+}
+
+.plan h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.plan p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.plan ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-size: 1.1rem;
+}
+
+.plan ul li {
+  margin-bottom: 5px;
+}
+
+/* Contact styles */
+.contact {
+  padding: 60px 0;
+  text-align: center;
+}
+
+.contact h2 {
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+}
+
+.contact p {
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+}
+
+.contact form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.contact form input,
+.contact form textarea,
+.contact form button {
+  width: 100%;
+  max-width: 400px;
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.contact form textarea {
+  height: 120px;
+}
+
+.contact form button {
+  background-color: #00bcd4;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+/* Footer styles */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: #333;
+  color: #fff;
+}
+
+.footer p {
+  margin-bottom: 10px;
+}
+
+.social-icons {
+  display: flex;
+  justify-content: center;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.social-icons img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Plan card styles */
+.options {
+  display: flex;
+  justify-content: center;
+}
+
+.option-card {
+  flex: 1;
+  max-width: 200px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+}
+
+.option-card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.option-content {
+  padding: 20px;
+  text-align: center;
+}
+
+.option-content h3 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.option-content p {
+  font-size: 1.2rem;
+}
+
+
+
+
+/* Position the chatbox icon on the bottom right corner */
+.chatbox-icon {
+  position: fixed;
+  bottom: 20px; 
+  right: 20px; 
+  z-index: 999; 
+  color: rgb(8, 80, 102);
+}
+
+/* Style the stacked chatbox icon */
+.chatbox-icon .fa-stack-2x {
+  color: #007bff; 
+}
+
+/* Adjust the size of the stacked chatbox icon */
+.chatbox-icon .fa-stack {
+  font-size: 2.4rem; 
+}
+
+/* Add animation to the chatbox icon */
+.rotate-animation {
+  animation: rotate 6s linear infinite;
+}
+
+/* Define the rotation animation */
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Styling for the tiny banner */
+.chat-banner {
+  position: fixed;
+  bottom: 40px; 
+  right: 110px; 
+  background-color: #083b53;
+  color: #ffffff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 999; /* Ensure the banner appears above everything else */
+}
+
+/* Styling for the floating chatbox */
+.floating-chatbox {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 20px;
+  z-index: 999;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out; /* Add a fade-in animation */
+}
+
+/* Define the fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.floating-chatbox h2 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.floating-chatbox p {
+  margin-bottom: 20px;
+}
+
+.floating-chatbox form {
+  display: flex;
+  flex-direction: column;
+}
+
+.floating-chatbox input,
+.floating-chatbox textarea {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.floating-chatbox button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.floating-chatbox button.close-chatbox {
+  background-color: #dc3545;
+}
+
+/* Styling for the modal overlay */
+.plan-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the modal container */
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+}
+
+/* Styling for the modal title */
+.modal-content h3 {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Styling for the modal price */
+.modal-content p {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+/* Styling for the modal tasks list */
+.modal-content ul {
+  list-style: disc;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+/* Styling for the modal task items */
+.modal-content li {
+  margin-bottom: 5px;
+}
+
+/* Styling for the modal description */
+.modal-content p:last-child {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+/* Styling for the modal footer */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Styling for the modal button */
+.modal-content button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+/* Styling for the modal button on hover */
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.popup-overlay {
+  position: fixed;
+  bottom: 57%;
+  right: 3%;
+  width: 300px;
+  background-color: #ffffff;
+  border: 1px solid #ffffff;
+  padding: 20px;
+  z-index: 999;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease-in-out; /* Add a fade-in animation */
+}
+
+.popup-overlay img {
+  border-radius: 700px;
+  width: 90px;
+}
+
+.popup-overlay button {
+  padding: 10px 10px;
+  border: none;
+  border-radius: 13px;
+  background-color: #37ddf3;
+}
+
+
+
+
+
+/* responsiveness */
+
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2rem;
+    margin-bottom: 15px;
+  }
+
+  .img10 {
+    position: static;
+    width: 120px; /* Adjust the width to your desired size */
+    height: auto; /* Automatically adjust the height while maintaining the aspect ratio */
+    margin-top: 20px; /* Add margin-top to separate the image from the content */
+  }
+
+  .hero p {
+    font-size: 1rem;
+    margin-bottom: 30px;
+  }
+
+  #features {
+    flex-direction: column;
+    gap: 30px;
+    padding: 10px;
+    
+  }
+
+  .feature {
+    height: auto;
+  }
+
+  .pricing-options {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+  }
+
+  .testimonial {
+    flex-basis: 100%;
+    margin-bottom: 30px;
+  }
+
+  .testimonial img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .testimonial blockquote {
+    font-size: 1.2rem;
+    padding: 0 10px;
+  }
+
+  .testimonial p {
+    font-size: 1rem;
+  }
+
+  .option-card {
+    flex: 1;
+    max-width: 100%;
+    margin: 10px;
+  }
+}
