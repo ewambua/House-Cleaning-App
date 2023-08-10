@@ -7,6 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const CleanerDashboard = () => {
   const navigate = useNavigate();
+  const [clickedRequestId, setClickedRequestId] = useState(null);
+
 
   const handleStatusUpdate = async (requestId, newStatus) => {
     try {
@@ -146,6 +148,8 @@ const CleanerDashboard = () => {
     ],
   };
 
+  
+
   return (
     <div className="cover">
       <div className="cleaner-dashboard">
@@ -209,7 +213,12 @@ const CleanerDashboard = () => {
               </thead>
               <tbody>
                 {cleanerProfile.requests.map((request) => (
-                  <tr className="notification" key={request.id}>
+                    <tr
+                    className={`request ${
+                      clickedRequestId === request.id ? "active" : ""
+                    }`}
+                    key={request.id}
+                  >
                     <td className="name-column">{userMap[request.user_id]}</td>
                     <td className="centered-column tasks-column">
                       {request.task_one}
@@ -217,20 +226,30 @@ const CleanerDashboard = () => {
                       {request.task_three}
                     </td>
                     <td className="stato">
-                      {request.status}
-                      <button
-                        onClick={() =>
-                          handleStatusUpdate(request.id, "accepted")
-                        }
-                      >
-                        Accept
-                      </button>
-                      <button
-                        onClick={() => handleStatusUpdate(request.id, "denied")}
-                      >
-                        Deny
-                      </button>
-                    </td>
+                          {request.status}
+                          {clickedRequestId !== request.id && (
+                            <button
+                              onClick={() => {
+                                handleStatusUpdate(request.id, "accepted");
+                                setClickedRequestId(request.id); // Update the clicked request ID
+                              }}
+                              disabled={clickedRequestId !== null}
+                            >
+                              Accept
+                            </button>
+                          )}
+                          {clickedRequestId !== request.id && (
+                            <button
+                              onClick={() => {
+                                handleStatusUpdate(request.id, "denied");
+                                setClickedRequestId(request.id); // Update the clicked request ID
+                              }}
+                              disabled={clickedRequestId !== null}
+                            >
+                              Deny
+                            </button>
+                          )}
+                      </td>
                   </tr>
                 ))}
               </tbody>

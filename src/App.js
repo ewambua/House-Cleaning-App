@@ -67,19 +67,8 @@ function App() {
                   ) : (
                     <Signup />
                   )}
-                  <button className='btn2' onClick={handleToggleForm}>
-                    {showLogin ? (
-                      <>
-                        <span className="custom-text">Don't have an account? </span>
-                        <span className="highlightText">Sign up</span>
-                      </>
-                    ) : (
-                      <>
-                        <span className="custom-text">Already have an account? </span>
-                        <span className="highlightText">Log in</span>
-                      </>
-                    )}
-                  </button>
+                  
+                   
                 </>
               )
             }
