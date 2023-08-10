@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./DashboardCleaner.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-// import { Bar } from 'react-chartjs-2';
+import { faArrowLeft, faStar } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+
 
 const CleanerDashboard = () => {
+  const navigate = useNavigate();
+
   const handleStatusUpdate = async (requestId, newStatus) => {
     try {
       const response = await fetch(`/requests/${requestId}`, {
@@ -146,6 +149,10 @@ const CleanerDashboard = () => {
   return (
     <div className="cover">
       <div className="cleaner-dashboard">
+      <button className="back-button" onClick={() => navigate("/landing")}>
+  <FontAwesomeIcon icon={faArrowLeft} /> 
+</button>
+
         <div className="profile">
           <div className="profile-image-container">
             <img
