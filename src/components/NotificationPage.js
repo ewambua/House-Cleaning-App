@@ -18,6 +18,8 @@ const NotificationPage = () => {
 
         setUserData(userData);
         setRequests(userData.requests);
+
+        console.log(userData)
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -101,6 +103,7 @@ const NotificationPage = () => {
         <h2>{userData.name}</h2>
         <p>Email: {userData.email}</p>
         <p>Username: {userData.username}</p>
+        
       </div>
       </div>
       </div>

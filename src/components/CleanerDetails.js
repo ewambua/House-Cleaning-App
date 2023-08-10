@@ -85,7 +85,6 @@ const CleanerDetails = ({ cleaner }) => {
         setReviewText('');
         setReviewRating(0);
 
-        console.log(review);
       })
       .catch(error => {
         console.error('Error submitting review:', error);
