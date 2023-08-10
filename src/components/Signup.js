@@ -19,7 +19,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('/' + (isCleaner ? 'cleaners' : 'users'), {
+      const response = await fetch('https://neatly-api.onrender.com/' + (isCleaner ? 'cleaners' : 'users'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

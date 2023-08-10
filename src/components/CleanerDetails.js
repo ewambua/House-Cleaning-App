@@ -1,22 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-
+import './CleanerDetails.css'; // Make sure to link the CSS file
 
 const CleanerDetails = ({ cleaner }) => {
   const [cleanerDetails, setCleanerDetails] = useState({
-    reviews: [], // Initialize reviews as an empty array
+    reviews: [],
   });
   const [reviewText, setReviewText] = useState('');
   const [reviewRating, setReviewRating] = useState(0);
+  const [userMap, setUserMap] = useState({});
 
   const renderStars = (rating) => {
     const totalStars = 5;
     const filledStars = Math.round(rating * 2) / 2;
     const starIcons = Array.from({ length: totalStars }, (_, index) => {
-      if (index + 0.5 <= filledStars) {
+      if (index + 1 <= filledStars) {
         return <FontAwesomeIcon key={index} icon={faStar} className="star filled-star" />;
-      } else if (index < filledStars) {
+      } else if (index + 0.5 <= filledStars) {
         return <FontAwesomeIcon key={index} icon={faStarHalfAlt} className="star half-star" />;
       } else {
         return <FontAwesomeIcon key={index} icon={faStar} className="star empty-star" />;
@@ -26,8 +27,7 @@ const CleanerDetails = ({ cleaner }) => {
   };
 
   useEffect(() => {
-    // Fetch additional details for the selected cleaner
-    fetch(`/cleaners/${cleaner.id}`)
+    fetch(`https://neatly-api.onrender.com/cleaners/${cleaner.id}`)
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -36,7 +36,19 @@ const CleanerDetails = ({ cleaner }) => {
       })
       .then(data => {
         setCleanerDetails(data);
-        console.log(data); // Assuming your API response contains additional cleaner details.
+        const tempUserMap = {};
+
+        const userPromises = data.reviews.map((review) =>
+          fetch(`https://neatly-api.onrender.com/users/${review.user_id}`)
+            .then((response) => response.json())
+            .then((userData) => {
+              tempUserMap[review.user_id] = userData.name || "";
+            })
+        );
+
+        Promise.all(userPromises).then(() => {
+          setUserMap(tempUserMap);
+        });
       })
       .catch(error => {
         console.error('Error fetching cleaner details:', error);
@@ -45,19 +57,14 @@ const CleanerDetails = ({ cleaner }) => {
 
   const handleSubmitReview = (e) => {
     e.preventDefault();
-  
-    // Retrieve user ID from local storage
     const userId = localStorage.getItem('userId');
-  
-    // Create a new review object
     const newReview = {
       review: reviewText,
       rating: reviewRating,
-      user_id: userId, // Include the user ID
+      user_id: userId,
     };
-  
-    // Submit the new review to the API
-    fetch(`/cleaners/${cleaner.id}/reviews`, {
+
+    fetch(`https://neatly-api.onrender.com/cleaners/${cleaner.id}/reviews`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -71,14 +78,14 @@ const CleanerDetails = ({ cleaner }) => {
         return response.json();
       })
       .then(data => {
-        // Update the cleaner details with the new review
         setCleanerDetails(prevDetails => ({
           ...prevDetails,
           reviews: [...prevDetails.reviews, data],
         }));
-        // Clear the review form
         setReviewText('');
         setReviewRating(0);
+
+        console.log(review);
       })
       .catch(error => {
         console.error('Error submitting review:', error);
@@ -86,54 +93,50 @@ const CleanerDetails = ({ cleaner }) => {
   };
   
   return (
-    <div className="cleaner-details">
-      <h2>{cleaner.name}</h2>
-      <p>Rating: {renderStars(cleaner.rating)}</p>
-
-      {/* Display cleaner bio */}
-      {cleanerDetails && (
-        <>
-          <h3>Bio</h3>
-          <p>{cleanerDetails.bio}</p>
-        </>
-      )}
-
-       {/* Display cleaner reviews */}
-       {cleanerDetails && cleanerDetails.reviews && cleanerDetails.reviews.length > 0 ? (
-        cleanerDetails.reviews.map((review) => (
-          <div key={review.id} className="review">
-            <p>{review.review}</p>
-            <div className="stars">
-              {/* ... (same as before) */}
-            </div>
+    <div className="cleaner-details-container">
+      <div className="cleaner-info">
+        <h2>{cleaner.name}</h2>
+        <div className="rating">{renderStars(cleaner.rating)}</div>
+        <p>{cleanerDetails.bio}</p>
+        <form onSubmit={handleSubmitReview}>
+          <h3>Submit a Review</h3>
+          <div className="rating-label">Add Rating:</div> {/* Added label */}
+          <div className="stars">
+            {Array.from(Array(5)).map((_, index) => (
+              <FontAwesomeIcon
+                key={index}
+                icon={index + 1 <= reviewRating ? faStar : faStarHalfAlt}
+                className="star rating-star"
+                onClick={() => setReviewRating(index + 1)}
+              />
+            ))}
           </div>
-        ))
-      ) : (
-        <p>No reviews available for this cleaner.</p>
-      )}
-
-      {/* Review submission form */}
-      <form onSubmit={handleSubmitReview}>
-        <h3>Submit a Review</h3>
-        <textarea
-          value={reviewText}
-          onChange={(e) => setReviewText(e.target.value)}
-          placeholder="Write your review..."
-          required
-        />
-        <div className="stars">
-          {/* Allow user to select rating */}
-          {Array.from(Array(5)).map((_, index) => (
-            <FontAwesomeIcon
-              key={index}
-              icon={index + 1 <= reviewRating ? faStar : faStarHalfAlt}
-              className="star rating-star"
-              onClick={() => setReviewRating(index + 1)}
-            />
-          ))}
-        </div>
-        <button type="submit">Submit Review</button>
-      </form>
+          <textarea
+            value={reviewText}
+            onChange={(e) => setReviewText(e.target.value)}
+            placeholder="Write your review..."
+            required
+          />
+          <button type="submit">Submit Review</button>
+        </form>
+      </div>
+      <div className="reviews2">
+        <h3>Reviews</h3>
+        {cleanerDetails.reviews && cleanerDetails.reviews.length > 0 ? (
+          cleanerDetails.reviews.map((review) => (
+            <div key={review.id} className="review2">
+              <div className="stars">
+                {renderStars(review.rating)}
+              </div>
+              
+              <p>{review.review}</p>
+              <p>By: {userMap[review.user_id]}</p>
+            </div>
+          ))
+        ) : (
+          <p>No reviews available for this cleaner.</p>
+        )}
+      </div>
     </div>
   );
 };

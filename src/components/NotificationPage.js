@@ -13,7 +13,7 @@ const NotificationPage = () => {
 
     const fetchUserData = async () => {
       try {
-        const response = await fetch(`/users/${userId}`); // Replace with your API endpoint
+        const response = await fetch(`https://neatly-api.onrender.com/users/${userId}`); // Replace with your API endpoint
         const userData = await response.json();
 
         setUserData(userData);

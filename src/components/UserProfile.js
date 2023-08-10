@@ -9,7 +9,7 @@ const UserProfile = () => {
     try {
       const storedUserId = localStorage.getItem('userId');
 
-      const response = await fetch(`/users/${storedUserId}`, {
+      const response = await fetch(`https://neatly-api.onrender.com/users/${storedUserId}`, {
         method: 'GET',
       });
 

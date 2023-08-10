@@ -53,7 +53,7 @@ const CleanerDashboard = () => {
     const cleanerId = localStorage.getItem("cleanerid");
 
     if (cleanerId) {
-      fetch(`/cleaners/${cleanerId}`)
+      fetch(`https://neatly-api.onrender.com/cleaners/${cleanerId}`)
         .then((response) => response.json())
         .then((data) => {
           setCleanerProfile({
@@ -212,7 +212,9 @@ const CleanerDashboard = () => {
                 </tr>
               </thead>
               <tbody>
-                {cleanerProfile.requests.map((request) => (
+                {cleanerProfile.requests
+                  .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort requests from newest to oldest
+                  .map((request) => (
                     <tr
                     className={`request ${
                       clickedRequestId === request.id ? "active" : ""
@@ -257,8 +259,10 @@ const CleanerDashboard = () => {
           </div>
 
           <div className="dashboard-section reviews">
-            <h3>Reviews</h3>
-            {cleanerProfile.reviews.map((review) => (
+              <h3>Reviews</h3>
+              {cleanerProfile.reviews
+                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at)) // Sort reviews from newest to oldest
+                .map((review) => (
               <div key={review.id} className="review">
                 <blockquote>
                   {" "}

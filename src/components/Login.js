@@ -14,13 +14,14 @@ const Login = () => {
 
     try {
       const loginType = isCleanerLogin ? 'cleaner/login' : 'login';
-      const response = await fetch(`/${loginType}`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-      });
+const apiUrl = `https://neatly-api.onrender.com/${loginType}`;
+const response = await fetch(apiUrl, {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({ email, password }),
+});
 
       if (response.ok) {
         const data = await response.json();

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import swal from 'sweetalert';
 import Login from './Login';
@@ -11,6 +11,10 @@ import image1 from './images/image1.png';
 import PlanDetailsModal from './PlanDetailsModal';
 import AboutUs from './AboutUs';
 import UserProfile from './UserProfile';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircle, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faComment as faSolidComment } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const CustomLandingPage = () => {
@@ -96,6 +100,9 @@ const CustomLandingPage = () => {
     }
   };
 
+  console.log('isChatboxOpen:', isChatboxOpen);
+
+
   const handlePlanClick = (plan) => {
     setSelectedPlan(plan);
   };
@@ -108,15 +115,16 @@ const CustomLandingPage = () => {
 
   return (
     <div className="landing-page">
+        
       <div className="chatbox-icon" onClick={() => setIsChatboxOpen(!isChatboxOpen)}>
-        <span className="fa-stack fa-3x rotate-animation">
-          <i className="far fa-circle fa-stack-2x" style={{ color: '#007bff' }}></i>
-          <i className="fas fa-comment fa-stack-1x"></i>
+      <span className="fa-stack fa-3x rotate-animation">
+          <FontAwesomeIcon icon={faCircle} className="fa-stack-2x" style={{ color: '#007bff' }} />
+          <FontAwesomeIcon icon={isChatboxOpen ? faComment : faSolidComment} className="fa-stack-1x" />
         </span>
-      </div>
+  </div>
       <ChatBanner />
       <header className={`header${isScrolling ? ' scrolling' : ''}`}>
-        <img src={require('./images/image1.png')} alt="CustomLogo" className="logo" />
+        <img src={require('./images/image1.png')} alt="CustomLogo" className="logo1" />
         <nav>
         {userRole === 'cleaner' && (
           <>
@@ -195,20 +203,24 @@ const CustomLandingPage = () => {
           >
             Profile
           </Link>
+          
         </nav>
+        
         <button className="logout-button" onClick={handleLogout}>
           Logout
         </button>
+        
       </header>
       <main>
         <div className="heroo">
           <div id="hero" className="hero">
             <div className="hero-content">
               <div className="hero-text">
-                <h1 className="main-head">
-                  Welcome to <span className="spanna">Neatly</span>!
+                <h1 className="spanna3">
+                  Welcome to 
+                  <br/><span className="spanna">Neatly</span>!
                 </h1>
-                <p>Discover Amazing Services with Us.</p>
+               
                 <a
                   href="#pricing"
                   className="btn5 btn-get-started"
@@ -219,6 +231,7 @@ const CustomLandingPage = () => {
                 >
                   Get Started
                 </a>
+                <p className="spanna4">Discover Amazing Services with Us.</p>
               </div>
               <div className="hero-image-container">
                 <div className="image-overlay"></div>
@@ -400,35 +413,73 @@ const CustomLandingPage = () => {
           </div>
         )}
         {isChatboxOpen && (
-          <div className="floating-chatbox" id="chatbox-contact">
-            <h2>Contact Us</h2>
-            <p>Have a question or need support? Contact our team.</p>
-            <form ref={form} onSubmit={sendEmail}>
-              <label>Name</label>
-              <input type="text" name="user_name" />
-              <label>Email</label>
-              <input type="email" name="user_email" />
-              <label>Message</label>
-              <textarea name="message" />
-              <input type="submit" value="Send" />
-            </form>
-            <button className="close-chatbox" onClick={() => setIsChatboxOpen(false)}>
-              Close
-            </button>
-          </div>
-        )}
-      </main>
-      <footer className="footer">
-        <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
-        <div className="social-icons">
-          <a href="#">
-            <img src="https://www.example.com/facebook-icon.png" alt="Facebook" />
-          </a>
-          <a href="#">
-            <img src="https://www.example.com/twitter-icon.png" alt="Twitter" />
-          </a>
+        <div className="floating-chatbox" id="chatbox-contact">
+          <h2>Contact Us</h2>
+          <p>Have a question or need support? Contact our team.</p>
+          <form ref={form} onSubmit={sendEmail}>
+            <label>Name</label>
+            <input type="text" name="user_name" />
+            <label>Email</label>
+            <input type="email" name="user_email" />
+            <label>Message</label>
+            <textarea name="message" />
+            <input type="submit" value="Send" />
+          </form>
+          <button className="close-chatbox" onClick={() => setIsChatboxOpen(false)}>
+            Close
+          </button>
         </div>
-      </footer>
+      )}
+      </main>
+
+      <footer className="footer">
+  <div className="trusted-partners">
+    <h4>Trusted Partners</h4>
+    <div className="partner-images">
+      {/* Add SVG icons for trusted partners */}
+      <div className="partner-images">
+            <img src="https://t4.ftcdn.net/jpg/03/05/89/85/360_F_305898516_XYRvICwxsFH3vRpui9fGRj1amC2XYCAv.jpg" alt="Cleaning Company 1" />
+            <img src="https://dynamic.brandcrowd.com/asset/logo/6b5b1848-80fb-4736-b0d1-02e501c6b9b6/logo-search-grid-1x?logoTemplateVersion=1&v=637902511808000000" alt="Cleaning Company 2" />
+            <img src="https://dynamic.brandcrowd.com/asset/logo/a1efd92f-96a6-4d56-a098-0d3f54a1a59a/logo-search-grid-1x?logoTemplateVersion=1&v=638203370689730000" alt="Cleaning Company 2" />
+            <img src="https://t4.ftcdn.net/jpg/05/06/60/99/360_F_506609974_DJniih8CLPmauI0BRcbcenn4uKmiokAo.jpg" alt="Cleaning Company 2" />
+          </div>
+    </div>
+  </div>
+  <p>&copy; {new Date().getFullYear()} Your Company Name. All rights reserved.</p>
+  <div className="social-icons">
+    <a href="#">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        fill="currentColor"
+        className="bi bi-facebook"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M14 0H2C.896 0 0 .896 0 2v12c0 1.104.896 2 2 2h6.585v-6.218H5.014V7.29h1.571V5.56C6.585 3.448 7.96 2 10.374 2c1.06 0 1.971.077 2.231.112v1.723h-1.52c-1.197 0-1.43.568-1.43 1.403v1.846h2.858L11.8 14.01H8.166V16h6c1.104 0 2-.896 2-2V2c0-1.104-.896-2-2-2z"
+        />
+      </svg>
+    </a>
+    <a href="#">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="30"
+        height="30"
+        fill="currentColor"
+        className="bi bi-twitter"
+        viewBox="0 0 16 16"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M16 3.8a6.18 6.18 0 0 1-1.725.475 3.112 3.112 0 0 0 1.366-1.717 6.219 6.219 0 0 1-1.97.75 3.105 3.105 0 0 0-5.305 2.825A8.82 8.82 0 0 1 1.053.56a3.09 3.09 0 0 0-.42 1.558A3.096 3.096 0 0 0 2.983 6.21a3.104 3.104 0 0 1-1.404-.386v.04a3.106 3.106 0 0 0 2.49 3.042 3.097 3.097 0 0 1-1.4.053 3.107 3.107 0 0 0 2.896 2.154A6.235 6.235 0 0 1 0 13.22 8.815 8.815 0 0 0 4.774 15c5.772 0 8.924-4.775 8.924-8.925 0-.135 0-.27-.008-.405A6.356 6.356 0 0 0 16 3.8z"
+        />
+      </svg>
+    </a>
+  </div>
+</footer>
+
     </div>
   );
 };

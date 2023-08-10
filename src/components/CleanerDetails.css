@@ -1,0 +1,95 @@
+/* CleanerDetails.css */
+
+.cleaner-details-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+  }
+  
+  .cleaner-info {
+    flex: 1;
+    padding-right: 20px;
+  }
+
+  .star {
+    font-size: 24px; /* Adjust the font size to make the stars larger */
+    margin-right: 5px;
+    color: #ffd700; /* Star color */
+  }
+  
+  .rating-star {
+    cursor: pointer;
+  }
+  
+  
+  .reviews2 {
+    flex: 1;
+    padding-left: 20px;
+    overflow: scroll;
+    height: 70vh;
+  }
+
+  .reviews2::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .reviews2::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 13px;
+  }
+  
+  .review2 {
+    margin-bottom: 20px;
+    padding: 10px;
+    color: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #181414;
+  }
+  
+  .review .stars {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  
+  .star {
+    font-size: 16px;
+    color: #ffd700;
+    margin-right: 5px;
+  }
+  
+  .rating-star {
+    cursor: pointer;
+  }
+  
+  .rating-star:hover {
+    color: #ffac33;
+  }
+  
+  .star.filled-star {
+    color: #ffd700;
+  }
+  
+  .star.half-star {
+    color: #ffac33;
+  }
+  
+  .star.empty-star {
+    color: #ccc;
+  }
+  
+  button {
+    padding: 5px 10px;
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #2980b9;
+  }
+  

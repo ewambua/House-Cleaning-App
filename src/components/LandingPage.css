@@ -31,9 +31,7 @@ body {
   background-color: #f7f7f7;
 }
 
-.logo {
-  width: 40px;
-}
+
 
 .btn-get-started {
   display: inline-block;
@@ -56,6 +54,7 @@ body {
   border: none;
   font-style: normal;
   border-radius: 4px;
+  margin-left:170px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
@@ -286,8 +285,24 @@ h1, h2, h3 {
 
 .spanna {
   color: rgb(0, 81, 255);
+  font-size: 78px;
+  animation: fadeIn 3.5s ease-in-out;
+  margin-left: 70px;
+}
+
+.spanna3 {
+  color: rgb(30, 42, 70);
   font-size: 72px;
   animation: fadeIn 3.5s ease-in-out;
+  margin-left: 70px;
+}
+
+.spanna4 {
+  color: rgb(30, 42, 70);
+  font-size: 72px;
+  animation: fadeIn 3.5s ease-in-out;
+  margin-left: 150px;
+  margin-top: 40px;
 }
 
 .options {
@@ -642,6 +657,7 @@ h1, h2, h3 {
   background-color: #dc3545;
 }
 
+
 /* Styling for the modal overlay */
 .plan-details-modal {
   position: fixed;
@@ -850,4 +866,49 @@ h1, h2, h3 {
   transform: translateY(-5px);
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
   background-color: #f8f8f8;
+}
+
+
+/* Add this CSS to your LandingPage.css or a separate CSS file */
+/* Styling for Trusted Partners section */
+.trusted-partners {
+  margin-top: 30px;
+}
+
+.trusted-partners h4 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+.partner-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.partner-images img {
+  max-width: 100px;
+  margin: 0 10px;
+}
+
+/* Styling for Social Media Icons */
+.social-icons {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.social-icons a {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.social-icons img {
+  width: 30px;
+  height: 30px;
+}
+
+/* Hover effect for social media icons */
+.social-icons img:hover {
+  transform: scale(1.1);
 }

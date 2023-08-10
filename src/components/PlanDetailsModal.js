@@ -36,7 +36,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   const { planName, tasks, description, maxTasksSelectable } = planDetails[selectedPlan];
 
   useEffect(() => {
-    fetch('/cleaners')
+    fetch('https://neatly-api.onrender.com/cleaners')
       .then(response => {
         if (!response.ok) {
           throw new Error('Network response was not ok');
@@ -74,7 +74,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   
     console.log('Request Data:', request_data);
   
-    fetch('/request', {
+    fetch('https://neatly-api.onrender.com/request', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
