@@ -12,6 +12,7 @@ import PlanDetailsModal from './PlanDetailsModal';
 import AboutUs from './AboutUs';
 import UserProfile from './UserProfile'; // Import the UserProfile component
 
+
 const CustomLandingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
@@ -182,10 +183,10 @@ const CustomLandingPage = () => {
           Profile
         </Link>
         <Link
-          to="/Dashboard"
-          className={selectedNavLink === 'Dashboard' ? 'selected' : ''}
+          to="/NotificationPage"
+          className={selectedNavLink === 'NotificationPage' ? 'selected' : ''}
         >
-          Dashboard
+          NotificationPage
         </Link>
         <Link
           to="/info"

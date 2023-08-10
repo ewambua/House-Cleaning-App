@@ -1,6 +1,3 @@
-
-
-=======
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Login from './components/Login';
@@ -46,13 +43,13 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/info" element={<AdditionalInfo/>} />  
-          <Route path="/profile" element={<UserProfile />} />  
+          <Route path="/info" element={<AdditionalInfo/>} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/AboutUs" element={<AboutUs/>}/>
-          <Route path="/NotificationPage" element={<NotificationPage/>}/>  
-          
-          
+          <Route path="/NotificationPage" element={<NotificationPage/>}/>
+
+
 
           <Route
             path="/landing"

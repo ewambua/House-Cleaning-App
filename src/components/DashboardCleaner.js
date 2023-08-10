@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './DashboardCleaner.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
-import { Bar } from 'react-chartjs-2';
+// import { Bar } from 'react-chartjs-2';
 
 const CleanerDashboard = () => {
   const [cleanerProfile, setCleanerProfile] = useState({
@@ -106,7 +106,7 @@ const CleanerDashboard = () => {
       },
     ],
   };
-  
+
   return (
     <div className="cover">
     <div className="cleaner-dashboard">
@@ -121,9 +121,9 @@ const CleanerDashboard = () => {
                   </div>
       </div>
       <div className="dashboard-section cleaner-profile">
-        
-        
-          
+
+
+
           <div className="average-rating-container">
             <div className="circle">
               <div className="outer-circle">
@@ -150,9 +150,9 @@ const CleanerDashboard = () => {
               <p>Number of Reviews</p>
             </div>
          </div>
-         
+
          </div>
-     
+
       <div className='boxes'>
       <div className="dashboard-section notifications">
   <h3 className="request-title">Requests</h3>
@@ -176,7 +176,7 @@ const CleanerDashboard = () => {
           <td className='stato'>{request.status}
           <button>accept</button>
           <button>deny</button></td>
-          
+
         </tr>
       ))}
     </tbody>
@@ -190,7 +190,7 @@ const CleanerDashboard = () => {
           {cleanerProfile.reviews.map((review) => (
             <div key={review.id} className="review">
               <blockquote> <p>{review.review}</p></blockquote>
-              
+
               <div className="stars">
                 {Array.from(Array(Math.floor(review.rating))).map((_, index) => (
                   <FontAwesomeIcon key={index} icon={faStar} className="star full-star" />
@@ -198,17 +198,17 @@ const CleanerDashboard = () => {
                 {review.rating % 1 !== 0 && (
                   <FontAwesomeIcon icon={faStar} className="star half-star" />
                 )}
-              </div> 
+              </div>
               <cite><p> by: ~{userMap[review.user_id]}</p></cite>
             </div>
           ))}
         </div>
-        
+
       </div>
     </div>
     </div>
 
-    
+
   );
 };
 
