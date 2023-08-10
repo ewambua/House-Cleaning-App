@@ -41,6 +41,8 @@ const Signup = () => {
         const data = await response.json();
         swal("Good job!", "You successfully signed up!", "success");
         console.log('Signup successful. JWT token:', data.jwt_token);
+
+        localStorage.setItem('userid', data.user.id);
   
         // Navigate to the '/landing' page after successful signup
         navigate('/landing');
