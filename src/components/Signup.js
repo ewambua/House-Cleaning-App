@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import swal from 'sweetalert';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
+
 
 const Signup = () => {
   const [name, setName] = useState('');
@@ -12,6 +13,7 @@ const Signup = () => {
   const [isCleaner, setIsCleaner] = useState(false);
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
+  const navigate = useNavigate();
   const [selectedImage, setSelectedImage] = useState(null); // Store the selected image file
 
 
@@ -39,11 +41,13 @@ const Signup = () => {
         const data = await response.json();
         swal("Good job!", "You successfully signed up!", "success");
         console.log('Signup successful. JWT token:', data.jwt_token);
+  
+        // Navigate to the '/landing' page after successful signup
+        navigate('/landing');
       } else {
         const errorData = await response.json();
         swal("Oops!", "Something went wrong, try signing up again!", "error");
         console.log('Signup failed. Error:', errorData.errors);
-
       }
     } catch (error) {
       console.error('Error occurred during signup:', error);
