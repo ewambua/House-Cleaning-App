@@ -65,7 +65,7 @@ const CustomLandingPage = () => {
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('cleanerid'); // Remove cleaner ID on logout
-    window.location.replace('https://neatly-api.onrender.com');
+    window.location.replace('https://neatly-api.onrender.com/login');
   };
 
   
