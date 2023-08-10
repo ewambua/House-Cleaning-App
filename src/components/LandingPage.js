@@ -65,7 +65,7 @@ const CustomLandingPage = () => {
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('cleanerid'); // Remove cleaner ID on logout
-    window.location.replace('https://https://house-cleaning-app-frontend.vercel.app/login');
+    window.location.replace('https://house-cleaning-app-frontend.vercel.app');
   };
 
   
