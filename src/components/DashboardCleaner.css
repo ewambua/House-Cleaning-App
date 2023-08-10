@@ -1,148 +1,353 @@
+/* Dashboard Cleaner Container */
+
 .cleaner-dashboard {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-}
-.dashboard-sections {
-  display: flex;
-  margin-bottom: 20px;
-}
+    display: block;
+    margin:30px;
+    width: 97%;
+    background-color: #1a333f;
+   border-radius: 30px;
+   color: white;
+   height: 150vh;
+   font-family: poppins;
+  }
 
-.dashboard-section:not(:last-child) {
-  margin-right: 20px;
-}
+  .average-rating-container {
+    margin-top: 30px;
+    border-radius: 9px;
+    height: 15vh;
+    display: flex;
+    margin-left: 50px;
+    justify-content: space-evenly;
+    width: 1300px;
+    align-items: center;
+    padding: 100px;
+    margin-top: 20px; /* Adjust spacing as needed */
+  }
+  
+  .circle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px; /* Adjust spacing between circles */
+  }
+  
+  .outer-circle {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #ccc; /* Outer circle color */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .inner-circle {
+    position: relative;
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    background-color: #ffd700; /* Inner circle color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .boxes {
+    padding: 50px;
+    display: flex;
+  }
+  
+  /* Cleaner Profile Section */
+  .cleaner-profile {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
 
-.cleaner-profile {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-}
+  .user-info {
+    margin-bottom: 40px;
+  }
+  
+  .profile-image-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background-color: #007bff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 40px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
 
-.profile-image-container {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  background-color: #007bff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-right: 20px;
-}
-
-.profile-image {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
-.user-info h2 {
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.user-info p {
-  margin: 5px 0;
-}
-.notifications {
-  flex: 1; 
-}
-
-.notifications {
-  margin-bottom: 30px;
-}
-.notifications table {
-  border-collapse: collapse;
-  width: 100%;
-}
-
-.notifications th,
-.notifications td {
-  padding: 8px; 
-  text-align: left;
-  border-bottom: 1px solid #ddd;
-}
-
-.notifications th {
-  background-color: #f2f2f2;
-}
+  .profile {
+    display: flex;
+    justify-content:baseline;
+  }
+  
+  .dashboard-section {
+    flex: 1;
+    margin: 10px;
+    min-width: 300px;
+  }
+  
+  .profile-image {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .user-info h2 {
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  .user-info p {
+    margin: 5px 0;
+  }
+  
+  /* Notifications Section */
 
 
-.notifications h3 {
-  color: #333;
-  margin-bottom: 10px;
-}
+  .dashboard-section.notifications {
+    background-color: #1d3e58; /* Background color for requests section */
+    padding: 20px;
+    overflow: scroll;
+    height: 90vh;
+    border-radius: 10px;
+    max-width: 55%; 
+  }
 
-.notification {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-}
+  .dashboard-section.notifications::-webkit-scrollbar {
+    width: 10px;
+  }
 
-.response {
-  padding: 5px 10px;
-  border-radius: 5px;
-  color: #fff;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-right: 10px;
-  width: 80px;
-  text-align: center;
-}
+  .dashboard-section.notifications::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 14px;
+  }
+  
+  .request-title {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .table-request {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .table-request th,
+  .table-request td {
+    padding: 20px;
+    border-bottom: 1px solid #110606;
+  }
+  
+  .table-request th.name-column,
+  .table-request th.status-column {
+    text-align: left;
+  }
+  
+  .table-request td.name-column {
+    font-weight: bold;
+  }
+  
+  .table-request td.centered-column {
+    text-align: center;
+  }
+  
+  .table-request td.status-column {
+    text-align: right;
+  }
+  
+  .notification {
+    transition: background-color 0.3s;
+  }
+  
+  .notification:hover {
+    background-color: #fff8e1; /* Hover background color */
+    cursor: pointer;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media screen and (max-width: 768px) {
+    .dashboard-section.notifications {
+      padding: 10px;
+    }
+  
+    .table-request th,
+    .table-request td {
+      padding: 5px;
+    }
+  
+    .request-title {
+      font-size: 1.3rem;
+    }
+  }
+  
+  
 
-.accept {
-  background-color: #28a745;
-}
+  
+  /* Reviews Section */
+  .dashboard-section.reviews {
+    background-color: #f8f8f8; 
+    padding: 20px;
+    border-radius: 10px;
+    overflow: scroll;
+    max-width: 38%;
+    height: 90vh;
+  }
 
-.decline {
-  background-color: #dc3545;
-}
+  .dashboard-section.reviews::-webkit-scrollbar {
+  width: 10px;
+  }
 
-.reviews {
-  text-align: center;
-  margin-top: 20px;
-}
-.reviews {
-  flex: 1; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
+  .dashboard-section.reviews::-webkit-scrollbar-thumb {
+    background-color: #1a333f;
+    border-radius: 13px;
+  }
+  
+  .dashboard-section.reviews h3 {
+    font-size: 1.8rem;
+    margin-bottom: 10px;
+    color:#1a333f;
+  }
+  
+  .review {
+    background-color: rgb(27, 23, 23); 
+    border-radius: 10px;
+    padding: 15px;
+    margin: 10px 0;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .review blockquote {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .review p {
+    margin: 10px 0;
+    font-size: 1.0rem;
+    line-height: 1.4;
+  }
+  
+  .stars {
+    margin-top: 10px;
+  }
+  
+  .star {
+    font-size: 1.2rem;
+    color: #ffd700;
+    margin-right: 2px;
+  }
+  
+  .full-star::before {
+    content: '\f005';
+  }
+  
+  .half-star::before {
+    content: '\f089';
+  }
+  
+  cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 0.6rem;
+    color: #888;
+  }
+  
+  /* Adjustments for smaller screens */
+  @media screen and (max-width: 768px) {
+    .dashboard-section.reviews {
+      padding: 10px;
+    }
+  
+    .review {
+      padding: 10px;
+      margin: 5px 0;
+    }
+  
+    .review p {
+      font-size: 1rem;
+    }
+  
+    cite {
+      font-size: 0.8rem;
+    }
+  }
 
-.review {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-bottom: 10px;
-}
-
-.review p {
-  flex: 1;
-  margin-right: 10px;
-   color: #333;
-}
-
-.stars {
-  display: flex;
-  align-items: center;
-}
-
-.star {
-  width: 20px;
-  height: 20px;
-  background-color: #ffc107;
-  clip-path: polygon(
-    50% 0%,
-    61.8% 38.2%,
-    100% 35.4%,
-    69.1% 57.3%,
-    82.6% 91.6%,
-    50% 70.9%,
-    17.4% 91.6%,
-    30.9% 57.3%,
-    0% 35.4%,
-    38.2% 38.2%
-  );
-}
+  .rating-stars {
+    color: #ff7b00; /* Set the star color */
+    font-size: 16px;
+    margin-top: 50px; 
+  }
+  
+  .stato {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  
+  .star {
+    width: 15px;
+    height: 15px;
+    color: rgb(255, 217, 0);
+    background-color: #e6e4df; /* Make the stars gold */
+    clip-path: polygon(
+      50% 0%,
+      61.8% 38.2%,
+      100% 35.4%,
+      69.1% 57.3%,
+      82.6% 91.6%,
+      50% 70.9%,
+      17.4% 91.6%,
+      30.9% 57.3%,
+      0% 35.4%,
+      38.2% 38.2%
+    );
+    margin: 2px;
+  }
+  
+  .full-star {
+    clip-path: polygon(
+      50% 0%,
+      61.8% 38.2%,
+      100% 35.4%,
+      69.1% 57.3%,
+      82.6% 91.6%,
+      50% 70.9%,
+      17.4% 91.6%,
+      30.9% 57.3%,
+      0% 35.4%,
+      38.2% 38.2%
+    );
+    background-color: #ffc107; /* Make the full stars gold */
+  }
+  
+  .half-star {
+    clip-path: polygon(50% 0%, 100% 0%, 100% 100%, 50% 70.9%, 0% 100%, 0% 0%);
+    background-color: #ffc107; /* Make the half stars gold */
+  }
+  
+  /* Animation for the dashboard-section */
+  .dashboard-section {
+    animation: fadeInUp 1s ease-in-out;
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
