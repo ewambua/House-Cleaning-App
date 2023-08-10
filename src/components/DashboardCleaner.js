@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './DashboardCleaner.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { Bar } from 'react-chartjs-2';
 
 const CleanerDashboard = () => {
   const [cleanerProfile, setCleanerProfile] = useState({
@@ -94,73 +95,92 @@ const CleanerDashboard = () => {
 
     return stars;
   };
+
+  const chartData = {
+    labels: ['Requests', 'Reviews'],
+    datasets: [
+      {
+        label: 'Count',
+        backgroundColor: ['#3498db', '#e74c3c'], // Colors for bars
+        data: [cleanerProfile.requests.length, cleanerProfile.reviews.length],
+      },
+    ],
+  };
   
   return (
     <div className="cover">
     <div className="cleaner-dashboard">
+      <div className='profile'>
+              <div className="profile-image-container">
+                  <img src={cleanerProfile.image_url} alt="profile" className="profile-image" />
+                </div>
+                <div className="user-info">
+                  <h1>{cleanerProfile.name}</h1>
+                  <p>{cleanerProfile.description}</p>
+                  <h1 className='rating-stars'>Rating:{renderStars(averageRating)}</h1>
+                  </div>
+      </div>
       <div className="dashboard-section cleaner-profile">
-        <div className="profile-image-container">
-          <img src={cleanerProfile.image_url} alt="profile" className="profile-image" />
-        </div>
-        <div className="user-info">
-          <h1>{cleanerProfile.name}</h1>
-          <p>{cleanerProfile.description}</p>
+        
+        
           
           <div className="average-rating-container">
-  <div className="circle">
-    <div className="outer-circle">
-      <div className="inner-circle">
-        {averageRating.toFixed(2)}
-      </div>
-    </div>
-    <p>Average Rating</p>
-  </div>
-  <div className="circle">
-    <div className="outer-circle">
-      <div className="inner-circle">
-        {cleanerProfile.requests.length}
-      </div>
-    </div>
-    <p>Number of Requests</p>
-  </div>
-  <div className="circle">
-    <div className="outer-circle">
-      <div className="inner-circle">
-        {cleanerProfile.reviews.length}
-      </div>
-    </div>
-    <p>Number of Reviews</p>
-  </div>
+            <div className="circle">
+              <div className="outer-circle">
+                <div className="inner-circle">
+                  {averageRating.toFixed(2)}
+                </div>
+              </div>
+              <p>Average Rating</p>
+            </div>
+            <div className="circle">
+              <div className="outer-circle">
+                <div className="inner-circle">
+                  {cleanerProfile.requests.length}
+                </div>
+              </div>
+              <p>Number of Requests</p>
+            </div>
+            <div className="circle">
+              <div className="outer-circle">
+                <div className="inner-circle">
+                  {cleanerProfile.reviews.length}
+                </div>
+              </div>
+              <p>Number of Reviews</p>
+            </div>
+         </div>
+         
+         </div>
+     
+      <div className='boxes'>
+      <div className="dashboard-section notifications">
+  <h3 className="request-title">Requests</h3>
+  <table className="table-request">
+    <thead>
+      <tr>
+        <th className="name-column">Name</th>
+        <th className="centered-column">Tasks</th>
+        <th className="status-column">Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      {cleanerProfile.requests.map((request) => (
+        <tr className="notification" key={request.id}>
+          <td className="name-column">{userMap[request.user_id]}</td>
+          <td className="centered-column tasks-column">
+            {request.task_one}
+            {request.task_two}
+            <br />
+            {request.task_three}
+          </td>
+          <td>{request.status}</td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
 </div>
 
-        </div>
-      </div>
-      <div className='boxes'>
-  <div className="dashboard-section notifications">
-    <h3 className='request-title'>Requests</h3>
-    <table className='table-request'>
-      <thead>
-        <tr>
-          <th className="name-column">Name</th>
-          <th className="centered-column">Tasks</th>
-          <th className='status-column'>Status</th>
-        </tr>
-      </thead>
-      <tbody>
-        {cleanerProfile.requests.map(request => (
-          <tr className="notification" key={request.id}>
-            <td className="name-column">{userMap[request.user_id]}</td>
-            <td className="centered-column tasks-column">
-              {request.task_one}
-              {request.task_two}<br />
-              {request.task_three}
-            </td>
-            <td>{request.status}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  </div>
 
 
         <div className="dashboard-section reviews">
@@ -181,9 +201,12 @@ const CleanerDashboard = () => {
             </div>
           ))}
         </div>
+        
       </div>
     </div>
     </div>
+
+    
   );
 };
 

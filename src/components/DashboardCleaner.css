@@ -11,17 +11,13 @@
    font-family: poppins;
   }
 
-
-
-
-
   .average-rating-container {
     margin-top: 30px;
     border-radius: 9px;
     height: 15vh;
     display: flex;
     margin-left: 50px;
-    justify-content: space-between;
+    justify-content: space-evenly;
     width: 1300px;
     align-items: center;
     padding: 100px;
@@ -68,19 +64,29 @@
   .cleaner-profile {
     display: flex;
     align-items: center;
+    justify-content: center;
     margin-bottom: 20px;
+  }
+
+  .user-info {
+    margin-bottom: 40px;
   }
   
   .profile-image-container {
-    width: 150px;
-    height: 150px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     background-color: #007bff;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 40px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+  .profile {
+    display: flex;
+    justify-content:baseline;
   }
   
   .dashboard-section {
@@ -107,16 +113,23 @@
   
   /* Notifications Section */
 
-  .boxes {
-    display: flex;
-    justify-content: space-between;
-  }
 
   .dashboard-section.notifications {
     background-color: #1d3e58; /* Background color for requests section */
     padding: 20px;
+    overflow: scroll;
+    height: 90vh;
     border-radius: 10px;
-    width: 110%; /* Adjust the width as needed */
+    max-width: 55%; 
+  }
+
+  .dashboard-section.notifications::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  .dashboard-section.notifications::-webkit-scrollbar-thumb {
+    background-color: white;
+    border-radius: 14px;
   }
   
   .request-title {
@@ -131,12 +144,11 @@
   
   .table-request th,
   .table-request td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+    padding: 20px;
+    border-bottom: 1px solid #110606;
   }
   
   .table-request th.name-column,
-  .table-request th.centered-column,
   .table-request th.status-column {
     text-align: left;
   }
@@ -187,7 +199,17 @@
     padding: 20px;
     border-radius: 10px;
     overflow: scroll;
-    max-width: 33%;
+    max-width: 38%;
+    height: 90vh;
+  }
+
+  .dashboard-section.reviews::-webkit-scrollbar {
+  width: 10px;
+  }
+
+  .dashboard-section.reviews::-webkit-scrollbar-thumb {
+    background-color: #1a333f;
+    border-radius: 13px;
   }
   
   .dashboard-section.reviews h3 {
@@ -206,11 +228,12 @@
   
   .review blockquote {
     margin: 0;
+    font-size: 14px;
   }
   
   .review p {
     margin: 10px 0;
-    font-size: 1.1rem;
+    font-size: 1.0rem;
     line-height: 1.4;
   }
   
@@ -257,6 +280,12 @@
     cite {
       font-size: 0.8rem;
     }
+  }
+
+  .rating-stars {
+    color: #ff7b00; /* Set the star color */
+    font-size: 16px;
+    margin-top: 50px; 
   }
   
   
