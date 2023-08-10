@@ -118,7 +118,7 @@
 }
 
 /* Stats */
-.stats {
+.stats2 {
   background-color: white;
   padding: 20px;
   border-radius: 4px;
@@ -127,7 +127,7 @@
   text-align: center;
 }
 
-.stats-circle {
+.stats-circle2 {
   position: relative;
   width: 120px;
   height: 120px;
@@ -139,7 +139,7 @@
   align-items: center;
 }
 
-.outer-circle {
+.outer-circle2 {
   width: 100%;
   height: 100%;
   border: 10px solid #eee;
@@ -149,7 +149,7 @@
   left: 0;
 }
 
-.inner-circle {
+.inner-circle2 {
   width: 100%;
   height: 100%;
   border: 10px solid #3498db;
@@ -161,13 +161,14 @@
   transform: rotate(0deg);
 }
 
-.stat-label {
+.stat-label2 {
   font-size: 14px;
   color: #666;
   margin-bottom: 5px;
+  color:white;
 }
 
-.stat-number {
+.stat-number2 {
   font-size: 20px;
   font-weight: bold;
   color: #333;
@@ -187,6 +188,7 @@
 /* Ultramodern styles */
 .notification-container {
   background-color: #1a333f;
+  color:white;
 }
 
 .header {
@@ -196,11 +198,13 @@
 .back-button {
   margin: 0;
   font-size: 16px;
+  font-style: normal;
 }
 
 .notification-title {
-  font-size: 32px;
-  margin-right: 20px;
+  font-size: 42px;
+  margin-right: 60%;
+  color: white;
 }
 
 .user-info {
@@ -224,6 +228,7 @@
 
 .notification-list {
   margin-top: 20px;
+  
 }
 
 .notification-item {
@@ -241,7 +246,7 @@
   font-size: 14px;
 }
 
-.stats {
+.stats2 {
   background-color: #222;
   margin-left: 80px;
   margin-top: 20px;

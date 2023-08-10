@@ -299,33 +299,94 @@ const CustomLandingPage = () => {
         {selectedPlan && (
           <PlanDetailsModal selectedPlan={selectedPlan} onClose={() => setSelectedPlan(null)} />
         )}
-        <section id="testimonials" className="testimonials">
-          <h2>What Our Customers Say</h2>
-          <div className="testimonial" data-aos="fade-up">
-            <img
-              src="https://previews.123rf.com/images/apoev/apoev2107/apoev210700033/171405527-default-avatar-photo-placeholder-gray-profile-picture-icon-business-man-illustration.jpg"
-              alt="User 1"
-            />
-            <div className="quote">
-              <blockquote>
-                "Testimonial from User 1 goes here. Lorem ipsum dolor sit amet..."
-              </blockquote>
-              <p>- User 1</p>
-            </div>
-          </div>
-          <div className="testimonial" data-aos="fade-up">
-            <img
-              src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
-              alt="User 2"
-            />
-            <div className="quote">
-              <blockquote>
-                "Testimonial from User 2 goes here. Lorem ipsum dolor sit amet..."
-              </blockquote>
-              <p>- User 2</p>
-            </div>
-          </div>
-        </section>
+        <section id="testimonials" className="testimonials1">
+  <h2>What Our Customers Say</h2>
+  <div className="testimonial" data-aos="fade-up">
+    <img
+      src="https://previews.123rf.com/images/apoev/apoev2107/apoev210700033/171405527-default-avatar-photo-placeholder-gray-profile-picture-icon-business-man-illustration.jpg"
+      alt="User 1"
+    />
+    <div className="quote">
+      <blockquote>
+        "Neatly helped me find reliable cleaners for my home. They are efficient and professional."
+      </blockquote>
+      <p>- John Doe</p>
+    </div>
+  </div>
+  <div className="testimonial" data-aos="fade-up">
+    <img
+      src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
+      alt="User 2"
+    />
+    <div className="quote">
+      <blockquote>
+        "Booking a cleaner through Neatly has been a breeze. I'm impressed by their prompt service."
+      </blockquote>
+      <p>- Jane Smith</p>
+    </div>
+  </div>
+  <div className="testimonial" data-aos="fade-up">
+  <img
+      src="https://previews.123rf.com/images/apoev/apoev2107/apoev210700033/171405527-default-avatar-photo-placeholder-gray-profile-picture-icon-business-man-illustration.jpg"
+      alt="User 1"
+    />
+    <div className="quote">
+      <blockquote>
+        "Neatly's environmentally-friendly approach aligns with my values. Great service!"
+      </blockquote>
+      <p>- Michael Johnson</p>
+    </div>
+  </div>
+  <div className="testimonial" data-aos="fade-up">
+  <img
+      src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
+      alt="User 2"
+    />
+    <div className="quote">
+      <blockquote>
+        "I love the variety of services Neatly offers. It makes life so much easier."
+      </blockquote>
+      <p>- Emily Davis</p>
+    </div>
+  </div>
+  <div className="testimonial" data-aos="fade-up">
+  <img
+      src="https://previews.123rf.com/images/apoev/apoev2107/apoev210700033/171405527-default-avatar-photo-placeholder-gray-profile-picture-icon-business-man-illustration.jpg"
+      alt="User 1"
+    />
+    <div className="quote">
+      <blockquote>
+        "Neatly's cleaners are polite and attentive. I'm a satisfied customer."
+      </blockquote>
+      <p>- Alex Turner</p>
+    </div>
+  </div>
+  <div className="testimonial" data-aos="fade-up">
+  <img
+      src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
+      alt="User 2"
+    />
+    <div className="quote">
+      <blockquote>
+        "Efficient, reliable, and friendly service. Neatly exceeded my expectations."
+      </blockquote>
+      <p>- Olivia Johnson</p>
+    </div>
+  </div>
+  <div className="testimonial" data-aos="fade-up">
+  <img
+      src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
+      alt="User 2"
+    />
+    <div className="quote">
+      <blockquote>
+        "Neatly's platform is user-friendly and their cleaners are top-notch."
+      </blockquote>
+      <p>- David Clark</p>
+    </div>
+  </div>
+</section>
+
         {isProfilePopupOpen && (
           <div className="popup-overlay">
             <div className="profile-popup">

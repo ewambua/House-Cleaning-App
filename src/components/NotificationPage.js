@@ -47,11 +47,12 @@ const NotificationPage = () => {
 
   return (
     <div className="notification-container">
+      <h1 className="notification-title">Notifications</h1>
       <div className="header">
         <Link to="/landing" className="back-button">
           Back to Landing
         </Link>
-        <h1 className="notification-title">Notifications</h1>
+        
       </div>
       
       <div className="sort-container">
@@ -78,7 +79,7 @@ const NotificationPage = () => {
           </div>
         ))}
       </div>
-      <div className="stats">
+      <div className="stats2">
         <h2>Stats</h2>
         <div className="stats-circle">
           <div className="outer-circle">

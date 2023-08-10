@@ -1,19 +1,15 @@
-
-@import '~@fortawesome/fontawesome-free/css/all.css';
-
 /* Reset some default styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
 }
 
 /* Body styles */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
-  margin-top: 0; /* Remove the margin-top to keep the header at the top */
+  margin-top: 0;
 }
 
 /* Header styles */
@@ -23,36 +19,34 @@ body {
   left: 0;
   width: 100%;
   z-index: 999;
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background-color: transparent; /* Set the header background to transparent by default */
-  transition: background-color 0.3s ease; /* Add a smooth transition for the background color change */
+  background-color: transparent;
+  transition: background-color 0.3s ease;
 }
 
 .header.scrolling {
-  background-color: #f7f7f7; /* Set your desired background color for the scrolling header */
-
+  background-color: #f7f7f7;
 }
 
 .logo {
-  width:40px;
+  width: 40px;
 }
 
 .btn-get-started {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #007BFF; /* Set your desired button color */
-  color: white; /* Text color */
+  background-color: #007BFF;
+  color: white;
   text-decoration: none;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-get-started:hover {
-  background-color: #0056b3; /* Hover color */
+  background-color: #0056b3;
 }
 
 .btn5 {
@@ -66,7 +60,6 @@ body {
   transition: background-color 0.3s ease;
 }
 
-/* Add the hover effect */
 .btn5:hover {
   background-color: rgb(0, 153, 255);
 }
@@ -79,21 +72,18 @@ body {
 .logout-button {
   display: inline-block;
   padding: 10px 20px;
-  background-color: #2c6a75; /* Set your desired button color */
-  color: white; /* Text color */
+  background-color: #2c6a75;
+  color: white;
   text-decoration: none;
-  border:none;
+  border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease, color 0.3s ease;
   cursor: pointer;
 }
 
 .logout-button:hover {
-  background-color: #c82333; /* Hover color */
+  background-color: #c82333;
 }
-
-
-
 
 .header nav a {
   text-decoration: none;
@@ -122,13 +112,12 @@ nav a.selected::after {
   background-color: blue;
 }
 
-
 .header nav a:hover {
   color: rgb(0, 140, 255);
 }
 
 .header nav a.active {
-color: blue;
+  color: blue;
 }
 
 h1, h2, h3 {
@@ -140,53 +129,50 @@ h1, h2, h3 {
   font-size: 50px;
 }
 
-
-
-/* Hero styles */@media (max-width: 768px) {
+/* Hero styles */
+@media (max-width: 768px) {
   .hero h1 {
     font-size: 2rem;
     margin-bottom: 15px;
   }
 
- 
   .img10 {
     position: static;
-    width: 80px; /* Adjust the width to your desired size */
-    height: auto; /* Automatically adjust the height while maintaining the aspect ratio */
-    margin-top: 20px; /* Add margin-top to separate the image from the content */
+    width: 80px;
+    height: auto;
+    margin-top: 20px;
   }
 }
 
 .main-head {
-   font-size: 40px;
+  font-size: 40px;
 }
 
 .heroo {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Make sure the hero section takes up the full viewport height */
+  height: 100vh;
 }
 
 .hero {
   position: relative;
   border-radius: 13px;
-  background-color: rgb(111, 169, 190) ; 
-  width: 90%; 
-  margin: 0 auto; 
-  height: 70vh; 
-  
+  background-color: rgb(111, 169, 190);
+  width: 90%;
+  margin: 0 auto;
+  height: 70vh;
 }
 
 .hero-content {
   position: relative;
   z-index: 1;
-  height: 100%; /* Make the content take up the full height of the hero */
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  padding: 0 20px; /* Add padding for spacing */
+  padding: 0 20px;
 }
 
 .hero-image-container {
@@ -195,7 +181,7 @@ h1, h2, h3 {
   right: 0;
   width: 50%;
   height: 100%;
-  opacity: 0.7; 
+  opacity: 0.7;
 }
 
 .hero-image {
@@ -207,23 +193,18 @@ h1, h2, h3 {
 .image-overlay {
   position: absolute;
   top: 0;
-  right: 0; /* Adjust to be on the right */
+  right: 0;
   width: 100%;
   height: 100%;
   background: linear-gradient(to left, rgba(9, 70, 236, 0) 0%, rgb(111, 168, 194) 100%);
 }
 
-
 /* Rest of your styles */
-
-
-
 
 .img10 {
   position: absolute;
   bottom: 40px;
   right: 19px;
-
 }
 
 .hero h1 {
@@ -247,15 +228,12 @@ h1, h2, h3 {
 
 /* Features styles */
 /* Features Section */
-/* LandingPage.css */
-
-/* Reset default margins and paddings for the section and its children */
 .features {
   display: flex;
   justify-content: space-around;
   align-items: center;
   padding: 110px 10px;
-  background-color: #f7f7f7; /* Set your desired background color */
+  background-color: #f7f7f7;
 }
 
 .feature {
@@ -263,43 +241,39 @@ h1, h2, h3 {
   max-width: 300px;
   padding: 20px;
   height: 40vh;
-  background-color: #fff; /* Set your desired feature card background color */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle box shadow */
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
-  transition: transform 0.2s ease-in-out; /* Add a smooth transition on hover */
+  transition: transform 0.2s ease-in-out;
 }
 
 /* Style the icon */
 .feature i {
   font-size: 48px;
-  color: #007bff; /* Set your desired icon color */
+  color: #007bff;
 }
 
 /* Style the feature title */
 .feature h3 {
   font-size: 24px;
   margin: 10px 0;
-  color: #333; /* Set your desired title color */
+  color: #333;
 }
 
 /* Style the feature description */
 .feature p {
   font-size: 16px;
   line-height: 1.6;
-  color: #666; /* Set your desired description color */
+  color: #666;
 }
 
 /* Hover effect on feature cards */
 .feature:hover {
-  transform: scale(1.05); /* Increase the size slightly on hover */
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); /* Add a stronger box shadow on hover */
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-
 /* Pricing options */
-/* Your existing CSS code */
-
-/* Pricing Options Section */
 .pricing-options {
   padding: 150px 20px;
   text-align: center;
@@ -342,10 +316,7 @@ h1, h2, h3 {
   border-radius: 8px;
   padding: 20px;
   margin-top: 30px;
-
 }
-
-
 
 .option-content h3 {
   font-size: 1.5em;
@@ -380,7 +351,6 @@ h1, h2, h3 {
 .option-card.bronze {
   /* Customize the style for Bronze plan */
   border-color: #cd7f32;
-
 }
 
 .option-card.bronze:hover {
@@ -421,80 +391,6 @@ h1, h2, h3 {
   /* Customize the style for Gold heading */
   color: #ffd700;
 }
-
-#testimonials {
-display: block;
-}
-
-
-/* Testimonials styles */
-.testimonials {
-  padding: 60px 0;
-  text-align: center;
-  background-color: #ffffff;
-  display: flex;
-  /* flex-wrap: wrap; */
-  justify-content: center;
-}
-
-.testimonials h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-}
-
-.testimonial {
-  margin-bottom: 90px;
-  flex-basis: calc(50% - 40px); /* Adjust the width of each testimonial (2 testimonials per row) */
-  background-color: #fff;
-  box-shadow: 0 0 15px rgba(109, 108, 108, 0.1);
-  border-radius: 8px;
-  padding: 30px;
-  transition: transform 0.3s ease-in-out;
-  overflow: hidden;
-  margin : 0 25% 0 25%;
-}
-
-.testimonial img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 20px;
-}
-
-.testimonial .quote {
-  opacity: 0.5;
-}
-
-.testimonial blockquote {
-  font-size: 1.2rem;
-  font-weight: 700;
-  font-style: italic;
-  color: #1898ee;
-  margin: 0 0 20px;
-  padding: 0 20px;
-}
-
-.testimonial p {
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: #555;
-  margin: 0;
-}
-
-/* Hover effect on testimonials */
-.testimonial:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  background-color: #f8f8f8;
-}
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-  .testimonial {
-    flex-basis: calc(100% - 40px); /* Adjust to single column layout on smaller screens */
-  }
-}
-
 
 /* Pricing styles */
 .pricing {
@@ -574,6 +470,7 @@ display: block;
   background-color: #00bcd4;
   color: #fff;
   border: none;
+  border-radius: 4px;
   cursor: pointer;
 }
 
@@ -637,9 +534,6 @@ display: block;
 .option-content p {
   font-size: 1.2rem;
 }
-
-
-
 
 /* Position the chatbox icon on the bottom right corner */
 .chatbox-icon {
@@ -849,13 +743,7 @@ display: block;
   background-color: #37ddf3;
 }
 
-
-
-
-
 /* responsiveness */
-
-
 @media (max-width: 768px) {
   .hero h1 {
     font-size: 2rem;
@@ -878,7 +766,6 @@ display: block;
     flex-direction: column;
     gap: 30px;
     padding: 10px;
-
   }
 
   .feature {
@@ -915,4 +802,52 @@ display: block;
     max-width: 100%;
     margin: 10px;
   }
+}
+
+
+/* Testimonials grid styles */
+.testimonials1 {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-gap: 20px;
+  padding: 60px 0;
+  text-align: center;
+  background-color: #d1d1d1;
+  
+}
+
+.testimonial {
+  background-color: rgb(241, 241, 241);
+  border-radius: 8px;
+}
+
+
+.testimonial img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.testimonial blockquote {
+  font-size: 1rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #306080;
+  margin: 0 0 10px;
+  padding: 0 10px;
+}
+
+.testimonial p {
+  font-size: 1rem;
+  font-weight: 400;
+  color: #555;
+  margin: 0;
+}
+
+/* Hover effect on testimonials */
+.testimonial:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  background-color: #f8f8f8;
 }
