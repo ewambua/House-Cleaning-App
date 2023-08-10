@@ -69,14 +69,14 @@ const CleanerDashboard = () => {
 
           const promises = [
             ...data.reviews.map((review) =>
-              fetch(`/users/${review.user_id}`)
+              fetch(`https://neatly-api.onrender.com/users/${review.user_id}`)
                 .then((response) => response.json())
                 .then((userData) => {
                   tempUserMap[review.user_id] = userData.name || "";
                 })
             ),
             ...data.requests.map((request) =>
-              fetch(`/users/${request.user_id}`)
+              fetch(`https://neatly-api.onrender.com/users/${request.user_id}`)
                 .then((response) => response.json())
                 .then((userData) => {
                   tempUserMap[request.user_id] = userData.name || "";
