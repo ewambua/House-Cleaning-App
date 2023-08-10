@@ -12,7 +12,7 @@ const CleanerDashboard = () => {
 
   const handleStatusUpdate = async (requestId, newStatus) => {
     try {
-      const response = await fetch(`/requests/${requestId}`, {
+      const response = await fetch(`https://neatly-api.onrender.com/requests/${requestId}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -69,14 +69,14 @@ const CleanerDashboard = () => {
 
           const promises = [
             ...data.reviews.map((review) =>
-              fetch(`https://neatly-api.onrender.com/users/${review.user_id}`)
+              fetch(`/users/${review.user_id}`)
                 .then((response) => response.json())
                 .then((userData) => {
                   tempUserMap[review.user_id] = userData.name || "";
                 })
             ),
             ...data.requests.map((request) =>
-              fetch(`https://neatly-api.onrender.com/users/${request.user_id}`)
+              fetch(`/users/${request.user_id}`)
                 .then((response) => response.json())
                 .then((userData) => {
                   tempUserMap[request.user_id] = userData.name || "";
