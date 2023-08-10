@@ -12,6 +12,7 @@ import PlanDetailsModal from './PlanDetailsModal';
 import AboutUs from './AboutUs';
 import UserProfile from './UserProfile';
 
+
 const CustomLandingPage = () => {
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
@@ -176,6 +177,12 @@ const CustomLandingPage = () => {
               >
                 Testimonials
               </a>
+              <Link
+                to="/NotificationPage"
+                className={selectedNavLink === 'NotificationPage' ? 'selected' : ''}
+              >
+                NotificationPage
+              </Link>
               <Link to="/AboutUs" className={selectedNavLink === 'AboutUs' ? 'selected' : ''}>
                 AboutUs
               </Link>

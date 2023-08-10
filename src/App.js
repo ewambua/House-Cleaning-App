@@ -8,8 +8,7 @@ import AboutUs from './components/AboutUs';
 import UserProfile from './components/UserProfile';
 import AdditionalInfo from './components/additionalInfo';
 import Dashboard from './components/DashboardCleaner.js';
-
-
+import NotificationPage from './components/NotificationPage';
 
 function App() {
   const [showLogin, setShowLogin] = useState(true);
@@ -44,11 +43,13 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login onSuccess={handleLoginSuccess} />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/info" element={<AdditionalInfo/>} />  
-          <Route path="/profile" element={<UserProfile />} />  
+          <Route path="/info" element={<AdditionalInfo/>} />
+          <Route path="/profile" element={<UserProfile />} />
           <Route path="/Dashboard" element={<Dashboard />} />
-          <Route path="/AboutUs" element={<AboutUs/>}/>  
-          
+          <Route path="/AboutUs" element={<AboutUs/>}/>
+          <Route path="/NotificationPage" element={<NotificationPage/>}/>
+
+
 
           <Route
             path="/landing"
