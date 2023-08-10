@@ -37,11 +37,30 @@ body {
 
 }
 
+.logo {
+  width:40px;
+}
+
+.btn-get-started {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007BFF; /* Set your desired button color */
+  color: white; /* Text color */
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-get-started:hover {
+  background-color: #0056b3; /* Hover color */
+}
+
 .btn5 {
   background-color: #007bff;
   color: #1f0505;
   padding: 10px 20px;
   border: none;
+  font-style: normal;
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
@@ -55,6 +74,24 @@ body {
 .header img {
   height: 40px;
 }
+
+/* Logout button styles */
+.logout-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #2c6a75; /* Set your desired button color */
+  color: white; /* Text color */
+  text-decoration: none;
+  border:none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #c82333; /* Hover color */
+}
+
 
 
 
@@ -71,7 +108,7 @@ body {
 /* Style for selected navigation link */
 nav a.selected {
   position: relative;
-  color: green;
+  color: rgb(12, 108, 172);
 }
 
 /* Blue line under selected link */
@@ -111,9 +148,7 @@ h1, h2, h3 {
     margin-bottom: 15px;
   }
 
-  /* ... */
-
-  /* Adjust the image size and positioning on smaller devices */
+ 
   .img10 {
     position: static;
     width: 80px; /* Adjust the width to your desired size */
@@ -122,29 +157,67 @@ h1, h2, h3 {
   }
 }
 
+.main-head {
+   font-size: 40px;
+}
 
 .heroo {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100vh; /* Make sure the hero section takes up the full viewport height */
 }
 
 .hero {
-  text-align: center;
-  padding: 100px 0;
-  width: 90%;
-  background-color: #00bcd4;
+  position: relative;
+  border-radius: 13px;
+  background-color: rgb(111, 169, 190) ; 
+  width: 90%; 
+  margin: 0 auto; 
+  height: 70vh; 
+  
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  height: 100%; /* Make the content take up the full height of the hero */
   display: flex;
   flex-direction: column;
-  color: #fff;
-  align-items: center;
-  font-size:170px;
   justify-content: center;
-  height:90vh;
-  margin: 70px;
-  border-radius: 13px;
-  box-shadow: 4px 12px  10px rgba(0,0,0,0.6);
+  align-items: flex-start;
+  padding: 0 20px; /* Add padding for spacing */
 }
+
+.hero-image-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 50%;
+  height: 100%;
+  opacity: 0.7; 
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  right: 0; /* Adjust to be on the right */
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to left, rgba(9, 70, 236, 0) 0%, rgb(111, 168, 194) 100%);
+}
+
+
+/* Rest of your styles */
+
+
+
 
 .img10 {
   position: absolute;

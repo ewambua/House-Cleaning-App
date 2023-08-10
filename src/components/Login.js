@@ -30,6 +30,7 @@ const Login = () => {
         localStorage.setItem('jwtToken', data.token);
         localStorage.setItem('userId', data.userId); 
         localStorage.setItem('cleanerid', data.cleanerid);
+        localStorage.setItem('userRole', isCleanerLogin ? 'cleaner' : 'user');
         console.log('Login successful. JWT token:', data.token, data);
 
         // Show success message
@@ -37,7 +38,7 @@ const Login = () => {
 
         // Redirect to the appropriate dashboard page after successful login
         if (isCleanerLogin) {
-          navigate('/Dashboard'); // Replace '/dashboardCleaner' with the path of your cleaner dashboard
+          navigate('/landing'); // Replace '/dashboardCleaner' with the path of your cleaner dashboard
         } else {
           navigate('/landing'); // Replace '/landing' with the path of your user landing page
         }
@@ -54,19 +55,19 @@ const Login = () => {
 
   return (
     <div className='signup'>
-      <form onSubmit={handleSubmit} className="form_main">
-        <div className="toggle-container">
-          <label htmlFor="toggle" className="toggle-label">
-            {isCleanerLogin ? 'Cleaner Login' : 'User Login'}
-          </label>
-          <input
-            type="checkbox"
-            id="toggle"
-            className="toggle-input"
-            checked={isCleanerLogin}
-            onChange={() => setIsCleanerLogin(prevState => !prevState)}
-          />
-        </div>
+    <form onSubmit={handleSubmit} className="form_main">
+      <div className="toggle-container">
+        <label htmlFor="toggle" className="toggle-label">
+          {isCleanerLogin ? 'Cleaner Login' : 'User Login'}
+        </label>
+        <input
+          type="checkbox"
+          id="toggle"
+          className="toggle-input"
+          checked={isCleanerLogin}
+          onChange={() => setIsCleanerLogin(prevState => !prevState)}
+        />
+      </div>
         <p className="heading">Login</p>
         <div className="inputContainer">
           <svg className="inputIcon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#2e2e2e" viewBox="0 0 16 16">
