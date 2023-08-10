@@ -161,7 +161,7 @@ const CleanerDashboard = () => {
       <tr>
         <th className="name-column">Name</th>
         <th className="centered-column">Tasks</th>
-        <th className="status-column">Status</th>
+        <th className="status-column">Response</th>
       </tr>
     </thead>
     <tbody>
@@ -171,10 +171,12 @@ const CleanerDashboard = () => {
           <td className="centered-column tasks-column">
             {request.task_one}
             {request.task_two}
-            <br />
             {request.task_three}
           </td>
-          <td>{request.status}</td>
+          <td className='stato'>{request.status}
+          <button>accept</button>
+          <button>deny</button></td>
+          
         </tr>
       ))}
     </tbody>

@@ -208,12 +208,14 @@ const CustomLandingPage = () => {
       </header>
 
       <main>
+        <div className='heroo'>
         <div id='hero' className="hero">
           {/* Hero Section Content */}
-          <h1>Welcome to Our <span className="spanna">Website</span>!</h1>
+          <h1>Welcome to <span className="spanna">Neatly</span>!</h1>
           <p>Discover Amazing Services with Us.</p>
           <img className="img10" src={image1} alt="Description of the image" />
           <button className="btn5">Get Started</button>
+        </div>
         </div>
 
         <section id="features" className="features">

@@ -288,6 +288,11 @@
     margin-top: 50px; 
   }
   
+  .stato {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
   
   
   .star {
