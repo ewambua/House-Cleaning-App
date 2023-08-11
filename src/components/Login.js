@@ -58,14 +58,12 @@ const Login = () => {
                  <span className="spanna2">Welcome</span>!
               </h1>
 
-              {isLoading ? (
-                <div className="loader">
-                  <div className="circle"></div>
-                  <div className="circle"></div>
-                  <div className="circle"></div>
-                  <div className="circle"></div>
-                </div>
-              ) : (
+              <div className="loader">
+                <div className="circle"></div>
+                <div className="circle"></div>
+                <div className="circle"></div>
+                <div className="circle"></div>
+              </div>
               
               <form onSubmit={handleSubmit} className="form_main">
                 <div className="toggle-container">
@@ -97,12 +95,7 @@ const Login = () => {
 
                 <button id="button" type="submit" disabled={isLoading}>
                   {isLoading ? (
-                    <div className="loader">
-                      <div className="circle"></div>
-                      <div className="circle"></div>
-                      <div className="circle"></div>
-                      <div className="circle"></div>
-                    </div>
+                    <Loader type="Oval" color="#FFFFFF" height={20} width={20} />
                   ) : (
                     'Submit'
                   )}
@@ -117,8 +110,6 @@ const Login = () => {
                   </Link>
                 </p>
               </form>
-              
-              )}
             </div>
           </div>
         </div>
