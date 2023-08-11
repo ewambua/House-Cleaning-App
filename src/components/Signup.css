@@ -276,6 +276,11 @@
 
 
 
+.spanna2 {
+  color: rgb(135, 137, 139);
+  font-size: 72px;
+  animation: fadeIn 3.5s ease-in-out;
+}
 /* Add this CSS to your existing stylesheet */
 
 .loader-overlay {
