@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar, faStarHalfAlt } from '@fortawesome/free-solid-svg-icons';
-import './CleanerDetails.css'; // Make sure to link the CSS file
+import { faStar, faStarHalfAlt, faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import './CleanerDetails.css'; 
 
-const CleanerDetails = ({ cleaner }) => {
+const CleanerDetails = ({ cleaner, onBack }) => {
   const [cleanerDetails, setCleanerDetails] = useState({
     reviews: [],
   });
@@ -94,9 +94,15 @@ const CleanerDetails = ({ cleaner }) => {
   return (
     <div className="cleaner-details-container">
       <div className="cleaner-info">
+        <div className="back-button">
+          <FontAwesomeIcon icon={faArrowLeft} onClick={onBack} className="back-icon" />
+        </div>
         <h2>{cleaner.name}</h2>
+        <div className="cleaner-image">
+          <img classname="details-dp" src={cleaner.image_url} alt={cleaner.name} />
+        </div>
         <div className="rating">{renderStars(cleaner.rating)}</div>
-        <p>{cleanerDetails.bio}</p>
+        <p>{cleanerDetails.description}</p>
         <form onSubmit={handleSubmitReview}>
           <h3>Submit a Review</h3>
           <div className="rating-label">Add Rating:</div> {/* Added label */}

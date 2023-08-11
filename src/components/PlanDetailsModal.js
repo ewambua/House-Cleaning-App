@@ -7,8 +7,8 @@ import { faTshirt, faHome, faTree } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert';
 
 const PlanDetailsModal = ({ selectedPlan, onClose }) => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCleaner, setSelectedCleaner] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [availableCleaners, setAvailableCleaners] = useState([]);
 
@@ -62,7 +62,13 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
     console.log("selected cleaner:", cleaner);
   };
 
+  const handleCleanerClick = (cleaner) => {
+    setSelectedCleaner(cleaner);
+  };
 
+  const handleBackToPlanDetails = () => {
+    setSelectedCleaner(null);
+  };
 
 
   const handleSubmit = () => {
@@ -127,7 +133,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
         <h2>{planName}</h2>
 
         {selectedCleaner ? (
-          <CleanerDetails cleaner={selectedCleaner} />
+          <CleanerDetails cleaner={selectedCleaner} onBack={handleBackToPlanDetails} />
         ) : (
           <div className="details-modal">
             <div className="tasks-section">

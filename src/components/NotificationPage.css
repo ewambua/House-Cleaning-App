@@ -1,5 +1,136 @@
 /* General styles */
+
+
+
+/* Dark Mode */
+.notification-container.dark-mode {
+  background-color: #1a333f;
+  color: white;
+}
+
+.header.dark-mode {
+  padding: 20px;
+}
+
+.back-button.dark-mode {
+  margin: 0;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.notification-title.dark-mode {
+  font-size: 42px;
+  margin-right: 60%;
+  color: white;
+}
+
+.user-info.dark-mode {
+  background-color: #222;
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.sort-container.dark-mode {
+  margin-top: 20px;
+}
+
+.sort-label.dark-mode {
+  font-size: 18px;
+  margin-right: 15px;
+}
+
+.sort-select.dark-mode {
+  font-size: 16px;
+}
+
+.notification-item.dark-mode {
+  background-color: #111;
+  margin-bottom: 15px;
+  padding: 20px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.notification-text.dark-mode {
+  font-size: 18px;
+  color: white;
+}
+
+.stato1.dark-mode {
+  font-size: 18px;
+  color: green;
+}
+
+.notification-timestamp.dark-mode {
+  font-size: 14px;
+}
+
+.stats2.dark-mode {
+  background-color: #222;
+  margin-left: 80px;
+  margin-top: 20px;
+  padding: 30px;
+  position: sticky;
+  top: 0;
+  right: 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+}
+
+.footer.dark-mode {
+  font-size: 14px;
+  padding: 15px;
+  background-color: #1a333f;
+  color: white;
+}
+
+.header2 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: transparent;
+  color: white;
+  z-index: 1000; /* Make sure it's above other content */
+}
+
+
+.logo {
+  width: 50px;
+  height: auto;
+}
+
+.navlinky {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+.navlinky a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-size: 16px;
+}
+
+.navlinky a:hover {
+  text-decoration: underline;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+
 .notification-container {
+
   padding: 20px;
   background-color: #f5f5f5;
   min-height: 100vh;
@@ -14,7 +145,7 @@
 }
 
 /* Header */
-.header {
+.header2 {
   display: flex;
   align-items: center;
   width: 100%;
@@ -38,10 +169,11 @@
   background-color: #2980b9;
 }
 
-.notification-title {
-  font-size: 24px;
-  color: #333;
-  margin-left: auto;
+.notification-title1 {
+  margin-top: 70px;
+  font-size: 44px;
+  color: #858181;
+
 }
 
 /* User Info */
@@ -300,4 +432,98 @@
   .notification-item {
     padding: 15px;
   }
+}
+
+
+
+/* Dark mode styles */
+.dark-mode {
+  background-color: #1a1a1a;
+  color: white;
+}
+
+.dark-mode-header {
+  background-color: #111;
+}
+
+/* Light mode styles */
+.light-mode {
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+.light-mode-header {
+  background-color: #3b5672;
+}
+
+
+/* Light Mode */
+.notification-container.light-mode {
+  background-color: #f5f5f5;
+  color: #000000;
+}
+
+.header2.light-mode {
+  background-color: transparent;
+  color: white;
+}
+
+.back-button.light-mode {
+  background-color: #3498db;
+  color: white;
+}
+
+.notification-title.light-mode {
+  font-size: 24px;
+  color: #000000;
+  background-color: #000000;
+}
+
+.user-info.light-mode {
+  background-color: white;
+  color: black;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.sort-container.light-mode {
+  margin-top: 20px;
+}
+
+.sort-label.light-mode {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.sort-select.light-mode {
+  padding: 6px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.notification-item.light-mode {
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.notification-text.light-mode {
+  color: #333;
+}
+
+.stato1.light-mode {
+  color: green;
+}
+
+.notification-timestamp.light-mode {
+  color: #888;
+}
+
+.stats2.light-mode {
+  background-color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  color: black;
+}
+
+.footer.light-mode {
+  background-color: #f5f5f5;
+  color: #888;
 }

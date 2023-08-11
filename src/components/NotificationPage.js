@@ -3,6 +3,7 @@ import './NotificationPage.css';
 import { Link } from 'react-router-dom';
 
 const NotificationPage = () => {
+  const [isDarkMode, setIsDarkMode] = useState(true);
   const [userData, setUserData] = useState({});
   const [requests, setRequests] = useState([]);
   const [sortBy, setSortBy] = useState('mostRecent');
@@ -47,17 +48,33 @@ const NotificationPage = () => {
     }
   });
 
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode);
+  };
+  
+  const toggleLightMode = () => {
+    setIsDarkMode(false);
+  };
+  
+
     // Function to show a notification message
   const showNotification = (message) => {
     setNotificationMessage(message);
   };
 
   return (
-    <div className="notification-container">
-      <h1 className="notification-title">Notifications</h1>
+    <div className={`notification-container ${isDarkMode ? 'dark-mode' : 'light-mode'}`}>
+       <header className={`header2 ${isDarkMode ? 'dark-mode-header' : 'light-mode-header'}`}>
+        <img src={require('./images/image1.png')} alt="Logo" className="logo" />
+        <nav className='navlinky'>
+          <Link to="/">Home</Link>
+          <Link to="/about">About</Link>
+        </nav>
+      </header>
+      <h1 className="notification-title1">Notifications</h1>
       <div className="header">
         <Link to="/landing" className="back-button">
-          Back to Landing
+          Back 
         </Link>
         
       </div>
@@ -108,6 +125,8 @@ const NotificationPage = () => {
         <h2>{userData.name}</h2>
         <p>Email: {userData.email}</p>
         <p>Username: {userData.username}</p>
+        <button onClick={toggleDarkMode}>Dark Mode</button>
+    <button onClick={toggleLightMode}>Light Mode</button>
         
       </div>
       </div>
