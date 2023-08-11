@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import swal from 'sweetalert';
-import './Signup.css'
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -59,20 +58,14 @@ const Login = () => {
                  <span className="spanna2">Welcome</span>!
               </h1>
 
-              {isLoading && (
-              <div className="loader-overlay">
+              {isLoading ? (
                 <div className="loader">
                   <div className="circle"></div>
                   <div className="circle"></div>
                   <div className="circle"></div>
                   <div className="circle"></div>
                 </div>
-              </div>
-            )}
-
-{!isLoading && showSuccess ? (
-              <div className="success-message">Login successful!</div>
-            ) : (
+              ) : (
               
               <form onSubmit={handleSubmit} className="form_main">
                 <div className="toggle-container">
