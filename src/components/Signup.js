@@ -39,7 +39,7 @@ const Signup = () => {
 
       if (response.ok) {
         const data = await response.json();
-        swal("Good job!", "You successfully signed up!", "success");
+        swal("Good job!", "You successfully signed up!, please log in to continue", "success");
         console.log('Signup successful. JWT token:', data.jwt_token);
   
         // Store user ID and JWT token in local storage
