@@ -157,7 +157,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
                 ))}
               </ul>
             </div>
-            <p className="description">
+            <p className="description1">
               <br />
               For this plan you are only allowed to choose {maxTasksSelectable} Task
               {maxTasksSelectable > 1 && 's'} for the cleaners to do. The tasks are not limited to one choice but you can

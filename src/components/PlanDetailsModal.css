@@ -49,18 +49,31 @@ h2 {
 .tasks {
   list-style: none;
   padding: 0;
+  display: flex;
+  font-family: poppins;
+  align-items: center;
+  justify-content: center;
 }
 
 .tasks li {
   margin-bottom: 10px;
+  background-color: #fffdfd;
+  font-weight: 600;
+  padding: 20px 10px;
+  border-radius: 15px;
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
 }
 
 .task-icon {
   margin-right: 8px;
 }
 
-.description {
+.description1 {
   margin-bottom: 20px;
+  font-family: poppins;
+  font-size: 12px;
+  font-weight: 500;
+  color: green;
 }
 
 .search-bar input {
