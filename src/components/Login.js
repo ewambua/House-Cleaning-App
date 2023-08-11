@@ -58,14 +58,20 @@ const Login = () => {
                  <span className="spanna2">Welcome</span>!
               </h1>
 
-              {isLoading ? (
+              {isLoading && (
+              <div className="loader-overlay">
                 <div className="loader">
                   <div className="circle"></div>
                   <div className="circle"></div>
                   <div className="circle"></div>
                   <div className="circle"></div>
                 </div>
-              ) : (
+              </div>
+            )}
+
+{!isLoading && showSuccess ? (
+              <div className="success-message">Login successful!</div>
+            ) : (
               
               <form onSubmit={handleSubmit} className="form_main">
                 <div className="toggle-container">
