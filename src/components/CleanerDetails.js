@@ -113,6 +113,7 @@ const CleanerDetails = ({ cleaner, onBack }) => {
                 icon={index + 1 <= reviewRating ? faStar : faStarHalfAlt}
                 className="star rating-star"
                 onClick={() => setReviewRating(index + 1)}
+                value={index + 1}
               />
             ))}
           </div>

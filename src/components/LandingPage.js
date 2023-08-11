@@ -15,10 +15,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faComment, faBell } from '@fortawesome/free-regular-svg-icons';
 import { faComment as faSolidComment } from '@fortawesome/free-solid-svg-icons';
 
+
 const CustomLandingPage = () => {
-  const [userData, setUserData] = useState(null);
-  const [requests, setRequests] = useState([]);
-  const [hasUnreadRequests, setHasUnreadRequests] = useState(false);
+  const [userData, setUserData] = useState(null); // State to store user data
+  const [requests, setRequests] = useState([]); // State to store user requests
+  const [hasUnreadRequests, setHasUnreadRequests] = useState(false); // State to track unread requests
   const [notificationReminder, setNotificationReminder] = useState('');
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
@@ -26,40 +27,43 @@ const CustomLandingPage = () => {
   const [selectedNavLink, setSelectedNavLink] = useState(null);
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
   const [notificationContent, setNotificationContent] = useState('');
-  const [showNotification, setShowNotification] = useState(false);
+const [showNotification, setShowNotification] = useState(false);
 
-  useEffect(() => {
-    const userId = localStorage.getItem('userId');
 
-    const fetchUserData = async () => {
-      try {
-        const response = await fetch(`https://neatly-api.onrender.com/users/${userId}`);
-        const userData = await response.json();
+useEffect(() => {
+  const userId = localStorage.getItem('userId');
 
-        setUserData(userData);
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch(`https://neatly-api.onrender.com/users/${userId}`);
+      const userData = await response.json();
 
-        const sortedRequests = userData.requests.sort((a, b) => {
-          return new Date(b.created_at) - new Date(a.created_at);
-        });
+      setUserData(userData);
 
-        setRequests(sortedRequests);
+      const sortedRequests = userData.requests.sort((a, b) => {
+        return new Date(b.created_at) - new Date(a.created_at);
+      });
 
-        const latestRequest = sortedRequests.length > 0 ? sortedRequests[0] : null;
-        setHasUnreadRequests(latestRequest && latestRequest.status === 'accepted');
+      setRequests(sortedRequests);
 
-        if (latestRequest) {
-          setNotificationContent(`Latest request status: ${latestRequest.status}`);
-          setShowNotification(true);
-        }
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      const latestRequest = sortedRequests.length > 0 ? sortedRequests[0] : null;
+      console.log('Latest Request:', latestRequest.status); 
+      setHasUnreadRequests(latestRequest && latestRequest.status === 'accepted');
+
+      if (latestRequest) {
+        setNotificationContent(`Latest request status: ${latestRequest.status}`);
+        setShowNotification(true);
       }
-    };
-
-    if (userId) {
-      fetchUserData();
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
-  }, []);
+  };
+
+  if (userId) {
+    fetchUserData();
+  }
+}, []);
+
 
   const form = useRef();
 
@@ -68,16 +72,19 @@ const CustomLandingPage = () => {
 
     emailjs.sendForm('service_frjj88b', 'template_6yxi629', form.current, 'gGCrp2rNJ48xALizp')
       .then((result) => {
+        console.log(result.text);
         swal("Good job!", "Your email has been sent!", "success");
       }, (error) => {
+        console.log(error.text);
         swal("Oops!", "Something went wrong, please try again!", "error");
       });
   };
-
   const jwtToken = localStorage.getItem('jwtToken');
   const cleanerId = localStorage.getItem('cleanerid');
   const userId = localStorage.getItem('userid');
   const userRole = localStorage.getItem('userRole');
+  
+  console.log(cleanerId, userId)
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -89,18 +96,22 @@ const CustomLandingPage = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('cleanerid');
+    localStorage.removeItem('cleanerid'); // Remove cleaner ID on logout
     window.location.replace('https://house-cleaning-app-frontend.vercel.app');
   };
 
+  
+  
+
+  // Function to handle scrolling to a section
   const handleScrollToSection = (sectionId) => {
     const targetElement = document.getElementById(sectionId);
     if (targetElement) {
-      const headerOffset = 80;
+      const headerOffset = 80; // Adjust this value according to your header's height
       const elementPosition = targetElement.getBoundingClientRect().top;
       const offsetPosition = elementPosition - headerOffset;
 
-      const scrollDuration = 500;
+      const scrollDuration = 500; // Set the duration of the scroll animation in milliseconds
       const startingTime = performance.now();
       const getScrollTop = window.scrollY || document.documentElement.scrollTop;
       const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
@@ -121,6 +132,8 @@ const CustomLandingPage = () => {
     }
   };
 
+
+
   const handlePlanClick = (plan) => {
     setSelectedPlan(plan);
   };
@@ -128,6 +141,13 @@ const CustomLandingPage = () => {
   if (!jwtToken) {
     return <Login />;
   }
+
+    // Function to show a notification reminder
+    const showNotificationReminder = (message) => {
+      setNotificationReminder(message);
+    };
+
+    
 
   const showCleanerSections = cleanerId === undefined;
 
@@ -144,7 +164,8 @@ const CustomLandingPage = () => {
 
       {showNotification && (
         <div className="notification-popup">
-          <p>The latest request is {userData?.requests?.length > 0 ? userData.requests[0].status : 'No Requests'}</p> {/* Display the request status */}
+          <p>{notificationContent}</p>
+          <p>Request Status: {userData?.requests?.length > 0 ? userData.requests[0].status : 'No Requests'}</p> {/* Display the request status */}
           <button className="close-notification" onClick={() => setShowNotification(false)}>
             Close
           </button>
@@ -364,7 +385,7 @@ const CustomLandingPage = () => {
         )}
         <section id="testimonials" className="testimonials1">
   <h2>What Our Customers Say</h2>
-  <div className="testimonial" >
+  <div className="testimonial" data-aos="fade-up">
     <img
       src="https://previews.123rf.com/images/apoev/apoev2107/apoev210700033/171405527-default-avatar-photo-placeholder-gray-profile-picture-icon-business-man-illustration.jpg"
       alt="User 1"
@@ -376,7 +397,7 @@ const CustomLandingPage = () => {
       <p>- John Doe</p>
     </div>
   </div>
-  <div className="testimonial" >
+  <div className="testimonial" data-aos="fade-up">
     <img
       src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
       alt="User 2"

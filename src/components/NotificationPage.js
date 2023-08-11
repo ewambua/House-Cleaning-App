@@ -62,12 +62,12 @@ const NotificationPage = () => {
       <header className={`header2 ${isDarkMode ? 'dark-mode-header' : 'light-mode-header'}`}>
         <img src={require('./images/image1.png')} alt="Logo" className="logo" />
         <nav className='navlinky'>
-          <Link to="/">Home</Link>
+          
           <Link to="/about">About</Link>
         </nav>
       </header>
       <h1 className="notification-title1">Notifications</h1>
-      <div className="header">
+      <div className="header2">
         <Link to="/landing" className="back-button">
           Back
         </Link>
