@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 import './Signup.css';
 import swal from 'sweetalert';
-import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
-
+import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
   const [name, setName] = useState('');
-  const [username, setUsername] = useState(''); // New state for username
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordConfirmation, setPasswordConfirmation] = useState('');
@@ -14,8 +13,12 @@ const Signup = () => {
   const [description, setDescription] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const navigate = useNavigate();
-  const [selectedImage, setSelectedImage] = useState(null); // Store the selected image file
+  const [selectedImage, setSelectedImage] = useState(null);
 
+  const handleSuccessOk = () => {
+    swal.close();
+    navigate('/login');
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,14 +42,14 @@ const Signup = () => {
 
       if (response.ok) {
         const data = await response.json();
-        swal("Good job!", "You successfully signed up!, please log in to continue", "success");
+        swal("Good job!", "You successfully signed up! Please log in to continue", "success")
+          .then(handleSuccessOk);
         console.log('Signup successful. JWT token:', data.jwt_token);
-  
-        // Store user ID and JWT token in local storage
+
         localStorage.setItem('userid', data.user.id);
         localStorage.setItem('jwt_token', data.jwt_token);
         localStorage.setItem('cleanerid', data.cleanerid)
-       
+
         navigate('/landing');
       } else {
         const errorData = await response.json();
@@ -58,23 +61,19 @@ const Signup = () => {
     }
   };
 
-    // Handle image selection
-    const handleImageChange = (e) => {
-      const file = e.target.files[0];
-      if (file) {
-        setSelectedImage(file);
-        // Convert the selected image to a base64 encoded string
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          setImageUrl(event.target.result);
-        };
-        reader.readAsDataURL(file);
-      }
-    };
-  
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setSelectedImage(file);
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        setImageUrl(event.target.result);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
 
   return (
-   
     <div className='signup'>
       <div className="heroo">
         <div id="hero" className="heroo">
@@ -86,7 +85,6 @@ const Signup = () => {
         <form onSubmit={handleSubmit} className="form_main">
           <p className="heading">Signup</p>
 
-          {/* Toggle between cleaner and user signup */}
           <div className="role-toggle-wrapper">
             <span className={`toggleOption ${isCleaner ? '' : 'active'}`} onClick={() => setIsCleaner(false)}>
               User
