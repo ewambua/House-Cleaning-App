@@ -102,7 +102,7 @@ const Login = () => {
                 </div>
 
                 <button id="button" type="submit" disabled={isLoading}>
-                  
+                    Submit
                 </button>
                 <a className="forgotLink" href="#">Forgot your password?</a>
                 {showSuccess && <div className="success-message">Login successful!</div>}
