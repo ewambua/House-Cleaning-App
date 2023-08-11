@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import swal from 'sweetalert';
-import Loader from 'react-loader-spinner'; // Import the loading spinner component
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'; // Import styles for the loading spinner
+import Loader from 'react-loader-spinner'; 
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.min.css';
+
 
 const Login = () => {
   const [email, setEmail] = useState('');
