@@ -93,12 +93,12 @@ const Login = () => {
                 </div>
 
                 <button id="button" type="submit" disabled={isLoading}>
-          {isLoading ? (
-            <Loader type="Oval" color="#FFFFFF" height={20} width={20} />
-          ) : (
-            'Submit'
-          )}
-        </button>
+                  {isLoading ? (
+                    <Loader type="Oval" color="#FFFFFF" height={20} width={20} />
+                  ) : (
+                    'Submit'
+                  )}
+                </button>
                 <a className="forgotLink" href="#">Forgot your password?</a>
                 {showSuccess && <div className="success-message">Login successful!</div>}
 
