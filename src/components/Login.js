@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import swal from 'sweetalert';
 
-
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -59,7 +58,17 @@ const Login = () => {
                  <span className="spanna2">Welcome</span>!
               </h1>
 
-              
+              {isLoading && (
+              <div className="loader-overlay">
+                <div className="loader">
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
+              </div>
+            )}
+
 {!isLoading && showSuccess ? (
               <div className="success-message">Login successful!</div>
             ) : (
@@ -93,16 +102,7 @@ const Login = () => {
                 </div>
 
                 <button id="button" type="submit" disabled={isLoading}>
-                  {isLoading ? (
-                    <div className="loader">
-                      <div className="circle"></div>
-                      <div className="circle"></div>
-                      <div className="circle"></div>
-                      <div className="circle"></div>
-                    </div>
-                  ) : (
-                    'Submit'
-                  )}
+                  
                 </button>
                 <a className="forgotLink" href="#">Forgot your password?</a>
                 {showSuccess && <div className="success-message">Login successful!</div>}
