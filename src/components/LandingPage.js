@@ -15,22 +15,50 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faComment, faBell } from '@fortawesome/free-regular-svg-icons';
 import { faComment as faSolidComment } from '@fortawesome/free-solid-svg-icons';
 
-
 const CustomLandingPage = () => {
+  const [userData, setUserData] = useState(null);
+  const [requests, setRequests] = useState([]);
+  const [hasUnreadRequests, setHasUnreadRequests] = useState(false);
   const [notificationReminder, setNotificationReminder] = useState('');
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
   const [selectedNavLink, setSelectedNavLink] = useState(null);
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
+  const [notificationContent, setNotificationContent] = useState('');
+  const [showNotification, setShowNotification] = useState(false);
 
   useEffect(() => {
-    AOS.init();
-    window.addEventListener('scroll', handleScroll);
+    const userId = localStorage.getItem('userId');
 
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`https://neatly-api.onrender.com/users/${userId}`);
+        const userData = await response.json();
+
+        setUserData(userData);
+
+        const sortedRequests = userData.requests.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
+
+        setRequests(sortedRequests);
+
+        const latestRequest = sortedRequests.length > 0 ? sortedRequests[0] : null;
+        setHasUnreadRequests(latestRequest && latestRequest.status === 'accepted');
+
+        if (latestRequest) {
+          setNotificationContent(`Latest request status: ${latestRequest.status}`);
+          setShowNotification(true);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
     };
+
+    if (userId) {
+      fetchUserData();
+    }
   }, []);
 
   const form = useRef();
@@ -40,19 +68,16 @@ const CustomLandingPage = () => {
 
     emailjs.sendForm('service_frjj88b', 'template_6yxi629', form.current, 'gGCrp2rNJ48xALizp')
       .then((result) => {
-        console.log(result.text);
         swal("Good job!", "Your email has been sent!", "success");
       }, (error) => {
-        console.log(error.text);
         swal("Oops!", "Something went wrong, please try again!", "error");
       });
   };
+
   const jwtToken = localStorage.getItem('jwtToken');
   const cleanerId = localStorage.getItem('cleanerid');
   const userId = localStorage.getItem('userid');
   const userRole = localStorage.getItem('userRole');
-  
-  console.log(cleanerId, userId)
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -64,22 +89,18 @@ const CustomLandingPage = () => {
 
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('cleanerid'); // Remove cleaner ID on logout
+    localStorage.removeItem('cleanerid');
     window.location.replace('https://house-cleaning-app-frontend.vercel.app');
   };
 
-  
-  
-
-  // Function to handle scrolling to a section
   const handleScrollToSection = (sectionId) => {
     const targetElement = document.getElementById(sectionId);
     if (targetElement) {
-      const headerOffset = 80; // Adjust this value according to your header's height
+      const headerOffset = 80;
       const elementPosition = targetElement.getBoundingClientRect().top;
       const offsetPosition = elementPosition - headerOffset;
 
-      const scrollDuration = 500; // Set the duration of the scroll animation in milliseconds
+      const scrollDuration = 500;
       const startingTime = performance.now();
       const getScrollTop = window.scrollY || document.documentElement.scrollTop;
       const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
@@ -100,9 +121,6 @@ const CustomLandingPage = () => {
     }
   };
 
-  console.log('isChatboxOpen:', isChatboxOpen);
-
-
   const handlePlanClick = (plan) => {
     setSelectedPlan(plan);
   };
@@ -110,11 +128,6 @@ const CustomLandingPage = () => {
   if (!jwtToken) {
     return <Login />;
   }
-
-    // Function to show a notification reminder
-    const showNotificationReminder = (message) => {
-      setNotificationReminder(message);
-    };
 
   const showCleanerSections = cleanerId === undefined;
 
@@ -128,6 +141,15 @@ const CustomLandingPage = () => {
         </span>
   </div>
       <ChatBanner />
+
+      {showNotification && (
+        <div className="notification-popup">
+          <p>The latest request is {userData?.requests?.length > 0 ? userData.requests[0].status : 'No Requests'}</p> {/* Display the request status */}
+          <button className="close-notification" onClick={() => setShowNotification(false)}>
+            Close
+          </button>
+        </div>
+      )}
 
     {notificationReminder && (
         <div className="notification-reminder">
@@ -200,13 +222,13 @@ const CustomLandingPage = () => {
               >
                 Testimonials
               </a>
-              <Link to="/NotificationPage" className={selectedNavLink === 'NotificationPage' ? 'selected' : ''}>
-                <FontAwesomeIcon icon={faBell} className="notification-bell-icon" />
-              </Link>
+              
 
               <Link to="/AboutUs" className={selectedNavLink === 'AboutUs' ? 'selected' : ''}>
                 AboutUs
               </Link>
+
+
             </>
           )}
           <Link
@@ -216,9 +238,24 @@ const CustomLandingPage = () => {
           >
             Profile
           </Link>
+
+
           
         </nav>
         
+          
+          {userRole === 'user' && (
+            <Link to="/NotificationPage" className={selectedNavLink === 'NotificationPage' ? 'selected' : ''}>
+  <FontAwesomeIcon
+    icon={faBell}
+    className={`notification-bell-icon ${hasUnreadRequests ? 'has-unread' : ''}`}
+  />
+</Link>
+
+
+
+            )}
+
         <button className="logout-button" onClick={handleLogout}>
           Logout
         </button>

@@ -891,15 +891,39 @@ h1, h2, h3 {
   margin: 0 10px;
 }
 
-/* Example CSS */
-.notification-link.has-unread::after {
-  content: ''; /* Add a visual indicator, e.g., a red dot or a badge */
-  display: inline-block;
-  width: 8px;
-  height: 8px;
-  background-color: red; /* Change color as needed */
-  border-radius: 50%;
-  margin-left: 5px;
+/* Notification bell icon */
+
+
+.notification-bell-icon {
+  font-size: 1.5rem;
+  margin-left: 20px;
+  position: relative;
+  color: black;
+  transition: color 0.3s ease; /* Add a transition effect for smoother color change */
+}
+
+.notification-bell-icon:hover {
+  color: #007BFF;
+}
+
+.notification-bell-icon.has-unread {
+  color: red; /* Change the color to red for unread notifications */
+  animation: shake 0.5s infinite;
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
 }
 
 
@@ -923,4 +947,31 @@ h1, h2, h3 {
 /* Hover effect for social media icons */
 .social-icons img:hover {
   transform: scale(1.1);
+}
+
+
+.notification-popup {
+  position: fixed;
+  border-radius: 15px;
+  opacity: 90%;
+  top: 70px;
+  right: 20px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.notification-popup p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.close-notification {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 5px 10px;
+  cursor: pointer;
 }

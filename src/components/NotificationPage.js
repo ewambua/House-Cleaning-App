@@ -8,7 +8,7 @@ const NotificationPage = () => {
   const [sortBy, setSortBy] = useState('mostRecent');
 
   useEffect(() => {
-    // Fetch user data using the user ID from local storage
+   
     const userId = localStorage.getItem('userId'); // Assuming 'userId' is the key used to store the user ID
 
     const fetchUserData = async () => {

@@ -7,6 +7,7 @@ import { faTshirt, faHome, faTree } from '@fortawesome/free-solid-svg-icons';
 import swal from 'sweetalert';
 
 const PlanDetailsModal = ({ selectedPlan, onClose }) => {
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCleaner, setSelectedCleaner] = useState(null);
   const [selectedTasks, setSelectedTasks] = useState([]);
   const [availableCleaners, setAvailableCleaners] = useState([]);
@@ -157,20 +158,27 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
               select any variations.
             </p>
             <h3>Available Cleaners:</h3>
-            <div className="cleaners-section">
+            <div className="search-bar">
+  <input
+    type="text"
+    placeholder="Search for cleaners..."
+    value={searchQuery}
+    onChange={(e) => setSearchQuery(e.target.value)}
+  />
+</div>
+<div className="cleaners-section">
   <ul>
-    {availableCleaners.map((cleaner, index) => (
+    {availableCleaners
+      .filter((cleaner) =>
+        cleaner.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .map((cleaner, index) => (
       <li
         key={index}
         className={`cleaner-item ${selectedCleaner === cleaner ? 'selected' : ''}`}
         onClick={() => handleCleanerSelect(cleaner)}
       >
         <div className={`cleaner-name ${selectedCleaner === cleaner ? 'selected' : ''}`}>
-          <input
-            type="checkbox"
-            checked={selectedCleaner === cleaner}
-            onChange={() => handleCleanerSelect(cleaner)}
-          />
           {cleaner.name}
         </div>
         <div className="cleaner-rating">{renderStars(cleaner.rating)}</div>
@@ -179,6 +187,7 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
     ))}
   </ul>
 </div>
+
           </div>
         )}
 
