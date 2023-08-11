@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import Loader from 'react-loader-spinner'; // Import the loading spinner component
+import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'; // Import styles for the loading spinner
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -8,20 +10,23 @@ const Login = () => {
   const [isCleanerLogin, setIsCleanerLogin] = useState(false);
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
+      setIsLoading(true); // Set isLoading to true when submitting
+
       const loginType = isCleanerLogin ? 'cleaner/login' : 'login';
-const apiUrl = `https://neatly-api.onrender.com/${loginType}`;
-const response = await fetch(apiUrl, {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({ email, password }),
-});
+      const apiUrl = `https://neatly-api.onrender.com/${loginType}`;
+      const response = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -44,6 +49,8 @@ const response = await fetch(apiUrl, {
       }
     } catch (error) {
       console.error('Error occurred during login:', error);
+    } finally {
+      setIsLoading(false); // Set isLoading back to false after the request is completed
     }
   };
 
@@ -85,7 +92,13 @@ const response = await fetch(apiUrl, {
                   <input type="password" className="inputField" id="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} />
                 </div>
 
-                <button id="button" type="submit">Submit</button>
+                <button id="button" type="submit" disabled={isLoading}>
+          {isLoading ? (
+            <Loader type="Oval" color="#FFFFFF" height={20} width={20} />
+          ) : (
+            'Submit'
+          )}
+        </button>
                 <a className="forgotLink" href="#">Forgot your password?</a>
                 {showSuccess && <div className="success-message">Login successful!</div>}
 
