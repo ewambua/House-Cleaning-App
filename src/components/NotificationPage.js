@@ -72,7 +72,7 @@ const NotificationPage = () => {
             <img className="notification-icon" src="https://www.example.com/accept-icon.png" alt="Accept Icon" />
             <div className="notification-content">
               <p className="notification-text">
-                Your cleaning request for {request.task_one}, {request.task_two}, and {request.task_three} has been {request.status === 'accepted' ? 'accepted' : 'denied'} by the cleaner.
+                Your cleaning request for {request.task_one}, {request.task_two}, and {request.task_three} has been <span className='stato1'>{request.status === 'accepted' ? 'accepted' : 'denied'}</span> by the cleaner.
               </p>
               <p className="notification-timestamp">
                 {new Date(request.created_at).toLocaleString()}

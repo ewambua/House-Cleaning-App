@@ -240,6 +240,12 @@
 
 .notification-text {
   font-size: 18px;
+  color:white;
+}
+
+.stato1 {
+  font-size: 18px;
+  color: green;
 }
 
 .notification-timestamp {
