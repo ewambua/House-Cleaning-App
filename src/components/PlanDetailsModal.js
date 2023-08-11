@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faStarHalfAlt, faTimes } from '@fortawesome/free-solid-svg-icons';
 import CleanerDetails from './CleanerDetails';
 import { faTshirt, faHome, faTree } from '@fortawesome/free-solid-svg-icons';
+import swal from 'sweetalert';
 
 const PlanDetailsModal = ({ selectedPlan, onClose }) => {
   const [selectedCleaner, setSelectedCleaner] = useState(null);
@@ -59,21 +60,21 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
     setSelectedCleaner(cleaner);
     console.log("selected cleaner:", cleaner);
   };
-  
-  
-  
+
+
+
 
   const handleSubmit = () => {
     const request_data = {
       task_one: selectedTasks[0],
       task_two: selectedTasks[1],
       task_three: selectedTasks[2],
-      user_id: localStorage.getItem('userId'), 
-      cleaner_id: selectedCleaner.id 
+      user_id: localStorage.getItem('userId'),
+      cleaner_id: selectedCleaner.id
     };
-  
+
     console.log('Request Data:', request_data);
-  
+
     fetch('https://neatly-api.onrender.com/request', {
       method: 'POST',
       headers: {
@@ -84,14 +85,16 @@ const PlanDetailsModal = ({ selectedPlan, onClose }) => {
       .then(response => response.json())
       .then(data => {
         console.log('Server Response:', data);
+        swal("Good job!", "Your plan request has been sent to the cleaner!", "success");
         onClose();
       })
       .catch(error => {
         console.error('Error creating request:', error);
+        swal("Oops!", "Something went wrong, please try again!", "error");
       });
   };
-  
-  
+
+
 
   const renderStars = (rating) => {
     const totalStars = 5;
