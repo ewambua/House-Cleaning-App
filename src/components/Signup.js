@@ -41,10 +41,12 @@ const Signup = () => {
         const data = await response.json();
         swal("Good job!", "You successfully signed up!", "success");
         console.log('Signup successful. JWT token:', data.jwt_token);
-
-        localStorage.setItem('userid', data.user.id);
   
-        // Navigate to the '/landing' page after successful signup
+        // Store user ID and JWT token in local storage
+        localStorage.setItem('userid', data.user.id);
+        localStorage.setItem('jwt_token', data.jwt_token);
+        localStorage.setItem('cleanerid', data.cleanerid)
+       
         navigate('/landing');
       } else {
         const errorData = await response.json();
