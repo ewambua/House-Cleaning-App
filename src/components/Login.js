@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import swal from 'sweetalert';
+import './Signup.css'
 
 const Login = () => {
   const [email, setEmail] = useState('');
