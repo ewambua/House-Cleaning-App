@@ -15,11 +15,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircle, faComment, faBell } from '@fortawesome/free-regular-svg-icons';
 import { faComment as faSolidComment } from '@fortawesome/free-solid-svg-icons';
 
-
 const CustomLandingPage = () => {
-  const [userData, setUserData] = useState(null); // State to store user data
-  const [requests, setRequests] = useState([]); // State to store user requests
-  const [hasUnreadRequests, setHasUnreadRequests] = useState(false); // State to track unread requests
+  const [userData, setUserData] = useState(null);
+  const [requests, setRequests] = useState([]);
+  const [hasUnreadRequests, setHasUnreadRequests] = useState(false);
   const [notificationReminder, setNotificationReminder] = useState('');
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
@@ -27,43 +26,40 @@ const CustomLandingPage = () => {
   const [selectedNavLink, setSelectedNavLink] = useState(null);
   const [isProfilePopupOpen, setIsProfilePopupOpen] = useState(false);
   const [notificationContent, setNotificationContent] = useState('');
-const [showNotification, setShowNotification] = useState(false);
+  const [showNotification, setShowNotification] = useState(false);
 
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
 
-useEffect(() => {
-  const userId = localStorage.getItem('userId');
+    const fetchUserData = async () => {
+      try {
+        const response = await fetch(`https://neatly-api.onrender.com/users/${userId}`);
+        const userData = await response.json();
 
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch(`https://neatly-api.onrender.com/users/${userId}`);
-      const userData = await response.json();
+        setUserData(userData);
 
-      setUserData(userData);
+        const sortedRequests = userData.requests.sort((a, b) => {
+          return new Date(b.created_at) - new Date(a.created_at);
+        });
 
-      const sortedRequests = userData.requests.sort((a, b) => {
-        return new Date(b.created_at) - new Date(a.created_at);
-      });
+        setRequests(sortedRequests);
 
-      setRequests(sortedRequests);
+        const latestRequest = sortedRequests.length > 0 ? sortedRequests[0] : null;
+        setHasUnreadRequests(latestRequest && latestRequest.status === 'accepted');
 
-      const latestRequest = sortedRequests.length > 0 ? sortedRequests[0] : null;
-      console.log('Latest Request:', latestRequest.status); 
-      setHasUnreadRequests(latestRequest && latestRequest.status === 'accepted');
-
-      if (latestRequest) {
-        setNotificationContent(`Latest request status: ${latestRequest.status}`);
-        setShowNotification(true);
+        if (latestRequest) {
+          setNotificationContent(`Latest request status: ${latestRequest.status}`);
+          setShowNotification(true);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
-    } catch (error) {
-      console.error('Error fetching data:', error);
+    };
+
+    if (userId) {
+      fetchUserData();
     }
-  };
-
-  if (userId) {
-    fetchUserData();
-  }
-}, []);
-
+  }, []);
 
   const form = useRef();
 
@@ -72,19 +68,16 @@ useEffect(() => {
 
     emailjs.sendForm('service_frjj88b', 'template_6yxi629', form.current, 'gGCrp2rNJ48xALizp')
       .then((result) => {
-        console.log(result.text);
         swal("Good job!", "Your email has been sent!", "success");
       }, (error) => {
-        console.log(error.text);
         swal("Oops!", "Something went wrong, please try again!", "error");
       });
   };
+
   const jwtToken = localStorage.getItem('jwtToken');
   const cleanerId = localStorage.getItem('cleanerid');
   const userId = localStorage.getItem('userid');
   const userRole = localStorage.getItem('userRole');
-  
-  console.log(cleanerId, userId)
 
   const handleScroll = () => {
     if (window.scrollY > 50) {
@@ -96,22 +89,18 @@ useEffect(() => {
 
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
-    localStorage.removeItem('cleanerid'); // Remove cleaner ID on logout
+    localStorage.removeItem('cleanerid');
     window.location.replace('https://house-cleaning-app-frontend.vercel.app');
   };
 
-  
-  
-
-  // Function to handle scrolling to a section
   const handleScrollToSection = (sectionId) => {
     const targetElement = document.getElementById(sectionId);
     if (targetElement) {
-      const headerOffset = 80; // Adjust this value according to your header's height
+      const headerOffset = 80;
       const elementPosition = targetElement.getBoundingClientRect().top;
       const offsetPosition = elementPosition - headerOffset;
 
-      const scrollDuration = 500; // Set the duration of the scroll animation in milliseconds
+      const scrollDuration = 500;
       const startingTime = performance.now();
       const getScrollTop = window.scrollY || document.documentElement.scrollTop;
       const easeInOutQuad = (t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t);
@@ -132,8 +121,6 @@ useEffect(() => {
     }
   };
 
-
-
   const handlePlanClick = (plan) => {
     setSelectedPlan(plan);
   };
@@ -142,14 +129,9 @@ useEffect(() => {
     return <Login />;
   }
 
-    // Function to show a notification reminder
-    const showNotificationReminder = (message) => {
-      setNotificationReminder(message);
-    };
-
-    
-
   const showCleanerSections = cleanerId === undefined;
+
+  
 
   return (
     <div className="landing-page">
@@ -164,8 +146,7 @@ useEffect(() => {
 
       {showNotification && (
         <div className="notification-popup">
-          <p>{notificationContent}</p>
-          <p>Request Status: {userData?.requests?.length > 0 ? userData.requests[0].status : 'No Requests'}</p> {/* Display the request status */}
+          <p>The latest request is {userData?.requests?.length > 0 ? userData.requests[0].status : 'No Requests'}</p> {/* Display the request status */}
           <button className="close-notification" onClick={() => setShowNotification(false)}>
             Close
           </button>
@@ -385,7 +366,7 @@ useEffect(() => {
         )}
         <section id="testimonials" className="testimonials1">
   <h2>What Our Customers Say</h2>
-  <div className="testimonial" data-aos="fade-up">
+  <div className="testimonial" >
     <img
       src="https://previews.123rf.com/images/apoev/apoev2107/apoev210700033/171405527-default-avatar-photo-placeholder-gray-profile-picture-icon-business-man-illustration.jpg"
       alt="User 1"
@@ -397,7 +378,7 @@ useEffect(() => {
       <p>- John Doe</p>
     </div>
   </div>
-  <div className="testimonial" data-aos="fade-up">
+  <div className="testimonial" >
     <img
       src="https://media.istockphoto.com/id/1327592631/vector/default-avatar-photo-placeholder-icon-grey-profile-picture-business-woman.jpg?s=612x612&w=is&k=20&c=hfszYWjgUTD2z9VI5i5g3LRFgYP4NRcIMlZ5FvnU86M="
       alt="User 2"
