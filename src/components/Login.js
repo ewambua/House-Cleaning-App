@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import swal from 'sweetalert';
-import Loader from 'react-loader-spinner'; 
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.min.css';
-
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -11,13 +8,13 @@ const Login = () => {
   const [isCleanerLogin, setIsCleanerLogin] = useState(false);
   const navigate = useNavigate();
   const [showSuccess, setShowSuccess] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // Add isLoading state
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      setIsLoading(true); // Set isLoading to true when submitting
+      setIsLoading(true);
 
       const loginType = isCleanerLogin ? 'cleaner/login' : 'login';
       const apiUrl = `https://neatly-api.onrender.com/${loginType}`;
@@ -38,11 +35,7 @@ const Login = () => {
 
         setShowSuccess(true);
 
-        if (isCleanerLogin) {
-          navigate('/landing');
-        } else {
-          navigate('/landing');
-        }
+        navigate('/landing'); // Common action for both cleaner and user login
       } else {
         const errorData = await response.json();
         swal("Oops!", "Something went wrong, make sure to enter correct email and password!", "error");
@@ -51,7 +44,7 @@ const Login = () => {
     } catch (error) {
       console.error('Error occurred during login:', error);
     } finally {
-      setIsLoading(false); // Set isLoading back to false after the request is completed
+      setIsLoading(false);
     }
   };
 
@@ -64,6 +57,15 @@ const Login = () => {
               <h1 className="main-head">
                  <span className="spanna2">Welcome</span>!
               </h1>
+
+              {isLoading ? (
+                <div className="loader">
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                  <div className="circle"></div>
+                </div>
+              ) : (
               
               <form onSubmit={handleSubmit} className="form_main">
                 <div className="toggle-container">
@@ -95,7 +97,12 @@ const Login = () => {
 
                 <button id="button" type="submit" disabled={isLoading}>
                   {isLoading ? (
-                    <Loader type="Oval" color="#FFFFFF" height={20} width={20} />
+                    <div className="loader">
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                      <div className="circle"></div>
+                    </div>
                   ) : (
                     'Submit'
                   )}
@@ -110,6 +117,8 @@ const Login = () => {
                   </Link>
                 </p>
               </form>
+              
+              )}
             </div>
           </div>
         </div>
