@@ -47,6 +47,11 @@ const NotificationPage = () => {
     }
   });
 
+    // Function to show a notification message
+  const showNotification = (message) => {
+    setNotificationMessage(message);
+  };
+
   return (
     <div className="notification-container">
       <h1 className="notification-title">Notifications</h1>

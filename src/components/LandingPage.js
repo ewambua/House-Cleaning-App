@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
 import swal from 'sweetalert';
 import Login from './Login';
@@ -12,12 +12,12 @@ import PlanDetailsModal from './PlanDetailsModal';
 import AboutUs from './AboutUs';
 import UserProfile from './UserProfile';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle, faComment } from '@fortawesome/free-regular-svg-icons';
+import { faCircle, faComment, faBell } from '@fortawesome/free-regular-svg-icons';
 import { faComment as faSolidComment } from '@fortawesome/free-solid-svg-icons';
 
 
-
 const CustomLandingPage = () => {
+  const [notificationReminder, setNotificationReminder] = useState('');
   const [selectedPlan, setSelectedPlan] = useState(null);
   const [isChatboxOpen, setIsChatboxOpen] = useState(false);
   const [isScrolling, setIsScrolling] = useState(false);
@@ -111,6 +111,11 @@ const CustomLandingPage = () => {
     return <Login />;
   }
 
+    // Function to show a notification reminder
+    const showNotificationReminder = (message) => {
+      setNotificationReminder(message);
+    };
+
   const showCleanerSections = cleanerId === undefined;
 
   return (
@@ -123,6 +128,16 @@ const CustomLandingPage = () => {
         </span>
   </div>
       <ChatBanner />
+
+    {notificationReminder && (
+        <div className="notification-reminder">
+          {notificationReminder}
+          <button className="close-reminder" onClick={() => setNotificationReminder('')}>
+            Close
+          </button>
+        </div>
+      )}
+
       <header className={`header${isScrolling ? ' scrolling' : ''}`}>
         <img src={require('./images/image1.png')} alt="CustomLogo" className="logo1" />
         <nav>
@@ -185,12 +200,10 @@ const CustomLandingPage = () => {
               >
                 Testimonials
               </a>
-              <Link
-                to="/NotificationPage"
-                className={selectedNavLink === 'NotificationPage' ? 'selected' : ''}
-              >
-                NotificationPage
+              <Link to="/NotificationPage" className={selectedNavLink === 'NotificationPage' ? 'selected' : ''}>
+                <FontAwesomeIcon icon={faBell} className="notification-bell-icon" />
               </Link>
+
               <Link to="/AboutUs" className={selectedNavLink === 'AboutUs' ? 'selected' : ''}>
                 AboutUs
               </Link>

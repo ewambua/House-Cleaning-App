@@ -891,6 +891,18 @@ h1, h2, h3 {
   margin: 0 10px;
 }
 
+/* Example CSS */
+.notification-link.has-unread::after {
+  content: ''; /* Add a visual indicator, e.g., a red dot or a badge */
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: red; /* Change color as needed */
+  border-radius: 50%;
+  margin-left: 5px;
+}
+
+
 /* Styling for Social Media Icons */
 .social-icons {
   display: flex;
